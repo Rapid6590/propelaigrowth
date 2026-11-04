@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>推不動的事，能用這個方法嗎？｜Propel AI</title><meta name="description" content="三題、用點的、不用留資料。看看那件推不動的事能不能用這個方法處理。"><link rel="canonical" href="https://propelaigrowth.com/quiz/">
+<meta property="og:title" content="推不動的事，能用這個方法嗎？"><meta property="og:description" content="三題、用點的、不用留資料。看看那件推不動的事能不能用這個方法處理。"><meta property="og:image" content="https://propelaigrowth.com/assets/og.png"><meta property="og:url" content="https://propelaigrowth.com/quiz/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: one narrow column, one question per screen; the result reads like a short letter, exits at the very end. */
+:root{
+  --bg:#FBFAF7; --surface:#FFFFFF; --ink:#0B2A3F; --muted:#5B6B77; --line:#DCE2E6;
+  --navy:#003054; --accent:#F06000; --accent-ink:#B84A00; --tint:#FFF1E6; --ok:#2F7D6B; --ok-tint:#E6F3EF; --warn-tint:#F3EFE4;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C1A24; --surface:#13252F; --ink:#EAF0F3; --muted:#9DB0BC; --line:#28404D;
+  --navy:#BFD9EA; --accent:#FF8A3D; --accent-ink:#FFA566; --tint:#33200F; --ok:#7CCDB8; --ok-tint:#143229; --warn-tint:#2A2A22; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0C1A24; --surface:#13252F; --ink:#EAF0F3; --muted:#9DB0BC; --line:#28404D;
+  --navy:#BFD9EA; --accent:#FF8A3D; --accent-ink:#FFA566; --tint:#33200F; --ok:#7CCDB8; --ok-tint:#143229; --warn-tint:#2A2A22; color-scheme:dark }
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.75}
+.wrap{max-width:680px;margin:0 auto;padding-inline:20px;padding-block:28px 64px;display:flex;flex-direction:column;gap:24px}
+.brand{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.brand b{color:var(--navy);font-weight:900;letter-spacing:.08em}
+h1{font-size:clamp(28px,6vw,40px);line-height:1.25;font-weight:900;color:var(--navy);margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font-size:22px;line-height:1.4;font-weight:700;color:var(--navy);margin:0;text-wrap:balance}
+h3{font-size:14px;font-weight:700;color:var(--muted);letter-spacing:.08em;margin:0}
+p{margin:0;text-wrap:pretty}
+.s{display:inline-block;max-width:100%}
+.verdict p,.block p,.case p,details p,.exit p,ul.plain li,.opt{text-wrap:balance}
+.lead{font-size:18px;color:var(--ink)}
+.note{font-size:14px;color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:14px 28px;background:var(--accent);color:#fff;cursor:pointer;align-self:flex-start}
+.btn:hover{filter:brightness(1.06)}
+.btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line);font-weight:500}
+.linkbtn{font:inherit;font-size:15px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 0;align-self:flex-start}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.steps{display:flex;gap:6px;align-items:center}
+.steps i{height:5px;flex:1;border-radius:3px;background:var(--line)}
+.steps i.on{background:var(--accent)}
+.steps span{font-size:13px;color:var(--muted);margin-left:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{font:inherit;text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:14px 18px;cursor:pointer;line-height:1.55}
+.opt:hover{border-color:var(--accent)}
+.opt small{display:block;color:var(--muted);font-size:14px}
+.verdict{border-radius:18px;padding:22px 22px;display:flex;flex-direction:column;gap:10px}
+.verdict.fit{background:var(--ok-tint)} .verdict.first{background:var(--tint)} .verdict.not{background:var(--warn-tint)}
+.verdict .tag{font-size:13px;font-weight:700;letter-spacing:.08em}
+.verdict.fit .tag{color:var(--ok)} .verdict.first .tag{color:var(--accent-ink)} .verdict.not .tag{color:var(--muted)}
+.because{font-size:15px;color:var(--muted)}
+.block{display:flex;flex-direction:column;gap:8px;padding-top:20px;border-top:1px solid var(--line)}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.case .src{font-size:13px;color:var(--muted)}
+details{border-bottom:1px solid var(--line);padding:12px 0}
+summary{cursor:pointer;font-weight:700;color:var(--navy);list-style-position:outside}
+details p{margin-top:8px;color:var(--ink);font-size:16px}
+.exit{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.exit .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.exit a.btn{text-decoration:none;display:inline-block}
+.price{font-size:13px;color:var(--muted)}
+ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.opt.sel{border-color:var(--accent);background:var(--tint)}
+.opt .box{display:inline-block;width:18px;height:18px;border:1.5px solid var(--line);border-radius:5px;vertical-align:-3px;margin-right:10px;background:var(--surface)}
+.opt.sel .box{background:var(--accent);border-color:var(--accent)}
+.opt.radio .box{border-radius:50%}
+.note a,.price a{color:var(--accent-ink)}
+details.fold{border:0;padding:0}
+details.fold summary{font-size:14px;font-weight:700;color:var(--muted);letter-spacing:.08em}
+details.fold summary span{font-weight:400;letter-spacing:0;color:var(--accent-ink);margin-left:6px}
+details.fold p{font-size:16px;margin-top:10px}
+details.fold ul{margin-top:8px}
+.more{margin-top:8px;padding-top:18px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.more a{color:var(--accent-ink);font-weight:700}
+</style>
+
+<div class="wrap">
+  <div class="brand"><a href="/" style="color:var(--muted);text-decoration:none;font-size:13px;margin-right:8px">← 首頁</a><b>PROPEL AI</b><span>兩分鐘小測驗</span></div>
+  <section id="q-intro" class="stack">
+    <h1><span class="s">那件<em>推了很久</em>、</span><span class="s">卻還是沒有發生的事，</span><span class="s">能用這個方法處理嗎？</span></h1>
+    <p class="lead"><span class="s">提案做了，客戶沒有下一步。</span><span class="s">AI 工具買了，團隊沒有用起來。</span><span class="s">SOP 寫清楚了，現場還是照舊。</span></p>
+    <p><span class="s">回答三個問題，你會看到：</span><span class="s">這件事常見的卡點在哪、</span><span class="s">你試過的方法各在推哪一塊，</span><span class="s">以及這週就能自己做的一件小事。</span></p>
+    <button class="btn" id="startBtn" type="button">開始，三題</button>
+    <p class="note"><span class="s">全部用點選，不用留姓名或 email。</span><span class="s">這不是診斷，只是幫你判斷值不值得往下看。</span></p>
+  </section>
+
+  <section id="q-quiz" class="stack" hidden>
+    <div class="steps" id="steps" aria-hidden="true"></div>
+    <h2 id="qTitle" tabindex="-1"></h2>
+    <p class="note" id="qHint"></p>
+    <div class="opts" id="opts"></div>
+    <p class="note" id="qErr" hidden></p>
+    <button class="btn" id="nextBtn" type="button">下一題</button>
+    <button class="linkbtn" id="backBtn" type="button">回上一題</button>
+  </section>
+
+  <section id="q-result" class="stack" hidden>
+    <div class="verdict" id="verdict">
+      <span class="tag" id="vTag"></span>
+      <h2 id="vTitle" tabindex="-1"></h2>
+      <p id="vBody"></p>
+      <p class="because" id="vBecause"></p>
+    </div>
+
+    <div class="block" id="startBlock">
+      <h3 id="startHead">這週就能自己做的一件小事</h3>
+      <p id="startText"></p>
+      <p class="note" id="askNow">看完這一步就想問？<a href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener">私訊 George</a>：我會回你一個可能的卡點，和一個可以先查的問題。不談課。</p>
+    </div>
+
+    <div class="block" id="painBlock">
+      <h3>這件事常見的卡點</h3>
+      <p id="painText"></p>
+      <p class="note" id="otherPains"></p>
+    </div>
+
+    <div class="block" id="triedBlock">
+      <h3>你試過的方法，各在推哪一塊</h3>
+      <p id="triedLead"></p>
+      <p id="triedSum"></p>
+      <details class="fold">
+        <summary>每一種各推什麼<span>點開看</span></summary>
+        <ul class="plain" id="triedList"></ul>
+      </details>
+    </div>
+
+    <div class="block" id="caseBlock">
+      <h3>一個別人的例子</h3>
+      <div class="case">
+        <h2 id="caseTitle" style="font-size:19px"></h2>
+        <p id="caseBody"></p>
+        <p class="src" id="caseSrc"></p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>你可能想問</h3>
+      <div>
+        <details><summary>這跟再講一遍、主管盯、給獎勵這些做法，差別在哪？你們是說那些都錯了嗎？</summary><p>不是。再講一遍、主管盯、給獎勵都有用，很多公司就是靠這些把事情做起來的。我們的做法只是在不同的地方使力：那些方法推的是人，我們改的是他做事當下的環境。通常在三種情況會想換個方向：一是傳統做法已經做到極致，對手也用同樣的方法，很難再分出高下，想從另一個角度多拿一點優勢；二是傳統做法有效，但代價太高，要一直花預算，或一直花主管的時間和精力，想找比較省力的替代做法；三是手上沒有足夠的人或預算，用不起傳統做法。不在這三種情況的，原來的方法繼續用就好。</p></details>
+        <details><summary>要花很多預算嗎？小公司適用嗎？</summary><p>改法本身多半是動流程、訊息和表單，不需要另外採購，所以人少、預算緊的團隊也用得上。課是付費的（59 分鐘試駕 NT$8,900／場）。我們不保證成效數字，每家公司都要用自己的數字驗證。</p></details>
+        <details><summary>要多久才看得到變化？</summary><p>看那個動作多久發生一次。每天都發生的事，先觀察一兩週，再看資料夠不夠判斷；一年才發生幾次的事，就要更久。所以動手改之前，先記下現在的數字。</p></details>
+        <details><summary>這樣改環境，對方會不會覺得被設計？</summary><p>我們教的做法都攤在桌面上：把步驟變簡單、把提醒放在對的時間、把選項講清楚。判斷標準很簡單，對方事後知道你做了什麼，會不會覺得被騙。會的，就不做。</p></details>
+        <details><summary>行為經濟學是什麼？一句話說得完嗎？</summary><p>人做決定，除了看需求和意願，也受「選項怎麼呈現、步驟有多麻煩、提醒什麼時候出現」影響。這門學問研究的就是這些，所以它處理的是環境，不是去改變一個人的個性。</p></details>
+        <details><summary>這跟 AI 有什麼關係？</summary><p>課堂上會用到我們自己開發的 AI 輔助工具。順序是固定的：團隊先想，AI 再補上可能漏看的地方，講師帶大家看，最後由團隊決定。課後也有寫好的提示詞，讓你回公司套用自己的狀況再練一次。</p></details>
+        <details><summary>你們的課怎麼上？</summary><p>帶一件你們實際推不動的事來。課堂上把它拆成看得見的動作、找出可能卡住的那一步、設計一個可以嘗試的改法，再用你們自己的數字看效果。重點不在學一套理論，在回去就能動手。</p></details>
+      </div>
+    </div>
+
+    <div class="exit" id="exitBox">
+      <h2 id="exitTitle"></h2>
+      <p id="exitBody"></p>
+      <p class="note" id="exitHow"></p>
+      <div class="row">
+        <button class="btn ghost" id="copyBtn" type="button">複製我的結果</button>
+        <a class="btn" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener">到 LinkedIn 私訊 George</a>
+      </div>
+      <p class="note" id="copyMsg" hidden></p>
+      <div id="trialBox" class="stack" style="gap:6px">
+        <p><b id="trialName"></b></p>
+        <p class="note" id="trialNote"></p>
+        <p class="price">NT$8,900／場（未稅）。未經同意不做後續推銷。<a href="/" target="_blank" rel="noopener">看 59 分鐘試駕和其他課程的介紹</a>。</p>
+      </div>
+    </div>
+
+    <button class="linkbtn" id="againBtn" type="button">重新作答</button>
+  </section>
+
+  <p class="more">想看我們有哪些課、從哪裡開始：<a href="/" >Propel AI 首頁 →</a></p>
+</div>
+<script>
+(function(){
+const PAINS=[
+ ['sales','客戶不往下談','提案、報價、試用之後就沒有下文'],
+ ['adopt','AI 或新工具沒人用','買了、教了，大家還是用舊方法'],
+ ['sop','SOP 或流程沒人照做','規定寫得很清楚，現場還是照舊'],
+ ['gov','民眾不來辦、不配合','申請、繳費、回覆通知的人太少'],
+ ['other','另一件推了很久的事','沒人反對，就是一直沒發生']];
+const ACTOR={sales:'客戶',adopt:'同仁',sop:'現場的人',gov:'民眾',other:'對方'};
+const TRIAL={sales:'業務行銷版',adopt:'導入不落地版',sop:'SOP 版',gov:'政府版',other:'通用版'};
+const TOPIC={sales:'報價送出後，第幾天、用什麼理由跟進',adopt:'新工具，自動開通還是讓大家自己申請',sop:'SOP 給幾套做法，現場才做得到',gov:'這一欄，一定要民眾自己填嗎',other:'交辦時，要不要讓他寫下哪天幾點做'};
+const FIRSTSEQ={sales:'先說明、再給優惠、再給業務壓力',adopt:'先公告、再訓練、再加獎懲',sop:'先宣導、再訓練、再稽核',gov:'先宣導、再辦說明會、再加罰則',other:'先說明、再訓練、再加獎金'};
+const FIRSTM={sales:'再說明一次、再給一次優惠，在客戶其實還不清楚內容的時候，通常就夠了。',adopt:'再公告一次、再辦一場訓練，在同仁真的不知道、不會用的時候，通常就夠了。',sop:'再宣導一次、再辦一次訓練，在現場的人真的不知道、不會做的時候，通常就夠了。',gov:'再宣導一次、辦一場說明會，在民眾真的不知道、不會辦的時候，通常就夠了。',other:'再講一次、辦一場訓練，在對方真的不知道、不會做的時候，通常就夠了。'};
+const ELSE=['else','試過別的做法（不在上面）',null,'你試過的做法不在清單上，這裡判斷不了它推的是哪一塊。私訊時告訴我你做了什麼。'];
+const TRIEDOPT={
+ sales:[
+  ['tell','再跟客戶說明一次、多提醒幾次','提醒','再說明、多提醒幾次，推的是「提醒」。如果客戶其實已經懂了，再多一封跟進信補的是同一格；他卡住的，可能是收到之後、在自己公司裡要做的那一步。'],
+  ['offer','給客戶折扣、優惠或延長試用','想不想','折扣和優惠，推的是客戶「想不想」。如果客戶本來就有興趣，只是在他公司裡走不下去，優惠補的不是他缺的那一格；而且給過一次，下一次沒有，感覺會像被拿走。'],
+  ['boss','請我們的高層出面，找對方的高層','想不想','高層出面，換的是說話的人，推的是對方「想不想」，能打開一扇門。門開了之後，對方內部那一步（找誰簽、要預算、寫理由）還是要有人做；如果那一步沒變簡單，門可能會再關上。'],
+  ['push','給業務獎金或業績壓力','你們業務的想不想','獎金和業績目標，推的是你們業務「想不想」，不是客戶。業務會更用力追；如果客戶那一步沒有變簡單，被推的人和卡住的人，不是同一個。'],
+  ['train','幫業務做銷售訓練','你們業務的會不會','銷售訓練，推的是你們業務「會不會」談。如果業務談得不錯、客戶也有興趣，卡的可能不在談法，在客戶回去之後要做的事。訓練裡可以多教一件：幫客戶準備他要拿去公司內部用的東西。'],
+  ['flow','改過提案、報價單或跟進流程','F','改提案、報價單和跟進流程，推的是客戶「順不順手」裡的「麻不麻煩」，這跟我們的做法是同一邊。如果還是沒用，問一句：客戶上一次停下來，是在他公司裡的哪一步？再看改的是不是那一步。'],ELSE],
+ adopt:[
+  ['tell','再公告、再提醒一次','提醒','公告和提醒，推的是「提醒」。如果同仁已經知道，再發一次補的是同一格；值得看的是提醒出現的時候，他是不是正在做需要用工具的那件事。'],
+  ['train','多辦一場訓練','會不會','訓練，推的是「順不順手」裡的「會不會」。如果他其實會用，第二天回到同一個桌面、同一套舊檔案，動作容易回到原樣；訓練改的是人，環境沒有跟著改。'],
+  ['boss','主管出面要求','想不想','主管出面有兩種：把困難排掉，或是要求。要求推的是「想不想」：主管盯的那幾天通常有效；主管一轉身，舊方法還是比較順手，動作就容易回去。'],
+  ['money','加獎金、罰則或列入考核','想不想','獎金是蘿蔔、罰則是棍子，推的都是「想不想」。如果同仁本來就不反對，補的不是缺的那一格；而且獎金一旦開始給，之後拿掉會比從來沒給過更痛。'],
+  ['flow','改過畫面、放了範本或改過流程','F','改畫面、放範本、改流程，推的是「順不順手」裡的「麻不麻煩」，這跟我們的做法是同一邊。如果還是沒用，問一句：「上一次本來可以用的時候，卡在哪一步？」再看改的是不是那一步。'],ELSE],
+ sop:[
+  ['tell','再宣導一次','提醒','宣導，推的是「提醒」。如果現場的人已經知道規定，再講一次補的是同一格；值得看的是那個動作該發生的那一秒、那個位置，有沒有任何提醒。'],
+  ['train','再辦一次訓練','會不會','訓練，推的是「順不順手」裡的「會不會」。如果他會做，只是忙起來就跳過，回到現場還是容易跳過；要看的是那一步在現場有多麻煩。'],
+  ['boss','主管盯、加稽核','想不想','主管盯、加稽核，推的是「想不想」：有人看的時候照做。也值得看看：沒有人檢查的時候，哪一步最容易被跳過？如果照做比不照做多幾個動作，那一步在檢查之外的時間，就容易回到原樣。'],
+  ['money','獎懲、列入考核','想不想','獎懲，推的是「想不想」。如果現場的人不是反對規定，是那一步太麻煩或忘了，獎懲補的不是缺的那一格，還可能變成只做給檢查看。'],
+  ['flow','改過表單、流程或現場擺設','F','改表單、流程或現場擺設，推的是「順不順手」裡的「麻不麻煩」，這跟我們的做法是同一邊。如果還是沒用，確認兩件事：改的是不是最常被跳過的那一步？做完之後有沒有任何標記，讓人知道做了？'],ELSE],
+ gov:[
+  ['tell','再宣導、再發通知','提醒','宣導和通知，推的是「提醒」，講的多半是「為什麼要辦」。如果民眾卡的是「怎麼辦、要帶什麼、要多久」，值得看通知的前三行有沒有直接寫這三件事。'],
+  ['explain','辦說明會、加人力解說','會不會','說明會，推的是「順不順手」裡的「會不會」。如果來說明會的多半是本來就會來辦的人，沒來的那一群缺的可能是：在他想到的那一刻，有一個夠簡單的入口。'],
+  ['boss','請其他單位或里鄰協助催','提醒','換一個人催，推的是「提醒」和一點人情。如果催到了、手續還是那麼多，他可能還是停在同一步。'],
+  ['money','加罰則，或給獎勵','想不想','罰則是棍子、獎勵是蘿蔔，推的都是「想不想」。如果民眾不是不想辦，是不知道怎麼辦，補的不是缺的那一格；罰則還可能讓人更不敢來問。'],
+  ['flow','改過表單、流程、櫃台或線上申辦','F','改表單、流程、櫃台或線上申辦，推的是「順不順手」裡的「麻不麻煩」，這跟我們的做法是同一邊。如果還是沒用，確認：改的是辦理流程的中段，還是民眾停下來的第一步（找到入口、看懂要帶什麼）？'],ELSE],
+ other:[
+  ['tell','再講一次、再提醒一次','提醒','再講一次，推的是「提醒」。如果對方已經知道，再講一次補的是同一格；值得看的是該動手的那一秒，有沒有提醒出現。'],
+  ['train','多辦一場教育訓練','會不會','訓練，推的是「順不順手」裡的「會不會」。如果他其實會做，回到同一個環境，動作容易回到原樣；訓練改的是人，環境沒有跟著改。'],
+  ['boss','請主管出面要求','想不想','主管出面有兩種：把困難排掉，或是要求。要求推的是「想不想」：主管看得到的時候通常有效；主管一轉身，卡住的那一步還在。'],
+  ['money','加獎金、罰則或列入考核','想不想','獎金是蘿蔔、罰則是棍子，推的都是「想不想」。如果對方本來就不反對，補的不是缺的那一格；而且獎金一旦開始給，之後拿掉比從來沒給過更痛。'],
+  ['flow','改過流程、表單或畫面','F','改流程、表單或畫面，推的是「順不順手」裡的「麻不麻煩」，這跟我們的做法是同一邊。如果還是沒用，確認：改的是不是他真正停下來的那一步。'],ELSE]};
+function nextOpt(){
+  const tried=real(ans.tried);
+  return [
+   tried.length?['low','換個做法：調整步驟、提醒或選項','把那一步改簡單、把提醒放在對的時間、把選項先擺好']:['low','試著調整步驟、提醒或選項','把那一步改簡單、把提醒放在對的時間、把選項先擺好'],
+   tried.length?['budget','原來的方向再推一次','再說明、再訓練、再提醒一次']:['budget','先用常見的做法推推看','說明、訓練、提醒'],
+   ['wait','先放著，再看看','或者目前沒有特別的想法']];
+}
+const PAIN={
+ sales:'客戶沒往下談，不一定是不想。往下談的下一步，常常要他在自己公司裡多做一件事：找主管、要預算、寫一段理由。那一件事有多麻煩，常常比他有多想要更關鍵。',
+ adopt:'新工具沒人用，不一定是反對。舊方法順手，新工具每用一次都要多想一下；而該用的那一秒，常常沒有任何提醒。公告和訓練在會議室裡，動作在工作現場。',
+ sop:'SOP 沒人照做，不一定是規定有問題。值得看那一秒：照做比不照做多幾個動作？規定在文件裡，現場看不看得到？做完有沒有任何標記，讓人知道做了？',
+ gov:'民眾不來辦，不一定是不願意。有可能是他以為很麻煩，或不知道有這回事；而且不辦，今天不會少什麼。宣導多半在講「為什麼要辦」，民眾卡的常常是「怎麼辦、要帶什麼、要多久」。',
+ other:'一件推了很久卻沒發生的事，常見的卡點有三個：還沒具體到「誰、在什麼時候、做哪一個動作」；該做的那一秒沒有提醒；做了沒有人看見。'};
+const START={
+ sales:'找出一個沒下文的客戶，翻出他最後一次回覆：他說了什麼、當時說接下來誰做什麼。再寫下你希望他做的下一個動作。兩相對照，差的那一步就是可以先看的地方。',
+ adopt:'問三個沒在用的人某一次實際的經過：「最近哪一件工作，本來可以用它？那次為什麼沒拿出來用？」不要問他對工具的看法。',
+ sop:'挑 SOP 裡最常被跳過的一步，到現場看一次那個動作實際是怎麼做的：多了什麼、少了什麼、卡在哪。',
+ gov:'從收到通知到找到申請入口，自己走一次就好：通知前三行有沒有寫要做什麼、要帶什麼、要多久？入口要找幾次才找到？',
+ other:'把那件事填進這一句：「（誰），在（什麼時候），做（哪一個動作）。」例如：「門市店長阿美，每天打烊前，把當天缺貨的三樣商品填進補貨表。」填不出其中一格，那一格就是要先確認的事。'};
+const F4=['通知信五處一起改，回覆變六倍半','英國一家金融業者要通知客戶來申請賠償，原本的信幾乎沒人回。監理機關和業者一起測了幾種改法，有用的五種是：信封寫「請盡快處理」、重點改條列、文字砍掉四成、寫出實際只要幾分鐘、幾週後再寄一次。五種一起用，回覆變成原來的六倍半。加主管機關標誌、改由執行長署名，都沒有幫助。有用的全是讓對方那一步更好做。','Erta, Hunt, Iscenko & Brambley (2013), FCA Occasional Paper No. 1'];
+const CASE={
+ sales:F4, gov:F4,
+ adopt:['預設溫度調低 1 度，大家照用；調低 2 度，大家就調回去','OECD 在自己的辦公室做實驗：恆溫器預設調低 1 度，多數員工沒去動它；一口氣調低 2 度，很多人覺得冷，自己動手調回去，結果平均比只調 1 度那組還高。對新工具來說：一次要大家把整套做法換掉，容易回到舊方法；先只挑一件工作、只改一小步。示意：先只在「整理會議紀錄」這一件事上用新工具，其他照舊。','Brown 等人 (2013), Energy Economics；轉引自 Thaler & Sunstein《推力》終極增訂版'],
+ sop:['月台長椅轉個方向，醉客起身直走，走到的是月台另一頭','日本一家鐵路公司調監視器看乘客跌落軌道的畫面，發現一個固定模式：深夜喝醉的乘客坐在長椅上打瞌睡，聽到進站廣播，迷迷糊糊站起來往正前方走幾步，就掉下去了。長椅原本面向軌道；把它轉成不面向軌道，醉客起身往前走，走到的是月台另一頭。沒有加人、沒有宣導、沒有罰則；先去看「到底是怎麼掉下去的」。','InsideBE (2021)；轉引自 MINDWORX《The SURF™ Method》Module 1'],
+ other:['上完課都說會去，3% 真的去；多一張地圖、排好時間，28%','耶魯大學對大四學生上了一堂破傷風有多危險的課，多數人說會去打預防針，真的去的只有 3%。另一組上同一堂課，多拿一張圈出健康中心的地圖，並當場決定哪一天、幾點去。這一組 28% 去了。他們本來就知道健康中心在哪；差別在有沒有把「會去」變成「星期三下午兩點、從側門走過去」。','Leventhal, Singer & Jones (1965), Journal of Personality and Social Psychology']};
+let ans={pain:[],focus:null,tried:[],next:null}, step=0;
+const $=id=>document.getElementById(id);
+const PL={};PAINS.forEach(o=>PL[o[0]]=o[1]);
+const real=t=>t.filter(x=>x!=='none');
+function qshow(id){['q-intro','q-quiz','q-result'].forEach(s=>$(s).hidden=(s!==id));window.scrollTo(0,0)}
+function focus(){const pains=real(ans.pain);return pains.length===1?pains[0]:(pains.length>1?ans.focus:null)}
+function steps(){
+  const S=[{k:'pain',multi:true,t:'這些痛點，你現在有哪幾件？',h:'可以複選。',o:PAINS.concat([['none','目前都沒有','',true]])}];
+  const pains=real(ans.pain);
+  if(pains.length>1) S.push({k:'focus',multi:false,t:'其中，最想先處理的是哪一件？',h:'先挑一件；其他的可以再測一次。',o:pains.map(p=>[p,PL[p],''])});
+  const f=focus();
+  if(f) S.push({k:'tried',multi:true,t:'為了解決「'+PL[f]+'」，你已經試過哪些？',h:'可以複選。',o:TRIEDOPT[f].map(o=>[o[0],o[1],'']).concat([['none','還沒特別做什麼','',true]])});
+  if(f) S.push({k:'next',multi:false,t:'接下來，你比較想怎麼做？',h:'',o:nextOpt()});
+  return S;
+}
+function renderQ(){
+  const S=steps(), q=S[step];
+  $('steps').innerHTML=S.map((_,n)=>'<i class="'+(n<=step?'on':'')+'"></i>').join('')+'<span>'+(step+1)+' / '+S.length+'</span>';
+  $('qTitle').textContent=q.t; $('qHint').textContent=q.h; $('qHint').hidden=!q.h; $('qErr').hidden=true;
+  const box=$('opts'); box.innerHTML='';
+  const cur=q.multi?ans[q.k]:(ans[q.k]?[ans[q.k]]:[]);
+  q.o.forEach(o=>{const b=document.createElement('button');b.type='button';b.className='opt'+(q.multi?'':' radio')+(cur.includes(o[0])?' sel':'');
+    b.setAttribute('role',q.multi?'checkbox':'radio'); b.setAttribute('aria-checked',cur.includes(o[0])?'true':'false');
+    const bx=document.createElement('span');bx.className='box';bx.setAttribute('aria-hidden','true');b.appendChild(bx);
+    b.appendChild(document.createTextNode(o[1]));
+    if(o[2]){const sm=document.createElement('small');sm.textContent=o[2];b.appendChild(sm)}
+    b.addEventListener('click',()=>{
+      if(q.multi){let a=ans[q.k]; if(o[3]) a=a.includes(o[0])?[]:[o[0]]; else {a=a.filter(x=>!q.o.find(z=>z[0]===x&&z[3])); a=a.includes(o[0])?a.filter(x=>x!==o[0]):a.concat(o[0]);} ans[q.k]=a; if(q.k==='pain'){ans.focus=null;ans.tried=[];} renderQ();}
+      else {if(q.k==='focus'&&ans.focus!==o[0]) ans.tried=[]; ans[q.k]=o[0]; next();}
+    });
+    box.appendChild(b)});
+  $('nextBtn').hidden=!q.multi; $('backBtn').hidden=(step===0); $('qTitle').focus({preventScroll:true});
+}
+function next(){
+  const S=steps(), q=S[step];
+  if(q.multi&&ans[q.k].length===0){$('qErr').hidden=false;$('qErr').textContent='至少選一個，或選最後一項。';return;}
+  if(q.k==='pain'&&ans.pain.every(p=>p==='none')){ans.tried=[];ans.next=null;renderR();return;}
+  const S2=steps(); if(step<S2.length-1){step++;renderQ()} else renderR();
+}
+function triedLead(f){const actor=ACTOR[f];return '一件事要在'+actor+'身上發生，要三樣同時到位：他想不想做、做起來順不順手、該做的那一秒有沒有人提醒。你試過的方法，各推的是其中哪一樣：';}
+function triedSum(f,tried){
+  const opts=TRIEDOPT[f], F=tried.includes('flow'), actor=ACTOR[f], OWN='你們業務的';
+  const q=x=>'「'+x+'」', j=a=>a.length>1?a.slice(0,-1).map(q).join('、')+'和'+q(a[a.length-1]):q(a[0]);
+  const them=[], own=[];
+  opts.forEach(o=>{ if(!tried.includes(o[0])||!o[2]||o[2]==='F') return;
+    if(o[2].startsWith(OWN)){const k=o[2].slice(OWN.length); if(!own.includes(k)) own.push(k);} else if(!them.includes(o[2])) them.push(o[2]); });
+  const parts=[]; if(them.length) parts.push((own.length?'推'+actor+'的是':'推的是')+j(them)); if(own.length) parts.push('推你們自己業務的是'+j(own));
+  const pushed=parts.join('；');
+  if(!them.length&&!own.length&&!F) return '';
+  if(!F) return '你試過的方法，'+pushed+'。還沒有人去看的，是'+actor+'「做起來麻不麻煩」。';
+  if(!them.length&&!own.length) return '你動的是'+actor+'「順不順手」，跟我們的做法同一邊。值得回頭看改流程那一次：改的是不是'+actor+'停下來的那一步？';
+  return '你試過的方法，'+pushed+'；也動過'+actor+'「順不順手」。值得回頭看改流程那一次：改的是不是'+actor+'停下來的那一步？';
+}
+function verdict(a){
+  const pains=real(a.pain), f=focus(), tried=real(a.tried), known=tried.filter(t=>t!=='else'), hasElse=tried.includes('else'), F=known.includes('flow'), actor=f?ACTOR[f]:'對方';
+  const SH=f?Object.fromEntries(TRIEDOPT[f].map(o=>[o[0],o[1]])):{};
+  const NX=Object.fromEntries(nextOpt().map(o=>[o[0],o[1]]));
+  const chose='你選的：'+(f?PL[f]:'')+'；'+(tried.length?'試過：'+tried.map(t=>SH[t]).join('；'):'還沒特別做什麼')+'；接下來：'+(a.next?NX[a.next]:'')+'。';
+  const TAG='可以先從這裡看', elseNote=hasElse?'你還做過清單外的事，那部分這裡看不到。':'';
+  if(pains.length===0) return {c:'not',tag:'這次不符合',title:'這次列出的情況，目前沒有符合你的。',body:'這個測驗只放了五種常見的情況。哪天有一件事推了很久還沒發生，再回來做一次。',because:'你選的：目前都沒有。'};
+  if(a.next==='wait') return {c:'not',tag:'先放著也可以',title:'先放著也可以。',body:'下面留了一件幾乎不花力氣的小事，和這件事常見的卡點；想動的時候再看。',because:chose};
+  if(known.length===0&&a.next==='budget'){const again=tried.length?'再推一次':'推';return {c:'first',tag:again+'之前，先問一句',title:again+'之前，先問自己一句。',body:FIRSTM[f]+'想一個具體的動作，問自己：如果那一步的麻煩都拿掉了，他會做嗎？直覺是會，缺的可能不是知道或會做，值得先看那一步的麻煩。直覺是不會，或不確定，先推一輪也可以；但先記下現在的數字，推完再回來比。'+elseNote,because:chose};}
+  if(tried.length&&known.length===0) return {c:'fit',tag:TAG,title:'你試過的做法不在清單上。',body:'這裡判斷不了它推的是哪一塊。私訊時告訴我你做了什麼，我回你一個可能的卡點。下面那件小事，不用等私訊就可以先做。',because:chose};
+  if(known.length===0) return {c:'fit',tag:TAG,title:'還沒特別做什麼，可以直接從環境開始看。',body:'常見的順序是'+FIRSTSEQ[f]+'。你還沒走那條路，所以可以先看一件事：'+actor+'在哪一步停下來。下面那件小事，就是從這裡開始。',because:chose};
+  const pre=a.next==='budget'?'原來的方向再推一次之前，先看一件事。':'';
+  if(F) return {c:'fit',tag:TAG,title:'你已經改過流程了，接下來看改的是不是卡住的那一步。',body:(f==='sales'?'說明、優惠、業務壓力推的是人；改提案、報價單和跟進流程改的是環境':'說明、訓練、獎懲推的是人；改畫面、表單和流程改的是環境')+'，這一步你已經做了。還是沒發生，通常是兩個原因之一：改的不是'+actor+'真正停下來的那一步；或是改完之後，'+actor+'當下沒有比較省事。這兩件事自己就能確認，不用花錢，下面那件小事就是從這裡開始。'+(a.next==='budget'?'原來的方向再推一次之前，先確認這兩件。':'')+elseNote,because:chose};
+  if(f==='sales'&&known.every(t=>t==='train')) return {c:'fit',tag:TAG,title:'你已經調整過業務的談法；接下來可以看客戶那一步。',body:pre+'如果業務談得不錯、客戶也有興趣，卡的可能在客戶回去之後要做的事。值得先確認：那一步做起來有多麻煩、該做的那一秒有沒有提醒。下面那件小事就能開始看。'+elseNote,because:chose};
+  return {c:'fit',tag:TAG,title:'接下來，可以看看實際做事的那一步。',body:pre+(f==='sales'?'清單上這幾種方法，動的是客戶，或是自己的業務。如果客戶其實不反對，只是在他公司裡走不下去，':'清單上這幾種方法，動的是'+actor+'。如果他其實不反對，只是沒做，')+'值得先確認另外兩件事：那一步做起來有多麻煩、該做的那一秒有沒有提醒。這兩件，下面那件小事就能開始看。'+elseNote,because:chose};
+}
+function renderR(){
+  const a=ans, v=verdict(a), pains=real(a.pain), f=focus(), tried=real(a.tried);
+  $('verdict').className='verdict '+v.c; $('vTag').textContent=v.tag; $('vTitle').innerHTML=v.title.split(/(?<=[，。；：？])/).map(x=>'<span class="s">'+x.replace(/[<>&]/g,'')+'</span>').join(''); $('vBody').textContent=v.body; $('vBecause').textContent=v.because;
+  const nop=!f;
+  $('startBlock').hidden=nop;
+  if(v.c==='first'){$('startHead').textContent=(tried.length?'再推一次':'推')+'之前，先做一件事';$('startText').textContent='先記下現在的數字：這件事這週發生了幾次。不然推完一輪，也不知道有沒有用。';}
+  else if(f){$('startHead').textContent='這週就能自己做的一件小事';$('startText').textContent=START[f];}
+  $('painBlock').hidden=nop; if(f){$('painText').textContent=PAIN[f]; const others=pains.filter(p=>p!==f); $('otherPains').hidden=others.length===0; $('otherPains').textContent=others.length?'你也勾了「'+others.map(p=>PL[p]).join('」「')+'」。這次只看一件；想看另一件，重新作答就好。':'';}
+  const opts=f?TRIEDOPT[f]:[];
+  $('triedBlock').hidden=nop||tried.length===0; $('triedLead').textContent=f&&tried.length?triedLead(f):''; $('triedSum').textContent=f&&tried.length?triedSum(f,tried):''; $('triedList').innerHTML=''; tried.forEach(t=>{const o=opts.find(x=>x[0]===t); if(!o) return; const li=document.createElement('li');li.textContent=o[3];$('triedList').appendChild(li)});
+  $('caseBlock').hidden=nop||v.c==='first';
+  if(f){const c=CASE[f]; $('caseTitle').textContent=c[0]; $('caseBody').textContent=c[1]; $('caseSrc').textContent='出處：'+c[2];}
+  const fit=v.c==='fit';
+  $('exitTitle').textContent=fit?'想知道你這件事，可以先從哪裡查？':(v.c==='first'?'推完那一輪，想找人看看？':(nop?'想先知道這是什麼？':'想動的時候，再聊？'));
+  $('exitBody').textContent=nop?'歡迎私訊，我可以用一個你身邊的例子說明這個方法在處理什麼。':'把測驗結果傳給我，再補一句你現在的情況。我會回你一個可能卡住的地方，和一個可以先確認的問題。不談課；想了解試駕，再另外問。';
+  $('exitHow').hidden=nop; $('exitHow').textContent='先按「複製我的結果」，貼進私訊，再加一句：你希望誰，在什麼時候，做哪一件事。';
+  $('trialBox').hidden=!fit; if(f){$('trialName').textContent='如果想親手試一次：59 分鐘試駕（'+TRIAL[f]+'）';$('trialNote').textContent='一堂付費的體驗課：實體上課、整場計價，你和你的團隊最多 30 人。先用行為經濟學的角度看一次你們卡住的那件事，再從半天課裡抽一題親手做一次。'+TRIAL[f]+'抽的那一題：「'+TOPIC[f]+'」。';}
+  $('copyMsg').hidden=true;
+  qshow('q-result'); $('vTitle').focus({preventScroll:true});
+}
+function summary(){
+  const a=ans,v=verdict(a),f=focus();
+  const SH=f?Object.fromEntries(TRIEDOPT[f].map(o=>[o[0],o[1]])):{}; const NX=Object.fromEntries(nextOpt().map(o=>[o[0],o[1]]));
+  return ['我做了 Propel AI 的兩分鐘小測驗：','推不動的事：'+(a.pain.includes('none')?'目前都沒有':a.pain.map(p=>PL[p]).join('、'))+(f&&a.pain.length>1?'（先處理：'+PL[f]+'）':''),'試過：'+(real(a.tried).length?real(a.tried).map(t=>SH[t]).join('、'):'還沒特別做什麼'),'接下來：'+(a.next?NX[a.next]:'—'),'結果：'+v.tag].join('\n');
+}
+function reset(){ans={pain:[],focus:null,tried:[],next:null};step=0;qshow('q-quiz');renderQ()}
+$('startBtn').addEventListener('click',reset);
+$('nextBtn').addEventListener('click',next);
+$('backBtn').addEventListener('click',()=>{if(step>0){step--;renderQ()}});
+$('againBtn').addEventListener('click',reset);
+$('copyBtn').addEventListener('click',()=>{
+  const t=summary(), m=$('copyMsg');
+  const done=ok=>{m.hidden=false;m.textContent=ok?'已複製。到 LinkedIn 私訊時直接貼上就可以。':'這個畫面不能自動複製，請手動選取下面的文字：\n'+t;m.style.whiteSpace='pre-line'};
+  try{navigator.clipboard.writeText(t).then(()=>done(true),()=>done(false))}catch(e){done(false)}
+});
+})();
+</script>
+
+</body></html>
