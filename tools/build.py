@@ -12,7 +12,8 @@ HUB_CSS = src[src.index('<style>')+7 : src.index('</style>')]
 HUB_CSS = HUB_CSS.replace('[data-go],[data-prev],[data-scroll]{cursor:pointer}\n','').replace('a[data-go],a[data-prev],a[data-scroll]{color:inherit}\n','').replace('.choice[data-go]:hover{border-color:var(--orange)}','.choice:hover{border-color:var(--orange)}')
 
 SITE = 'https://propelaigrowth.com'
-URL = {'home':'/', 'trial':'/trial/', 'half':'/half-day/', 'ws':'/workshop/', 'surf':'/surf/', 'how':'/how/',
+PREVIEW = True   # True: 首頁放「準備中」，整站搬到 /preview/ 之下不被索引；False: 正式公開
+URL = {'home':'/preview/' if PREVIEW else '/', 'trial':'/trial/', 'half':'/half-day/', 'ws':'/workshop/', 'surf':'/surf/', 'how':'/how/',
        'quiz':'/quiz/', 'picker':'/picker/', 'docs':'/downloads/',
        'trial-prep':'/trial/prep/', 'half-prep':'/half-day/prep/', 'ws-prep':'/workshop/prep/', 'surf-prep':'/surf/prep/',
        'about':'/about/', 'contact':'/contact/', 'articles':'/articles/', 'clients':'/clients/'}
@@ -96,7 +97,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 <title>{html.escape(full)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{url}">
-{'<meta name="robots" content="noindex">' if noindex else ''}
+{'<meta name="robots" content="noindex,nofollow">' if (noindex or PREVIEW) else ''}
 <meta property="og:type" content="website"><meta property="og:site_name" content="Propel AI 啟進智能決策">
 <meta property="og:title" content="{html.escape(full)}"><meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -109,7 +110,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 <body>
 <div class="wrap">
   <header class="sitehead">
-    <a class="wordmark" href="/">PROPEL AI<small>啟進智能決策｜行為經濟學 × 行為設計 × AI</small></a>
+    <a class="wordmark" href="{URL['home']}">PROPEL AI<small>啟進智能決策｜行為經濟學 × 行為設計 × AI</small></a>
     <nav class="sitenav" aria-label="主選單">{nav}</nav>
   </header>
 <main>
@@ -128,6 +129,8 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
     return head + body + foot
 
 def write(path, content):
+    if PREVIEW:
+        content = content.replace('href="/"', 'href="/preview/"').replace('href="/#courses"', 'href="/preview/#courses"')
     p = OUT / path.lstrip('/'); p.mkdir(parents=True, exist_ok=True)
     (p/'index.html').write_text(content, encoding='utf-8')
 
@@ -147,7 +150,7 @@ home = home.replace('<div class="contact">', '''<div class="who"><div class="av"
     <div class="contact">''')
 home = home.replace('<p><a href="/downloads/" style="color:var(--orange);text-decoration:underline">下載課程介紹（PDF）</a></p>',
                     '<p><a href="/downloads/" style="color:var(--orange);text-decoration:underline">下載課程介紹（PDF）</a>　<a href="/contact/" style="color:var(--orange);text-decoration:underline">約 30 分鐘電話</a></p>')
-write('/', page('home', home, nav_current='/'))
+write(URL['home'], page('home', home, nav_current='/'))
 
 # ---------- downloads ----------
 DOCS = [
@@ -298,11 +301,17 @@ if cl['quotes'] or cl['cases']:
 
 # ---------- static files ----------
 (OUT/'CNAME').write_text('propelaigrowth.com\n')
-(OUT/'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
+(OUT/'robots.txt').write_text('User-agent: *\nDisallow: /\n' if PREVIEW else f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
 urls = [URL[k] for k in ['home','how','trial','half','ws','surf','trial-prep','half-prep','ws-prep','surf-prep','quiz','picker','docs','about','contact','articles']] + [f'/articles/{a["slug"]}/' for a in arts]
 (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{SITE}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
 (OUT/'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#003054"/><text x="32" y="44" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="900" fill="#F06000" text-anchor="middle">P</text></svg>')
 (OUT/'404.html').write_text(page('home', '<span class="pill">404</span><h1>這一頁不在這裡</h1><p class="lead">可能是網址打錯，或這一頁搬家了。</p><div class="menu"><a class="choice" href="/"><span><span class="q">回首頁</span><span class="a">從「你現在是哪一種」開始</span></span><span class="go">→</span></a></div>', title='找不到這一頁', noindex=True), encoding='utf-8')
 (OUT/'.nojekyll').write_text('')
+if PREVIEW:
+    hold = '''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Propel AI 啟進智能決策</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#003054;color:#fff;font-family:"Noto Sans TC",sans-serif;text-align:center;padding:24px}.w{max-width:520px}.wm{color:#F06000;letter-spacing:.32em;font-weight:900;font-size:14px}h1{font-size:clamp(26px,6vw,40px);line-height:1.3;margin:18px 0 10px}p{color:#DCE6EE;font-size:17px;line-height:1.7}a{color:#FFB880}</style></head>
+<body><div class="w"><div class="wm">PROPEL AI</div><h1>講了三次，<br>他還是沒做？</h1><p>先不急著加預算，讓你想要的行為更容易發生。</p><p>網站整理中。想先聊聊：<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></p><p style="font-size:13px;color:#A7B4BE">啟進智能決策有限公司｜行為經濟學 × 行為設計 × AI</p></div></body></html>'''
+    (OUT/'index.html').write_text(hold, encoding='utf-8')
+    (OUT/'sitemap.xml').unlink()
 shutil.copy(pathlib.Path(__file__).parent/'og.png', OUT/'assets/og.png')
 print('built', sum(1 for _ in OUT.rglob('index.html')), 'pages;', len(list((OUT/'assets/img').iterdir())), 'images')
