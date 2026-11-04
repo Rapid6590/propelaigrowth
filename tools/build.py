@@ -304,4 +304,5 @@ urls = [URL[k] for k in ['home','how','trial','half','ws','surf','trial-prep','h
 (OUT/'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#003054"/><text x="32" y="44" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="900" fill="#F06000" text-anchor="middle">P</text></svg>')
 (OUT/'404.html').write_text(page('home', '<span class="pill">404</span><h1>這一頁不在這裡</h1><p class="lead">可能是網址打錯，或這一頁搬家了。</p><div class="menu"><a class="choice" href="/"><span><span class="q">回首頁</span><span class="a">從「你現在是哪一種」開始</span></span><span class="go">→</span></a></div>', title='找不到這一頁', noindex=True), encoding='utf-8')
 (OUT/'.nojekyll').write_text('')
+shutil.copy(pathlib.Path(__file__).parent/'og.png', OUT/'assets/og.png')
 print('built', sum(1 for _ in OUT.rglob('index.html')), 'pages;', len(list((OUT/'assets/img').iterdir())), 'images')
