@@ -45,5 +45,25 @@
     <div class="disc">課程頁與課前說明為課前說明，實際安排以報價單與開課前確認為準；本公司保留調整課程內容與進行方式之權利。</div>
   </footer>
 </div>
+<script>
+(function(){
+  document.querySelectorAll('form.mform').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.reportValidity())return;
+      var d=new FormData(f);
+      var body='我想讓：'+d.get('who')+'\n在：'+d.get('when')+'\n完成：'+d.get('what')+'\n\n'+d.get('name')+'\n'+d.get('email');
+      var key=d.get('access_key');
+      var done=function(){f.querySelector('.mdone').hidden=false;f.querySelectorAll('label,.mrow').forEach(function(x){x.hidden=true});};
+      if(!key){location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('官網：我最想推動的一件事')+'&body='+encodeURIComponent(body);return;}
+      var btn=f.querySelector('button');btn.disabled=true;btn.textContent='送出中…';
+      d.append('message',body);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+        if(j.success){done();}else{throw 0;}
+      }).catch(function(){btn.disabled=false;btn.textContent='送出，我們回信';location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('官網：我最想推動的一件事')+'&body='+encodeURIComponent(body);});
+    });
+  });
+})();
+</script>
 </body>
 </html>

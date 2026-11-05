@@ -279,6 +279,17 @@ footer{margin-top:28px;font-size:12px;color:var(--mute);text-align:center}
 .dl .acts a.view{background:var(--card);color:var(--fg);border:1px solid var(--line)}
 .empty{background:var(--sky);border-radius:12px;padding:16px;color:var(--mute);font-size:14px}
 .btn[aria-disabled]{opacity:.55;pointer-events:none}
+/* ---- micro form ---- */
+.mform{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 12px;display:grid;gap:10px}
+.mform label{display:grid;grid-template-columns:6.5em 1fr;gap:10px;align-items:center;font-size:14px}
+.mform label span{font-weight:700;color:var(--navy)}
+.mform input:not([type=hidden]):not(.hp){width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;font:inherit;font-size:15px;background:#fff}
+.mform input:focus{outline:2px solid var(--orange);border-color:var(--orange)}
+.mform .hp{position:absolute;left:-9999px}
+.mrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.mnote{font-size:13px;color:var(--mute)}
+.mdone{background:var(--navy);color:var(--navy-fg);border-radius:10px;padding:10px 12px;font-weight:700;margin:0}
+@media (max-width:480px){.mform label{grid-template-columns:1fr;gap:4px}}
 /* ---- home long page ---- */
 img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .doors{margin:14px 0 4px}

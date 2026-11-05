@@ -83,6 +83,17 @@ SITE_CSS = '''
 .dl .acts a.view{background:var(--card);color:var(--fg);border:1px solid var(--line)}
 .empty{background:var(--sky);border-radius:12px;padding:16px;color:var(--mute);font-size:14px}
 .btn[aria-disabled]{opacity:.55;pointer-events:none}
+/* ---- micro form ---- */
+.mform{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 12px;display:grid;gap:10px}
+.mform label{display:grid;grid-template-columns:6.5em 1fr;gap:10px;align-items:center;font-size:14px}
+.mform label span{font-weight:700;color:var(--navy)}
+.mform input:not([type=hidden]):not(.hp){width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;font:inherit;font-size:15px;background:#fff}
+.mform input:focus{outline:2px solid var(--orange);border-color:var(--orange)}
+.mform .hp{position:absolute;left:-9999px}
+.mrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.mnote{font-size:13px;color:var(--mute)}
+.mdone{background:var(--navy);color:var(--navy-fg);border-radius:10px;padding:10px 12px;font-weight:700;margin:0}
+@media (max-width:480px){.mform label{grid-template-columns:1fr;gap:4px}}
 /* ---- home long page ---- */
 img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .doors{margin:14px 0 4px}
@@ -154,6 +165,26 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
     <div class="disc">課程頁與課前說明為課前說明，實際安排以報價單與開課前確認為準；本公司保留調整課程內容與進行方式之權利。</div>
   </footer>
 </div>
+<script>
+(function(){
+  document.querySelectorAll('form.mform').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.reportValidity())return;
+      var d=new FormData(f);
+      var body='我想讓：'+d.get('who')+'\\n在：'+d.get('when')+'\\n完成：'+d.get('what')+'\\n\\n'+d.get('name')+'\\n'+d.get('email');
+      var key=d.get('access_key');
+      var done=function(){f.querySelector('.mdone').hidden=false;f.querySelectorAll('label,.mrow').forEach(function(x){x.hidden=true});};
+      if(!key){location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('官網：我最想推動的一件事')+'&body='+encodeURIComponent(body);return;}
+      var btn=f.querySelector('button');btn.disabled=true;btn.textContent='送出中…';
+      d.append('message',body);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+        if(j.success){done();}else{throw 0;}
+      }).catch(function(){btn.disabled=false;btn.textContent='送出，我們回信';location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('官網：我最想推動的一件事')+'&body='+encodeURIComponent(body);});
+    });
+  });
+})();
+</script>
 </body>
 </html>
 '''
@@ -168,6 +199,8 @@ def write(path, content):
 (OUT/'assets/site.css').write_text(HUB_CSS + SITE_CSS, encoding='utf-8')
 
 # ---------- content pages from hub views ----------
+cfg = json.loads((pathlib.Path(__file__).parent/'config.json').read_text(encoding='utf-8')) if (pathlib.Path(__file__).parent/'config.json').exists() else {}
+FORM_KEY = cfg.get('form_key','')
 bodies = {}
 for key in ['trial','half','ws','surf','how','trial-prep','half-prep','ws-prep','surf-prep']:
     v = links(strip_section(views[key]))
@@ -177,6 +210,21 @@ for key in ['trial','half','ws','surf','how','trial-prep','half-prep','ws-prep',
         v = f'<div class="prep">{v}</div>'
     write(URL[key], page(key, v))
 
+def microform(ctx):
+    return f'''
+      <form class="mform" id="mform-{ctx}" novalidate>
+        <input type="hidden" name="access_key" value="{FORM_KEY}">
+        <input type="hidden" name="subject" value="官網：我最想推動的一件事">
+        <input type="hidden" name="from_name" value="Propel AI 官網">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+        <label><span>我想讓</span><input name="who" placeholder="例：業務團隊／收到報價的客戶" required></label>
+        <label><span>在</span><input name="when" placeholder="例：每週一早會前／收到提案三天內" required></label>
+        <label><span>完成</span><input name="what" placeholder="例：打開 AI 跑出第一版草稿／確認下一步會議時間" required></label>
+        <label><span>公司與稱呼</span><input name="name" placeholder="例：○○公司 陳經理" required></label>
+        <label><span>Email</span><input name="email" type="email" placeholder="回信用" required></label>
+        <div class="mrow"><button class="btn primary" type="submit">送出，我們回信</button><span class="mnote">一句話就夠；不收費、不推銷。</span></div>
+        <p class="mdone" hidden>收到了。我們會先看哪個行為值得處理，兩個工作天內回信。</p>
+      </form>'''
 # home: long page that follows the 公司簡介 storyline (v0.2)
 how_body = bodies['how']
 import re as _re
@@ -298,7 +346,8 @@ home = f"""
       <p class="eyebrow">06　下一步</p>
       <h2>從一個你想推動的行為開始</h2>
       <p class="sub">說一件你最想推動的事：誰？在什麼時候？希望完成什麼動作？一句話就夠。我們先看哪個行為值得處理，再談適合的合作方式；不適合，我們會直說。</p>
-      <div class="cta"><a class="btn primary" href="mailto:george.chen@propelaigrowth.com?subject=%E6%88%91%E6%9C%80%E6%83%B3%E6%8E%A8%E5%8B%95%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B&body=%E8%AA%B0%EF%BC%9F%0A%E5%9C%A8%E4%BB%80%E9%BA%BC%E6%99%82%E5%80%99%EF%BC%9F%0A%E5%B8%8C%E6%9C%9B%E5%AE%8C%E6%88%90%E4%BB%80%E9%BA%BC%E5%8B%95%E4%BD%9C%EF%BC%9F%0A">寫信說一件事</a><a class="btn secondary" href="/contact/">約 30 分鐘電話</a><a class="btn secondary" href="/quiz/">還不確定？兩分鐘小測驗</a></div>
+      {microform('home')}
+      <div class="cta"><a class="btn secondary" href="/contact/">想直接談？約 30 分鐘電話</a><a class="btn secondary" href="/quiz/">還不確定？兩分鐘小測驗</a></div>
       <div class="contact">
         <p><b>啟進智能決策有限公司 Propel AI</b>｜George Chen（創辦人）</p>
         <p>Email <code>george.chen@propelaigrowth.com</code>　台北市忠孝東路五段 1-2 號 12 樓</p>
@@ -397,7 +446,6 @@ about = '''
 write('/about/', page('about', about, desc='Propel AI 啟進智能決策：把行為經濟學的研究發現，轉成企業團隊能在工作上練習的步驟，再用實際數字觀察效果。'))
 
 # ---------- contact ----------
-cfg = json.loads((pathlib.Path(__file__).parent/'config.json').read_text(encoding='utf-8')) if (pathlib.Path(__file__).parent/'config.json').exists() else {}
 book = cfg.get('booking_url'); form = cfg.get('form_url')
 contact = f'''
     <span class="pill">聯絡</span>
@@ -410,8 +458,10 @@ contact = f'''
     </ul>
     <div class="cta-row">
       <a class="btn primary" href="{book or '#'}" {'target="_blank" rel="noopener"' if book else 'aria-disabled="true"'}>約 30 分鐘電話{'' if book else '（預約頁準備中）'}</a>
-      <a class="btn secondary" href="mailto:george.chen@propelaigrowth.com?subject=%E6%88%91%E6%9C%80%E6%83%B3%E6%8E%A8%E5%8B%95%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B&body=%E8%AA%B0%EF%BC%9F%0A%E5%9C%A8%E4%BB%80%E9%BA%BC%E6%99%82%E5%80%99%EF%BC%9F%0A%E5%B8%8C%E6%9C%9B%E5%AE%8C%E6%88%90%E4%BB%80%E9%BA%BC%E5%8B%95%E4%BD%9C%EF%BC%9F%0A">寫信說一件事：george.chen@propelaigrowth.com</a>
     </div>
+    <h2>或者，先說一件事就好</h2>
+    <p class="sub">填三格，留 Email；不想填表的，寫信到 <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> 也可以。</p>
+    {microform('contact')}
     <h2>還沒準備好聊？</h2>
     <div class="menu">
       <a class="choice" href="/quiz/"><span><span class="q">先做兩分鐘小測驗</span><span class="a">三題、用點的、不用留資料</span></span><span class="go">→</span></a>
