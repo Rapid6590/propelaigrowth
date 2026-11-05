@@ -18,14 +18,14 @@ URL = {'home':'/preview/' if PREVIEW else '/', 'trial':'/trial/', 'half':'/half-
        'quiz':'/quiz/', 'picker':'/picker/', 'docs':'/downloads/',
        'trial-prep':'/trial/prep/', 'half-prep':'/half-day/prep/', 'ws-prep':'/workshop/prep/', 'surf-prep':'/surf/prep/',
        'about':'/about/', 'contact':'/contact/', 'articles':'/articles/', 'clients':'/clients/'}
-TITLE = {'home':'Propel AI 啟進智能決策｜講了三次，他還是沒做？', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
+TITLE = {'home':'Propel AI 啟進智能決策｜行為經濟學企業內訓・行為設計工作坊', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
          'how':'我們怎麼看問題', 'quiz':'兩分鐘小測驗', 'picker':'選題器', 'docs':'課程介紹下載',
          'trial-prep':'59 分鐘試駕 課前說明', 'half-prep':'半天課・全天課 課前說明', 'ws-prep':'全天工作坊 課前說明', 'surf-prep':'SURF™ 原廠班 課前說明',
          'about':'關於 Propel AI', 'contact':'聯絡我們', 'articles':'文章', 'clients':'客戶怎麼說'}
 DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要的行為更容易發生。企業培訓與工作坊：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班。',
         'trial':'59 分鐘到你公司上：一個小實驗、一題半天課、寫下你最想先讓誰做什麼。NT$ 8,900（未稅），上限 30 人。',
         'half':'用你本來就在做的決定當題目：半天六題、全天十二題，每題一個規律、三個案例、一次判斷、一段 AI 提示詞。',
-        'ws':'帶一個推不動的痛點來，走五站，當場拍板一個兩週內看得到數字的小試驗。每場上限 16 人。',
+        'ws':'帶一個推不動的痛點來，走五站，當場拍板一個小規模、可以追蹤數字的試驗。每場上限 16 人。',
         'surf':'歐洲 MINDWORX 的方法，主題只有一個：怎麼讓客戶說 YES。台灣授權講師中文授課，發原廠結業證書。',
         'how':'數字是結果；可以動手的是行為。環境→行為→指標，每個指標背後都是一條行為鏈。',
         'quiz':'三題、用點的、不用留資料。看看那件推不動的事能不能用這個方法處理。',
@@ -65,7 +65,7 @@ def extract_images(v, prefix):
     return re.sub(r'src="data:([a-z/+]+);base64,([A-Za-z0-9+/=]+)"', rep, v)
 
 # ---------- chrome ----------
-NAV = [('/#pain','痛點'),('/how/','怎麼看問題'),('/#method','方法'),('/#courses','課程'),('/about/','為什麼是我們'),('/articles/','文章'),('/contact/','聯絡')]
+NAV = [('/#pain','痛點'),('/how/','怎麼看問題'),('/#method','方法'),('/#courses','課程'),('/about/','為什麼是我們'),('/contact/','聯絡')]
 SITE_CSS = '''
 /* ---- site chrome ---- */
 .sitehead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
@@ -84,6 +84,8 @@ SITE_CSS = '''
 .empty{background:var(--sky);border-radius:12px;padding:16px;color:var(--mute);font-size:14px}
 .btn[aria-disabled]{opacity:.55;pointer-events:none}
 /* ---- home long page ---- */
+img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
+.doors{margin:14px 0 4px}
 .sec{margin:34px 0 0;padding-top:22px;border-top:1px solid var(--line)}
 .sec .eyebrow{margin-bottom:4px}
 .sec h2{margin:0 0 6px;font-size:22px}
@@ -148,7 +150,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 </main>
   <footer class="sitefoot">
     <div><b>Propel AI｜啟進智能決策有限公司</b>｜統一編號 61933866｜台北市忠孝東路五段 1-2 號 12 樓｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
-    <div>歐洲 MINDWORX SURF™ Method 授權講師與教練｜未經同意，不做後續推銷。</div>
+    <div>歐洲 MINDWORX SURF™ Method 授權講師與教練｜尊重您的決定；未經同意，不進行後續行銷聯繫。</div>
     <div class="disc">課程頁與課前說明為課前說明，實際安排以報價單與開課前確認為準；本公司保留調整課程內容與進行方式之權利。</div>
   </footer>
 </div>
@@ -183,8 +185,11 @@ _ex = '<div class="ex">'+_ex1+'</div><p class="note">外部研究，非 Propel A
 home = f"""
     <p class="eyebrow">講了三次，他還是沒做？</p>
     <h1>先不急著加預算，讓你想要的行為更容易發生</h1>
-    <p class="lead">從客戶遲遲不做決定，到員工沒有採用新工具。我們帶你的團隊找出關鍵行為卡點，設計出可以測試的改善方案——改環境，不改人。</p>
-    <div class="cta"><a class="btn primary" href="/quiz/">還不確定？兩分鐘小測驗</a><a class="btn secondary" href="/trial/">想先試一次：59 分鐘試駕</a></div>
+    <p class="lead">從客戶遲遲不做決定，到員工沒有採用新工具。Propel AI 結合行為經濟學、行為設計與 AI，帶你的團隊找出行為卡點，設計可以測試的改善方案——改環境，不改人。</p>
+    <div class="menu doors">
+      <a class="choice hot" href="/contact/"><span><span class="q">已經有題目，想談怎麼上</span><span class="a">企業培訓與工作坊｜約 30 分鐘電話，或寫信說一件事</span></span><span class="go">→</span></a>
+      <a class="choice" href="/quiz/"><span><span class="q">還不確定，先看看自己卡在哪</span><span class="a">兩分鐘小測驗｜三題，用點的，不用留資料</span></span><span class="go">→</span></a>
+    </div>
 
     <section class="sec" id="pain">
       <p class="eyebrow">01　你的企業問題</p>
@@ -222,19 +227,25 @@ home = f"""
       <h3>改環境，長什麼樣子？一個例子</h3>
       <p class="sub">同一個方案、同一個價格，只換了預設。同樣的東西換個擺法，數字差一截；我們把它做成你用得上的工件。</p>
       {_ex}
+      <h3>同一招，用在你公司長這樣</h3>
+      <div class="vs">
+        <div class="card"><h3>改前</h3><p>「附上報價，請參考，有問題再聯絡。」</p><p class="note">沒有下一步、沒有時間；球在客戶手上，而他最容易做的是什麼都不做。</p></div>
+        <div class="card us"><h3>改後</h3><p>「附上報價。我週四下午打給您，看有沒有要調的地方。」</p><p class="note">下一步和時間都先幫他定好；他只要不反對。跟綠電那一格是同一個原理。</p></div>
+      </div>
+      <p class="note">示意，取自半天課「客人說『我再想想』」模組；非客戶實績。</p>
       <a class="more" href="/how/">還有兩個例子與完整說明：我們怎麼看問題 →</a>
     </section>
 
     <section class="sec" id="method">
       <p class="eyebrow">03　我們的方法</p>
       <h2>PROPEL：從模糊問題到可測試方案</h2>
-      <p class="sub">像醫師問診：「業績不好」「員工不配合」是症狀，不是病因。先問診、逐步排除、找出病因，再開藥——六個字母，六站。是流程，不是軟體。</p>
+      <p class="sub">模組課是一題練一個判斷；工作坊才是帶你們自己的題目走完六站。像醫師問診：「業績不好」「員工不配合」是症狀，不是原因。先問診、逐步排除、檢查可能原因，再開藥——六個字母，六站。是流程，不是軟體。</p>
       <div class="stations">
         <div class="st"><b>P</b><i>Pinpoint</i><span>把商業問題翻成特定的人、時刻、看得見的動作</span></div>
         <div class="st"><b>R</b><i>Reconstruct</i><span>還原他實際走的路，看斷在哪一步</span></div>
         <div class="st"><b>O</b><i>Obstacle</i><span>用六問找出待驗證的障礙，排優先序</span></div>
         <div class="st"><b>P</b><i>Prescribe</i><span>對準卡點，挑一個可以測試的介入</span></div>
-        <div class="st"><b>E</b><i>Experiment</i><span>定比較方式、指標、看多久</span></div>
+        <div class="st"><b>E</b><i>Experiment</i><span>定比較方式、指標；觀察期依行為頻率定</span></div>
         <div class="st"><b>L</b><i>Loop</i><span>回公司看數字，修正判斷與下一步</span></div>
       </div>
       <div class="vs">
@@ -274,12 +285,12 @@ home = f"""
       <h2>從行為經濟學研究到企業可執行的決策，中間那一步由我們完成</h2>
       <p class="sub">學理讀起來需要時間，也缺一套可以直接拿來用的工具。我們這幾年做的，就是把研究發現轉成企業團隊能在工作上練習的步驟，再用實際數字觀察效果。</p>
       <div class="cards">
-        <div class="card"><h3>一套有名字的方法</h3><p>PROPEL 六站流程，從模糊問題走到可測試方案；課與工作坊都照它走。</p></div>
+        <div class="card"><h3>一套有名字的方法</h3><p>模組課教團隊把行為科學用在日常決策；工作坊用 PROPEL 六站處理你們自己的題目。兩者都配 AI 工具，交付不同。</p></div>
         <div class="card"><h3>做好的教材與資料庫</h3><p>八個痛點、150 份模組教材；背後是整理好的 67 種常見卡點與 101 種改法。</p></div>
         <div class="card"><h3>已開發的 AI 工具</h3><p>選題器、兩分鐘小測驗、每題的提示詞；AI 給第二意見，決定權在人。</p></div>
         <div class="card"><h3>歐洲 MINDWORX 授權夥伴</h3><p>SURF™ Method 台灣授權講師與教練；MINDWORX 服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司。</p></div>
       </div>
-      <div class="who"><div class="av">G</div><div><h3>誰來上課｜George Chen，創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors），修過「行為經濟學之父」Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監。完整講師資歷見公司簡介與課前說明。</p></div></div>
+      <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>誰來上課｜George Chen，創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors），修過「行為經濟學之父」Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監。完整講師資歷見公司簡介與課前說明。</p></div></div>
       <a class="more" href="/about/">關於我們：三不信條、方法與教材 →</a>
     </section>
 
@@ -287,11 +298,10 @@ home = f"""
       <p class="eyebrow">06　下一步</p>
       <h2>從一個你想推動的行為開始</h2>
       <p class="sub">說一件你最想推動的事：誰？在什麼時候？希望完成什麼動作？一句話就夠。我們先看哪個行為值得處理，再談適合的合作方式；不適合，我們會直說。</p>
-      <div class="cta"><a class="btn primary" href="mailto:george.chen@propelaigrowth.com?subject=%E6%88%91%E6%9C%80%E6%83%B3%E6%8E%A8%E5%8B%95%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B">寫信說一件事</a><a class="btn secondary" href="/contact/">約 30 分鐘電話</a><a class="btn secondary" href="/quiz/">還不確定？兩分鐘小測驗</a></div>
+      <div class="cta"><a class="btn primary" href="mailto:george.chen@propelaigrowth.com?subject=%E6%88%91%E6%9C%80%E6%83%B3%E6%8E%A8%E5%8B%95%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B&body=%E8%AA%B0%EF%BC%9F%0A%E5%9C%A8%E4%BB%80%E9%BA%BC%E6%99%82%E5%80%99%EF%BC%9F%0A%E5%B8%8C%E6%9C%9B%E5%AE%8C%E6%88%90%E4%BB%80%E9%BA%BC%E5%8B%95%E4%BD%9C%EF%BC%9F%0A">寫信說一件事</a><a class="btn secondary" href="/contact/">約 30 分鐘電話</a><a class="btn secondary" href="/quiz/">還不確定？兩分鐘小測驗</a></div>
       <div class="contact">
         <p><b>啟進智能決策有限公司 Propel AI</b>｜George Chen（創辦人）</p>
         <p>Email <code>george.chen@propelaigrowth.com</code>　台北市忠孝東路五段 1-2 號 12 樓</p>
-        <p>未經同意，不做後續推銷。</p>
       </div>
     </section>
 """
@@ -301,7 +311,7 @@ write(URL['home'], page('home', home, nav_current='/'))
 DOCS = [
  ('trial','59 分鐘試駕　一頁介紹','正面：59 分鐘你會經歷的三件事、帶走什麼、費用與折抵。背面：我們怎麼看問題——三個改環境的例子，和「每個指標背後都是一條行為鏈」。','Propel_AI_59分鐘試駕_一頁介紹.pdf'),
  ('half','半天課・全天課　一頁介紹','半天六題、全天十二題，用你本來就在做的決定當題目：每題一個規律、三個案例、一次判斷、一段 AI 提示詞。背面是模組一覽與四個現成組合。','Propel_AI_半天課全天課_一頁介紹.pdf'),
- ('workshop','全天工作坊　一頁介紹','上午看懂行為的規律，下午帶你們自己的題目走五站，當場拍板一個兩週內看得到數字的小試驗。每場上限 16 人。','Propel_AI_全天工作坊_一頁介紹.pdf'),
+ ('workshop','全天工作坊　一頁介紹','上午看懂行為的規律，下午帶你們自己的題目走五站，當場拍板一個小規模、可以追蹤數字的試驗。每場上限 16 人。','Propel_AI_全天工作坊_一頁介紹.pdf'),
  ('surf','SURF™ 原廠班　一頁介紹','歐洲 MINDWORX 的方法，主題只有一個：怎麼讓客戶說 YES。台灣授權講師中文授課，半天、全天都發原廠結業證書。','Propel_AI_SURF原廠班_一頁介紹.pdf'),
  ('propel','我們怎麼做：PROPEL 六站（兩頁）','第 1 頁：像看診一樣，先找出症狀背後卡在哪一步，再開處方。第 2 頁：從找行為到看數字的六站流程，工作坊就是照這條路走。','Propel_AI_PROPEL架構兩頁.pdf'),
 ]
@@ -353,7 +363,7 @@ about = '''
     <div class="cards">
       <div class="card"><h3>不把結果當行為</h3><p>業績、採用率是結果；能動手的是誰在什麼時候做哪個動作。</p></div>
       <div class="card"><h3>不把人格當原因</h3><p>「他懶」「他不用心」不是卡點；先看那一步是不是太費力、太容易忘，或沒有人先做。</p></div>
-      <div class="card"><h3>不把假設當結論</h3><p>改法先當假設，兩週小試驗看數字，再決定留、改、換。</p></div>
+      <div class="card"><h3>不把假設當結論</h3><p>改法先當假設，小試驗看數字，再決定留、改、換。觀察多久，看那個行為多常發生。</p></div>
     </div>
     <h2>為什麼是行為經濟學</h2>
     <p>企業很熟悉自己的銷售流程。但從客戶那一端看，他每一步要做什麼、擔心什麼、還需要誰點頭？這些客戶必須完成的事，不一定出現在我們的流程裡。行為經濟學講的就是這個：除了需求與意願，選項怎麼呈現、步驟有多麻煩、提醒怎麼出現，都會影響一個人的決定。</p>
@@ -362,7 +372,7 @@ about = '''
     <div class="cards">
       <div class="card"><div class="n">1</div><h3>拆成看得見的行動</h3><p>把「業績要成長」「工具要有人用」拆成誰、在什麼時候、做哪一個動作。</p></div>
       <div class="card"><div class="n">2</div><h3>找卡點，設計改法</h3><p>找出那個動作可能卡住的原因，設計一個先不急著加預算的改法。</p></div>
-      <div class="card"><div class="n">3</div><h3>用自己的數字看效果</h3><p>小範圍試兩週，看數字，再決定留、改、或換一處。</p></div>
+      <div class="card"><div class="n">3</div><h3>用自己的數字看效果</h3><p>小範圍試，看數字，再決定留、改、或換一處。觀察期依行為發生的頻率定；常發生的行為，一到兩週先看一次。</p></div>
     </div>
     <p>過程中會用到我們自己開發的 AI 輔助工具，背後是整理好的 67 種常見卡點與 101 種改法。順序是固定的：團隊先想，AI 再補上可能漏看的地方，講師帶你看，最後由團隊決定。課程結束後，AI 還能繼續陪你練習——我們提供寫好的提示詞，回到公司，把自己的實際狀況貼進平常用的 AI 工具，就能照課堂上的原理和步驟再走一遍。</p>
     <h2>方法、教材與夥伴</h2>
@@ -373,7 +383,7 @@ about = '''
       <li><b>夥伴</b><span>歐洲 MINDWORX：2015 年成立的行為經濟學顧問公司，現於歐洲與北美設點，服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司；Propel AI 是其 SURF™ Method 台灣授權講師與教練</span></li>
     </ul>
     <h2>誰來上課</h2>
-    <div class="who"><div class="av">G</div><div><h3>George Chen 陳朝智｜創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業），修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監；歐洲 MINDWORX SURF™ Method 授權講師與教練。「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題。</p></div></div>
+    <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen 陳朝智｜創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業），修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監；歐洲 MINDWORX SURF™ Method 授權講師與教練。「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題。</p></div></div>
     <p class="note">完整講師資歷與認證，見公司簡介與各課程的課前說明。SURF™ 是 MINDWORX 的方法；Propel AI 的課程與工作坊是我們自己設計的架構。</p>
     <h2>公司</h2>
     <ul class="facts">
@@ -391,8 +401,13 @@ cfg = json.loads((pathlib.Path(__file__).parent/'config.json').read_text(encodin
 book = cfg.get('booking_url'); form = cfg.get('form_url')
 contact = f'''
     <span class="pill">聯絡</span>
-    <h1>先聊 30 分鐘，再決定要不要往下</h1>
-    <p class="lead">說你那件推不動的事，我們告訴你可能卡在哪、從哪一個課程開始最省。不收費、不推銷；聊完覺得不適合，就到此為止。</p>
+    <h1>談企業培訓需求：先聊 30 分鐘，再決定要不要往下</h1>
+    <p class="lead">說你那件推不動的事，我們告訴你可能卡在哪、從哪一個課程開始最省。不收費；聊完覺得不適合，就到此為止。</p>
+    <ul class="facts">
+      <li><b>公司</b><span>啟進智能決策有限公司 Propel AI｜統一編號 61933866</span></li>
+      <li><b>窗口</b><span>George Chen 陳朝智（創辦人）｜george.chen@propelaigrowth.com</span></li>
+      <li><b>地址</b><span>台北市忠孝東路五段 1-2 號 12 樓｜課程到你公司上，雙北以外交通費另計</span></li>
+    </ul>
     <div class="cta-row">
       <a class="btn primary" href="{book or '#'}" {'target="_blank" rel="noopener"' if book else 'aria-disabled="true"'}>約 30 分鐘電話{'' if book else '（預約頁準備中）'}</a>
       <a class="btn secondary" href="mailto:george.chen@propelaigrowth.com?subject=%E6%88%91%E6%9C%80%E6%83%B3%E6%8E%A8%E5%8B%95%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B&body=%E8%AA%B0%EF%BC%9F%0A%E5%9C%A8%E4%BB%80%E9%BA%BC%E6%99%82%E5%80%99%EF%BC%9F%0A%E5%B8%8C%E6%9C%9B%E5%AE%8C%E6%88%90%E4%BB%80%E9%BA%BC%E5%8B%95%E4%BD%9C%EF%BC%9F%0A">寫信說一件事：george.chen@propelaigrowth.com</a>
@@ -403,7 +418,6 @@ contact = f'''
       <a class="choice" href="/downloads/"><span><span class="q">下載一頁介紹</span><span class="a">轉給同事或老闆看</span></span><span class="go">→</span></a>
       <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">LinkedIn 上的 George</span><span class="a">看他平常在寫什麼</span></span><span class="go">→</span></a>
     </div>
-    <p class="note">啟進智能決策有限公司｜台北市忠孝東路五段 1-2 號 12 樓｜課程都到你公司上，雙北以外交通費另計。</p>
     <div class="nav"><a href="/" class="prev">← 回首頁</a></div>
 '''
 write('/contact/', page('contact', contact, desc='約 30 分鐘電話，說你那件推不動的事。不收費、不推銷。'))
@@ -456,4 +470,5 @@ if PREVIEW:
     (OUT/'sitemap.xml').unlink()
 shutil.copy(pathlib.Path(__file__).parent/'og.png', OUT/'assets/og.png')
 shutil.copy(pathlib.Path(__file__).parent/'og_quiz.png', OUT/'assets/og_quiz.png')
+shutil.copy(pathlib.Path(__file__).parent/'george.jpg', OUT/'assets/george.jpg')
 print('built', sum(1 for _ in OUT.rglob('index.html')), 'pages;', len(list((OUT/'assets/img').iterdir())), 'images')

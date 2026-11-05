@@ -280,6 +280,8 @@ footer{margin-top:28px;font-size:12px;color:var(--mute);text-align:center}
 .empty{background:var(--sky);border-radius:12px;padding:16px;color:var(--mute);font-size:14px}
 .btn[aria-disabled]{opacity:.55;pointer-events:none}
 /* ---- home long page ---- */
+img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
+.doors{margin:14px 0 4px}
 .sec{margin:34px 0 0;padding-top:22px;border-top:1px solid var(--line)}
 .sec .eyebrow{margin-bottom:4px}
 .sec h2{margin:0 0 6px;font-size:22px}
