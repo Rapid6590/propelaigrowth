@@ -12,7 +12,8 @@ HUB_CSS = src[src.index('<style>')+7 : src.index('</style>')]
 HUB_CSS = HUB_CSS.replace('[data-go],[data-prev],[data-scroll]{cursor:pointer}\n','').replace('a[data-go],a[data-prev],a[data-scroll]{color:inherit}\n','').replace('.choice[data-go]:hover{border-color:var(--orange)}','.choice:hover{border-color:var(--orange)}')
 
 SITE = 'https://propelaigrowth.com'
-PREVIEW = True   # True: 首頁放「準備中」，整站搬到 /preview/ 之下不被索引；False: 正式公開
+PREVIEW = False  # True: 首頁放「準備中」，整站搬到 /preview/ 之下不被索引；False: 正式公開
+OGIMG = {'quiz':'og_quiz.png'}
 URL = {'home':'/preview/' if PREVIEW else '/', 'trial':'/trial/', 'half':'/half-day/', 'ws':'/workshop/', 'surf':'/surf/', 'how':'/how/',
        'quiz':'/quiz/', 'picker':'/picker/', 'docs':'/downloads/',
        'trial-prep':'/trial/prep/', 'half-prep':'/half-day/prep/', 'ws-prep':'/workshop/prep/', 'surf-prep':'/surf/prep/',
@@ -100,7 +101,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 {'<meta name="robots" content="noindex,nofollow">' if (noindex or PREVIEW) else ''}
 <meta property="og:type" content="website"><meta property="og:site_name" content="Propel AI 啟進智能決策">
 <meta property="og:title" content="{html.escape(full)}"><meta property="og:description" content="{html.escape(desc)}">
-<meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/{OGIMG.get(key,"og.png")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
@@ -191,7 +192,7 @@ def wrap_standalone(key, html_src, back_label):
     head = f'''<!doctype html>
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{html.escape(t)}｜Propel AI</title><meta name="description" content="{html.escape(DESC[key])}"><link rel="canonical" href="{SITE}{URL[key]}">
-<meta property="og:title" content="{html.escape(t)}"><meta property="og:description" content="{html.escape(DESC[key])}"><meta property="og:image" content="{SITE}/assets/og.png"><meta property="og:url" content="{SITE}{URL[key]}">
+<meta property="og:title" content="{html.escape(t)}"><meta property="og:description" content="{html.escape(DESC[key])}"><meta property="og:image" content="{SITE}/assets/{OGIMG.get(key,"og.png")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="{SITE}{URL[key]}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head><body>
 '''
@@ -314,4 +315,5 @@ if PREVIEW:
     (OUT/'index.html').write_text(hold, encoding='utf-8')
     (OUT/'sitemap.xml').unlink()
 shutil.copy(pathlib.Path(__file__).parent/'og.png', OUT/'assets/og.png')
+shutil.copy(pathlib.Path(__file__).parent/'og_quiz.png', OUT/'assets/og_quiz.png')
 print('built', sum(1 for _ in OUT.rglob('index.html')), 'pages;', len(list((OUT/'assets/img').iterdir())), 'images')
