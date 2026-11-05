@@ -107,7 +107,7 @@ details.fold ul{margin-top:8px}
     <div class="block" id="startBlock">
       <h3 id="startHead">這週就能自己做的一件小事</h3>
       <p id="startText"></p>
-      <p class="note" id="askNow">看完這一步就想問？<a href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener">私訊 George</a>：我會回你一個可能的卡點，和一個可以先查的問題。不談課。</p>
+      <p class="note" id="askNow">看完這一步就想問？寫信給 George（<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a>）：我會回你一個可能的卡點，和一個可以先查的問題。不談課。</p>
     </div>
 
     <div class="block" id="painBlock">
@@ -154,7 +154,7 @@ details.fold ul{margin-top:8px}
       <p class="note" id="exitHow"></p>
       <div class="row">
         <button class="btn ghost" id="copyBtn" type="button">複製我的結果</button>
-        <a class="btn" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener">到 LinkedIn 私訊 George</a>
+        <a class="btn" id="mailBtn" href="mailto:george.chen@propelaigrowth.com">Email 給 George</a>
       </div>
       <p class="note" id="copyMsg" hidden></p>
       <div id="trialBox" class="stack" style="gap:6px">
@@ -182,7 +182,7 @@ const TRIAL={sales:'業務行銷版',adopt:'導入不落地版',sop:'SOP 版',go
 const TOPIC={sales:'報價送出後，第幾天、用什麼理由跟進',adopt:'新工具，自動開通還是讓大家自己申請',sop:'SOP 給幾套做法，現場才做得到',gov:'這一欄，一定要民眾自己填嗎',other:'交辦時，要不要讓他寫下哪天幾點做'};
 const FIRSTSEQ={sales:'先說明、再給優惠、再給業務壓力',adopt:'先公告、再訓練、再加獎懲',sop:'先宣導、再訓練、再稽核',gov:'先宣導、再辦說明會、再加罰則',other:'先說明、再訓練、再加獎金'};
 const FIRSTM={sales:'再說明一次、再給一次優惠，在客戶其實還不清楚內容的時候，通常就夠了。',adopt:'再公告一次、再辦一場訓練，在同仁真的不知道、不會用的時候，通常就夠了。',sop:'再宣導一次、再辦一次訓練，在現場的人真的不知道、不會做的時候，通常就夠了。',gov:'再宣導一次、辦一場說明會，在民眾真的不知道、不會辦的時候，通常就夠了。',other:'再講一次、辦一場訓練，在對方真的不知道、不會做的時候，通常就夠了。'};
-const ELSE=['else','試過別的做法（不在上面）',null,'你試過的做法不在清單上，這裡判斷不了它推的是哪一塊。私訊時告訴我你做了什麼。'];
+const ELSE=['else','試過別的做法（不在上面）',null,'你試過的做法不在清單上，這裡判斷不了它推的是哪一塊。寫信時告訴我你做了什麼。'];
 const TRIEDOPT={
  sales:[
   ['tell','再跟客戶說明一次、多提醒幾次','提醒','再說明、多提醒幾次，推的是「提醒」。如果客戶其實已經懂了，再多一封跟進信補的是同一格；他卡住的，可能是收到之後、在自己公司裡要做的那一步。'],
@@ -302,7 +302,7 @@ function verdict(a){
   if(pains.length===0) return {c:'not',tag:'這次不符合',title:'這次列出的情況，目前沒有符合你的。',body:'這個測驗只放了五種常見的情況。哪天有一件事推了很久還沒發生，再回來做一次。',because:'你選的：目前都沒有。'};
   if(a.next==='wait') return {c:'not',tag:'先放著也可以',title:'先放著也可以。',body:'下面留了一件幾乎不花力氣的小事，和這件事常見的卡點；想動的時候再看。',because:chose};
   if(known.length===0&&a.next==='budget'){const again=tried.length?'再推一次':'推';return {c:'first',tag:again+'之前，先問一句',title:again+'之前，先問自己一句。',body:FIRSTM[f]+'想一個具體的動作，問自己：如果那一步的麻煩都拿掉了，他會做嗎？直覺是會，缺的可能不是知道或會做，值得先看那一步的麻煩。直覺是不會，或不確定，先推一輪也可以；但先記下現在的數字，推完再回來比。'+elseNote,because:chose};}
-  if(tried.length&&known.length===0) return {c:'fit',tag:TAG,title:'你試過的做法不在清單上。',body:'這裡判斷不了它推的是哪一塊。私訊時告訴我你做了什麼，我回你一個可能的卡點。下面那件小事，不用等私訊就可以先做。',because:chose};
+  if(tried.length&&known.length===0) return {c:'fit',tag:TAG,title:'你試過的做法不在清單上。',body:'這裡判斷不了它推的是哪一塊。寫信時告訴我你做了什麼，我回你一個可能的卡點。下面那件小事，不用等回信就可以先做。',because:chose};
   if(known.length===0) return {c:'fit',tag:TAG,title:'還沒特別做什麼，可以直接從環境開始看。',body:'常見的順序是'+FIRSTSEQ[f]+'。你還沒走那條路，所以可以先看一件事：'+actor+'在哪一步停下來。下面那件小事，就是從這裡開始。',because:chose};
   const pre=a.next==='budget'?'原來的方向再推一次之前，先看一件事。':'';
   if(F) return {c:'fit',tag:TAG,title:'你已經改過流程了，接下來看改的是不是卡住的那一步。',body:(f==='sales'?'說明、優惠、業務壓力推的是人；改提案、報價單和跟進流程改的是環境':'說明、訓練、獎懲推的是人；改畫面、表單和流程改的是環境')+'，這一步你已經做了。還是沒發生，通常是兩個原因之一：改的不是'+actor+'真正停下來的那一步；或是改完之後，'+actor+'當下沒有比較省事。這兩件事自己就能確認，不用花錢，下面那件小事就是從這裡開始。'+(a.next==='budget'?'原來的方向再推一次之前，先確認這兩件。':'')+elseNote,because:chose};
@@ -323,8 +323,9 @@ function renderR(){
   if(f){const c=CASE[f]; $('caseTitle').textContent=c[0]; $('caseBody').textContent=c[1]; $('caseSrc').textContent='出處：'+c[2];}
   const fit=v.c==='fit';
   $('exitTitle').textContent=fit?'想知道你這件事，可以先從哪裡查？':(v.c==='first'?'推完那一輪，想找人看看？':(nop?'想先知道這是什麼？':'想動的時候，再聊？'));
-  $('exitBody').textContent=nop?'歡迎私訊，我可以用一個你身邊的例子說明這個方法在處理什麼。':'把測驗結果傳給我，再補一句你現在的情況。我會回你一個可能卡住的地方，和一個可以先確認的問題。不談課；想了解試駕，再另外問。';
-  $('exitHow').hidden=nop; $('exitHow').textContent='先按「複製我的結果」，貼進私訊，再加一句：你希望誰，在什麼時候，做哪一件事。';
+  $('exitBody').textContent=nop?'歡迎寫信給我，我可以用一個你身邊的例子說明這個方法在處理什麼。':'把測驗結果 Email 給我，再補一句你現在的情況。我會回你一個可能卡住的地方，和一個可以先確認的問題。不談課；想了解試駕，再另外問。';
+  $('exitHow').hidden=nop; $('exitHow').textContent='按「Email 給 George」會幫你把結果填進信裡；再加一句：你希望誰，在什麼時候，做哪一件事。信箱：george.chen@propelaigrowth.com';
+  $('mailBtn').href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('兩分鐘小測驗的結果')+'&body='+encodeURIComponent(summary()+'\n\n我現在的情況：\n\n我希望誰，在什麼時候，做哪一件事：\n');
   $('trialBox').hidden=!fit; if(f){$('trialName').textContent='如果想親手試一次：59 分鐘試駕（'+TRIAL[f]+'）';$('trialNote').textContent='一堂付費的體驗課：實體上課、整場計價，你和你的團隊最多 30 人。先用行為經濟學的角度看一次你們卡住的那件事，再從半天課裡抽一題親手做一次。'+TRIAL[f]+'抽的那一題：「'+TOPIC[f]+'」。';}
   $('copyMsg').hidden=true;
   qshow('q-result'); $('vTitle').focus({preventScroll:true});
@@ -341,7 +342,7 @@ $('backBtn').addEventListener('click',()=>{if(step>0){step--;renderQ()}});
 $('againBtn').addEventListener('click',reset);
 $('copyBtn').addEventListener('click',()=>{
   const t=summary(), m=$('copyMsg');
-  const done=ok=>{m.hidden=false;m.textContent=ok?'已複製。到 LinkedIn 私訊時直接貼上就可以。':'這個畫面不能自動複製，請手動選取下面的文字：\n'+t;m.style.whiteSpace='pre-line'};
+  const done=ok=>{m.hidden=false;m.textContent=ok?'已複製。如果信件沒有自動開啟，寄到 george.chen@propelaigrowth.com 貼上就可以。':'這個畫面不能自動複製，請手動選取下面的文字：\n'+t;m.style.whiteSpace='pre-line'};
   try{navigator.clipboard.writeText(t).then(()=>done(true),()=>done(false))}catch(e){done(false)}
 });
 })();
