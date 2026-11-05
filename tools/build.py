@@ -147,7 +147,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
     foot = '''
 </main>
   <footer class="sitefoot">
-    <div><b>Propel AI｜啟進智能決策有限公司</b>｜台北市忠孝東路五段 1-2 號 12 樓｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a>｜<a href="https://www.linkedin.com/in/digitalgeorge" rel="noopener" target="_blank">LinkedIn</a></div>
+    <div><b>Propel AI｜啟進智能決策有限公司</b>｜統一編號 61933866｜台北市忠孝東路五段 1-2 號 12 樓｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
     <div>歐洲 MINDWORX SURF™ Method 授權講師與教練｜未經同意，不做後續推銷。</div>
     <div class="disc">課程頁與課前說明為課前說明，實際安排以報價單與開課前確認為準；本公司保留調整課程內容與進行方式之權利。</div>
   </footer>
@@ -272,14 +272,15 @@ home = f"""
     <section class="sec" id="why">
       <p class="eyebrow">05　為什麼是 Propel AI</p>
       <h2>從行為經濟學研究到企業可執行的決策，中間那一步由我們完成</h2>
-      <div class="who"><div class="av">G</div><div><h3>George Chen｜創辦人・行為經濟學與行為設計顧問</h3><p>在 Oracle 任職期間取得芝加哥大學 Booth 商學院 MBA，期間上了「行為經濟學之父」Richard Thaler 的課，從此投入這個領域。之後在 Oracle 多年，處理的是同一個問題：怎麼讓潛在客戶採取下一步。</p></div></div>
-      <ul class="creds">
-        <li><b>學位</b><span>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業）；修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課</span></li>
-        <li><b>經歷</b><span>Oracle 香港／台灣區行銷總監；Oracle 人力資源產品線亞太區行銷總監</span></li>
-        <li><b>行為經濟學</b><span>Chicago Booth 高階主管教育「行為經濟學」；Irrational Labs 訓練營結業；歐洲 MINDWORX SURF™ Method 授權講師與教練</span></li>
-      </ul>
-      <div class="quote"><b>我們的夥伴：歐洲 MINDWORX</b>2015 年成立於歐洲的行為經濟學顧問公司，現於歐洲與北美設點；服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司。SURF™ 是 MINDWORX 的方法，我們是授權講師與教練；Propel AI 的課與工作坊，用的是我們自己的 PROPEL 流程。<span class="note">上列為 MINDWORX 的客戶背景，不是 Propel AI 的客戶實績。</span></div>
-      <a class="more" href="/about/">完整資歷（AI、設計與體驗、教學與引導）與我們的三不信條 →</a>
+      <p class="sub">學理讀起來需要時間，也缺一套可以直接拿來用的工具。我們這幾年做的，就是把研究發現轉成企業團隊能在工作上練習的步驟，再用實際數字觀察效果。</p>
+      <div class="cards">
+        <div class="card"><h3>一套有名字的方法</h3><p>PROPEL 六站流程，從模糊問題走到可測試方案；課與工作坊都照它走。</p></div>
+        <div class="card"><h3>做好的教材與資料庫</h3><p>八個痛點、150 份模組教材；背後是整理好的 67 種常見卡點與 101 種改法。</p></div>
+        <div class="card"><h3>已開發的 AI 工具</h3><p>選題器、兩分鐘小測驗、每題的提示詞；AI 給第二意見，決定權在人。</p></div>
+        <div class="card"><h3>歐洲 MINDWORX 授權夥伴</h3><p>SURF™ Method 台灣授權講師與教練；MINDWORX 服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司。</p></div>
+      </div>
+      <div class="who"><div class="av">G</div><div><h3>誰來上課｜George Chen，創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors），修過「行為經濟學之父」Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監。完整講師資歷見公司簡介與課前說明。</p></div></div>
+      <a class="more" href="/about/">關於我們：三不信條、方法與教材 →</a>
     </section>
 
     <section class="sec" id="next">
@@ -348,6 +349,12 @@ about = '''
     <span class="pill">關於</span>
     <h1>我們做一件事：讓你想要的行為，更容易發生</h1>
     <p class="lead">提案做了，客戶卻遲遲沒有下一步；AI 工具買了，團隊卻沒有用起來；SOP 寫清楚了，現場還是照舊。Propel AI 透過企業培訓與工作坊，教團隊運用行為經濟學和 AI，找出客戶不往下談、同仁沒有行動的原因，再調整流程、訊息與做決定的環境。</p>
+    <h2>我們相信的三件事</h2>
+    <div class="cards">
+      <div class="card"><h3>不把結果當行為</h3><p>業績、採用率是結果；能動手的是誰在什麼時候做哪個動作。</p></div>
+      <div class="card"><h3>不把人格當原因</h3><p>「他懶」「他不用心」不是卡點；先看那一步是不是太費力、太容易忘，或沒有人先做。</p></div>
+      <div class="card"><h3>不把假設當結論</h3><p>改法先當假設，兩週小試驗看數字，再決定留、改、換。</p></div>
+    </div>
     <h2>為什麼是行為經濟學</h2>
     <p>企業很熟悉自己的銷售流程。但從客戶那一端看，他每一步要做什麼、擔心什麼、還需要誰點頭？這些客戶必須完成的事，不一定出現在我們的流程裡。行為經濟學講的就是這個：除了需求與意願，選項怎麼呈現、步驟有多麻煩、提醒怎麼出現，都會影響一個人的決定。</p>
     <p>過去，行為經濟學多由政府與大型企業聘顧問導入。一般企業也許聽過、也想試試看怎麼用在自己的生意上，但往往不知道從哪裡著手：學理讀起來需要時間，也缺一套可以直接拿來用的工具和工件，把研究發現接到工作上的步驟。我們這幾年做的，就是這一步——把行為經濟學的研究發現，轉成企業團隊能在工作上練習的步驟，再用實際數字觀察效果。</p>
@@ -358,35 +365,26 @@ about = '''
       <div class="card"><div class="n">3</div><h3>用自己的數字看效果</h3><p>小範圍試兩週，看數字，再決定留、改、或換一處。</p></div>
     </div>
     <p>過程中會用到我們自己開發的 AI 輔助工具，背後是整理好的 67 種常見卡點與 101 種改法。順序是固定的：團隊先想，AI 再補上可能漏看的地方，講師帶你看，最後由團隊決定。課程結束後，AI 還能繼續陪你練習——我們提供寫好的提示詞，回到公司，把自己的實際狀況貼進平常用的 AI 工具，就能照課堂上的原理和步驟再走一遍。</p>
-    <h2>我們相信的三件事</h2>
-    <div class="cards">
-      <div class="card"><h3>不把結果當行為</h3><p>業績、採用率是結果；能動手的是誰在什麼時候做哪個動作。</p></div>
-      <div class="card"><h3>不把人格當原因</h3><p>「他懶」「他不用心」不是卡點；先看那一步是不是太費力、太容易忘，或沒有人先做。</p></div>
-      <div class="card"><h3>不把假設當結論</h3><p>改法先當假設，兩週小試驗看數字，再決定留、改、換。</p></div>
-    </div>
-    <h2>誰在做</h2>
-    <div class="who"><div class="av">G</div><div><h3>George Chen 陳朝智｜創辦人</h3><p>「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題：負責過香港與台灣所有產品線的需求開發，也負責過大中華區的高科技產業，以及亞太區的人力資源產品線。有些產品是市場領導者，要讓客戶願意留下；有些是後進者，要讓客戶願意換掉原本的選擇。不同市場、不同競爭位置，都要先弄懂客戶為什麼願意、或不願意走下一步。</p></div></div>
-    <p>在芝加哥大學 Booth 商學院取得 MBA 學位（With Honors，前 20% 畢業）時，他修了 Richard Thaler 的課——行為經濟學之父，後來獲得諾貝爾經濟學獎。那堂課讓他開始留意：除了需求與意願，選項怎麼呈現、步驟有多麻煩、提醒怎麼出現，都會影響一個人的決定。從那時起他就在想：讓事情發生的很大一部分是環境，而環境是可以事先安排的。</p>
-    <h3 style="margin-top:18px">資歷與認證</h3>
+    <h2>方法、教材與夥伴</h2>
     <ul class="facts">
-      <li><b>學位</b><span>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業）；修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課</span></li>
-      <li><b>經歷</b><span>Oracle 香港／台灣區行銷總監；Oracle 人力資源產品線亞太區行銷總監</span></li>
-      <li><b>行為經濟學</b><span>Chicago Booth 高階主管教育「行為經濟學」（2024）；Irrational Labs 訓練營結業；歐洲 MINDWORX SURF™ Method 授權講師與教練</span></li>
-      <li><b>AI</b><span>密西根大學 Ross 商學院「生成式 AI 在企業」專項課程（Coursera，2025）；Google Cloud「生成式 AI 領導者」專業證書（Coursera，2025）</span></li>
-      <li><b>創新與設計思考</b><span>Emeritus 創新與設計思考研究生文憑（Postgraduate Diploma）——與 MIT Sloan、哥倫比亞商學院、達特茅斯 Tuck 合辦</span></li>
-      <li><b>UX 與顧客體驗</b><span>Parsons UX/UI、CX Academy 顧客體驗——所以解方做成你拿得到、能直接用的工件：一張表、一封信、一張提示詞</span></li>
-      <li><b>教學與引導</b><span>ATD 微學習證書課程（2022）；Maven「The AI Bootcamp for L&amp;D」結業（授課者 Dr Philippa Hardman，劍橋大學學習科學家）；AD™ 加速式討論工作坊（引導，2026）</span></li>
+      <li><b>方法</b><span>PROPEL 六站流程：Pinpoint、Reconstruct、Obstacle、Prescribe、Experiment、Loop——從模糊問題走到可測試方案</span></li>
+      <li><b>教材</b><span>八個痛點、150 份模組教材；半天六題、全天十二題，每題一個決定、一條規律、三個案例、一段 AI 提示詞</span></li>
+      <li><b>資料庫</b><span>整理好的 67 種常見卡點與 101 種改法，是 AI 工具與講義背後的底</span></li>
+      <li><b>夥伴</b><span>歐洲 MINDWORX：2015 年成立的行為經濟學顧問公司，現於歐洲與北美設點，服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司；Propel AI 是其 SURF™ Method 台灣授權講師與教練</span></li>
     </ul>
-    <p class="note">SURF™ 是 MINDWORX 的方法；Propel AI 的課程與工作坊是我們自己設計的架構。</p>
+    <h2>誰來上課</h2>
+    <div class="who"><div class="av">G</div><div><h3>George Chen 陳朝智｜創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業），修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監；歐洲 MINDWORX SURF™ Method 授權講師與教練。「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題。</p></div></div>
+    <p class="note">完整講師資歷與認證，見公司簡介與各課程的課前說明。SURF™ 是 MINDWORX 的方法；Propel AI 的課程與工作坊是我們自己設計的架構。</p>
     <h2>公司</h2>
     <ul class="facts">
       <li><b>名稱</b><span>啟進智能決策有限公司（Propel AI）</span></li>
+      <li><b>統一編號</b><span>61933866</span></li>
       <li><b>地址</b><span>台北市忠孝東路五段 1-2 號 12 樓</span></li>
       <li><b>聯絡</b><span>george.chen@propelaigrowth.com｜<a href="/contact/">約 30 分鐘電話</a></span></li>
     </ul>
     <div class="nav"><a href="/" class="prev">← 回首頁</a><a href="/how/">我們怎麼看問題 →</a></div>
 '''
-write('/about/', page('about', about, desc='Propel AI 啟進智能決策：把行為經濟學的研究發現，轉成企業團隊能在工作上練習的步驟，再用實際數字觀察效果。創辦人 George Chen。'))
+write('/about/', page('about', about, desc='Propel AI 啟進智能決策：把行為經濟學的研究發現，轉成企業團隊能在工作上練習的步驟，再用實際數字觀察效果。'))
 
 # ---------- contact ----------
 cfg = json.loads((pathlib.Path(__file__).parent/'config.json').read_text(encoding='utf-8')) if (pathlib.Path(__file__).parent/'config.json').exists() else {}
