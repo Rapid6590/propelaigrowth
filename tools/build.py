@@ -178,7 +178,8 @@ for key in ['trial','half','ws','surf','how','trial-prep','half-prep','ws-prep',
 # home: long page that follows the 公司簡介 storyline (v0.2)
 how_body = bodies['how']
 import re as _re
-_ex = _re.search(r'<div class="ex">.*?</div>\s*<p class="note">外部研究.*?</p>', how_body, _re.S).group(0)
+_ex1 = _re.search(r'<div class="exi">.*?</div></div></div>', how_body, _re.S).group(0)
+_ex = '<div class="ex">'+_ex1+'</div><p class="note">外部研究，非 Propel AI 客戶實績｜出處：Ebeling &amp; Lotz (2015) Nature Climate Change</p>'
 home = f"""
     <p class="eyebrow">講了三次，他還是沒做？</p>
     <h1>先不急著加預算，讓你想要的行為更容易發生</h1>
@@ -218,10 +219,10 @@ home = f"""
         <div class="card"><h3>常見的做法</h3><ul><li>講道理：「這樣對你比較好」</li><li>下命令：「這是規定」</li><li>重複宣導：「再提醒一次」</li><li>獎勵與處罰</li></ul><p>都用得上，但力氣一停，數字常掉回來。</p></div>
         <div class="card us"><h3>我們的做法</h3><ul><li>把他第一眼看到的，換成你最想他選的</li><li>少一個欄位、少一步，他就走得完</li><li>預設先幫他選好；不要的人自己取消</li><li>在他正要做的那一刻提醒一次</li></ul><p>改一張表、一封信、一個流程——改一次，之後每個人經過的都是新流程。</p></div>
       </div>
-      <h3>改環境，長什麼樣子？三個例子</h3>
-      <p class="sub">同樣的東西，換個擺法，數字差一截。三個都有公開研究；我們把它做成你用得上的工件。</p>
+      <h3>改環境，長什麼樣子？一個例子</h3>
+      <p class="sub">同一個方案、同一個價格，只換了預設。同樣的東西換個擺法，數字差一截；我們把它做成你用得上的工件。</p>
       {_ex}
-      <a class="more" href="/how/">完整版：我們怎麼看問題 →</a>
+      <a class="more" href="/how/">還有兩個例子與完整說明：我們怎麼看問題 →</a>
     </section>
 
     <section class="sec" id="method">
@@ -276,11 +277,9 @@ home = f"""
         <li><b>學位</b><span>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業）；修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課</span></li>
         <li><b>經歷</b><span>Oracle 香港／台灣區行銷總監；Oracle 人力資源產品線亞太區行銷總監</span></li>
         <li><b>行為經濟學</b><span>Chicago Booth 高階主管教育「行為經濟學」；Irrational Labs 訓練營結業；歐洲 MINDWORX SURF™ Method 授權講師與教練</span></li>
-        <li><b>AI</b><span>密西根大學 Ross 商學院「生成式 AI 在企業」；Google Cloud「生成式 AI 領導者」專業證書</span></li>
-        <li><b>設計與體驗</b><span>Emeritus 創新與設計思考研究生文憑；Parsons UX/UI；CX Academy 顧客體驗——所以解方做成你拿得到、能直接用的工件</span></li>
       </ul>
       <div class="quote"><b>我們的夥伴：歐洲 MINDWORX</b>2015 年成立於歐洲的行為經濟學顧問公司，現於歐洲與北美設點；服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司。SURF™ 是 MINDWORX 的方法，我們是授權講師與教練；Propel AI 的課與工作坊，用的是我們自己的 PROPEL 流程。<span class="note">上列為 MINDWORX 的客戶背景，不是 Propel AI 的客戶實績。</span></div>
-      <a class="more" href="/about/">完整資歷與我們的三不信條 →</a>
+      <a class="more" href="/about/">完整資歷（AI、設計與體驗、教學與引導）與我們的三不信條 →</a>
     </section>
 
     <section class="sec" id="next">
