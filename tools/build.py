@@ -397,14 +397,13 @@ contact = f'''
     <p class="lead">說你那件推不動的事，我們告訴你可能卡在哪、從哪一個課程開始最省。不收費、不推銷；聊完覺得不適合，就到此為止。</p>
     <div class="cta-row">
       <a class="btn primary" href="{book or '#'}" {'target="_blank" rel="noopener"' if book else 'aria-disabled="true"'}>約 30 分鐘電話{'' if book else '（預約頁準備中）'}</a>
-      <a class="btn secondary" href="{form or '#'}" {'target="_blank" rel="noopener"' if form else 'aria-disabled="true"'}>留言給我們{'' if form else '（表單準備中）'}</a>
-      <a class="btn secondary" href="mailto:george.chen@propelaigrowth.com?subject=想聊聊：">Email george.chen@propelaigrowth.com</a>
+      <a class="btn secondary" href="mailto:george.chen@propelaigrowth.com?subject=%E6%88%91%E6%9C%80%E6%83%B3%E6%8E%A8%E5%8B%95%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B&body=%E8%AA%B0%EF%BC%9F%0A%E5%9C%A8%E4%BB%80%E9%BA%BC%E6%99%82%E5%80%99%EF%BC%9F%0A%E5%B8%8C%E6%9C%9B%E5%AE%8C%E6%88%90%E4%BB%80%E9%BA%BC%E5%8B%95%E4%BD%9C%EF%BC%9F%0A">寫信說一件事：george.chen@propelaigrowth.com</a>
     </div>
     <h2>還沒準備好聊？</h2>
     <div class="menu">
       <a class="choice" href="/quiz/"><span><span class="q">先做兩分鐘小測驗</span><span class="a">三題、用點的、不用留資料</span></span><span class="go">→</span></a>
       <a class="choice" href="/downloads/"><span><span class="q">下載一頁介紹</span><span class="a">轉給同事或老闆看</span></span><span class="go">→</span></a>
-      <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">LinkedIn 私訊 George</span><span class="a">看他平常在寫什麼</span></span><span class="go">→</span></a>
+      <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">LinkedIn 上的 George</span><span class="a">看他平常在寫什麼</span></span><span class="go">→</span></a>
     </div>
     <p class="note">啟進智能決策有限公司｜台北市忠孝東路五段 1-2 號 12 樓｜課程都到你公司上，雙北以外交通費另計。</p>
     <div class="nav"><a href="/" class="prev">← 回首頁</a></div>
