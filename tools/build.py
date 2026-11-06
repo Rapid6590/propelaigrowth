@@ -161,6 +161,22 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .facts4 b{display:block;color:var(--orange);font-size:14px;margin-bottom:4px}
 .facts4 span{font-size:13.5px;color:var(--mute);line-height:1.45}
 @media (max-width:700px){.vs.three{grid-template-columns:1fr}.strip{grid-template-columns:repeat(3,1fr)}.facts4{grid-template-columns:1fr 1fr}}
+/* ---- v0.3b: OA layout review ---- */
+.pg-home .wrap{max-width:820px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:center;margin:4px 0 6px}
+.hero-v{width:100%;height:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px}
+.strip b{font-size:30px}
+.strip i{display:block;font-style:normal;font-size:10.5px;color:var(--mute);letter-spacing:.02em}
+.strip div{border-color:#F3B48A;padding:12px 6px}
+.strip div.later{border-color:var(--line);background:var(--sky)}
+.strip div.later b{color:var(--mute)}
+.strip-cap{margin:-2px 0 10px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:-1px;margin-right:4px}
+.dot.o{background:var(--orange)}.dot.g{background:#B8C4CE;margin-left:6px}
+.thumbs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0 4px}
+.thumbs a{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;text-decoration:none;color:var(--navy);font-size:13px;font-weight:700}
+.thumbs img{width:100%;height:150px;object-fit:cover;object-position:top;display:block;border-radius:6px;border:1px solid var(--line);background:#fff;margin-bottom:6px}
+@media (max-width:700px){.hero{grid-template-columns:1fr}.thumbs{grid-template-columns:1fr 1fr 1fr;gap:6px}.thumbs img{height:90px}.thumbs a{font-size:11.5px;padding:4px}}
 '''
 
 def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current=None, noindex=False):
@@ -186,7 +202,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 <link rel="stylesheet" href="/assets/site.css">
 {extra_head}
 </head>
-<body>
+<body class="pg-{key}">
 <div class="wrap">
   <header class="sitehead">
     <a class="wordmark" href="{URL['home']}">PROPEL AI<small>啟進智能決策｜行為經濟學 × 行為設計 × AI</small></a>
@@ -330,9 +346,27 @@ import re as _re
 _ex1 = _re.search(r'<div class="exi">.*?</div></div></div>', how_body, _re.S).group(0)
 _ex = '<div class="ex">'+_ex1+'</div><p class="note">外部研究，非 Propel AI 客戶實績｜出處：Ebeling &amp; Lotz (2015) Nature Climate Change</p>'
 home = f"""
-    <p class="eyebrow">講了三次，他還是沒做？</p>
-    <h1>先不急著加預算，讓你想要的行為更容易發生</h1>
-    <p class="lead">客戶不做決定、員工不用新工具、SOP 沒人照做——Propel AI 用行為經濟學和 AI，帶你的團隊找出卡點，改環境，不改人。</p>
+    <div class="hero">
+      <div class="hero-t">
+        <p class="eyebrow">講了三次，他還是沒做？</p>
+        <h1>先不急著加預算，讓你想要的行為更容易發生</h1>
+        <p class="lead">客戶不做決定、員工不用新工具、SOP 沒人照做——Propel AI 用行為經濟學和 AI，帶你的團隊找出卡點，改環境，不改人。</p>
+      </div>
+      <svg class="hero-v" viewBox="0 0 320 200" role="img" aria-label="原本：每個人都要再說服一次；改環境之後：路徑清楚，少一步，適時提醒">
+        <g font-family="Noto Sans TC,sans-serif" font-size="12" font-weight="700" fill="#003054">
+          <text x="10" y="22">原本：每個人都要再說服一次</text>
+          <text x="10" y="122">改環境：路清楚、少一步、適時提醒</text>
+        </g>
+        <g stroke="#C9D3DB" stroke-width="6" stroke-linecap="round"><line x1="20" y1="60" x2="300" y2="60"/></g>
+        <g fill="#5C6B78"><circle cx="30" cy="60" r="8"/><circle cx="120" cy="60" r="8"/><circle cx="210" cy="60" r="8"/></g>
+        <g fill="#DDE3E8"><rect x="66" y="44" width="30" height="32" rx="5"/><rect x="156" y="44" width="30" height="32" rx="5"/><rect x="246" y="44" width="30" height="32" rx="5"/></g>
+        <g font-family="Noto Sans TC,sans-serif" font-size="10" fill="#5C6B78"><text x="58" y="92">資訊不清</text><text x="148" y="92">步驟繁瑣</text><text x="240" y="92">反覆提醒</text></g>
+        <g stroke="#F06000" stroke-width="6" stroke-linecap="round"><line x1="20" y1="160" x2="290" y2="160"/></g>
+        <polygon points="288,148 310,160 288,172" fill="#F06000"/>
+        <g fill="#F06000"><circle cx="30" cy="160" r="8"/><circle cx="115" cy="160" r="8"/><circle cx="200" cy="160" r="8"/></g>
+        <g font-family="Noto Sans TC,sans-serif" font-size="10" fill="#003054"><text x="56" y="188">預設先選好</text><text x="142" y="188">少一個欄位</text><text x="226" y="188">那一刻提醒</text></g>
+      </svg>
+    </div>
     <div class="menu doors">
       <a class="choice hot" href="/contact/"><span><span class="q">已經有題目，想談怎麼上</span><span class="a">企業內訓與工作坊｜留下一件事，我們回信</span></span><span class="go">→</span></a>
       <a class="choice" href="/quiz/"><span><span class="q">還不確定，先看看自己卡在哪</span><span class="a">兩分鐘小測驗｜三題，用點的，不用留資料</span></span><span class="go">→</span></a>
@@ -374,8 +408,9 @@ home = f"""
       <h2>PROPEL 六站：是流程，不是軟體</h2>
       <p class="sub">像看診：「業績不好」是症狀，不是原因。先問診、逐步排除，再開藥。</p>
       <div class="strip">
-        <div><b>P</b><span>找行為</span></div><div><b>R</b><span>拆解</span></div><div><b>O</b><span>找卡點</span></div><div><b>P</b><span>找改法</span></div><div><b>E</b><span>小試驗</span></div><div><b>L</b><span>看數字</span></div>
+        <div><b>P</b><i>Pinpoint</i><span>找行為</span></div><div><b>R</b><i>Reconstruct</i><span>拆解</span></div><div><b>O</b><i>Obstacle</i><span>找卡點</span></div><div><b>P</b><i>Prescribe</i><span>找改法</span></div><div><b>E</b><i>Experiment</i><span>小試驗</span></div><div class="later"><b>L</b><i>Loop</i><span>看數字</span></div>
       </div>
+      <p class="note strip-cap"><span class="dot o"></span>工作坊當天走完前五站　<span class="dot g"></span>第六站回公司看數字</p>
       <div class="chips"><span>團隊先想</span><i>→</i><span>AI 再補</span><i>→</i><span>講師把關</span><i>→</i><span>團隊決定</span></div>
       <div class="big">先行為，後預算。互補，不取代。</div>
       <div class="links"><a class="more" href="/workshop/#case">看六站走一遍（虛構案例）→</a><a class="more" href="/downloads/">PROPEL 兩頁說明（PDF）→</a></div>
@@ -403,6 +438,12 @@ home = f"""
         <div><b>AI 工具</b><span>選題器、小測驗、每題提示詞；決定權在人</span></div>
         <div><b>MINDWORX 授權</b><span>SURF™ 台灣授權講師與教練</span></div>
       </div>
+      <div class="thumbs">
+        <a href="/half-day/#sample"><img src="/assets/demo/ys-1_t.jpg" alt="模組課一題的決定頁" width="640" height="360" loading="lazy"><span>模組課：一題長什麼樣</span></a>
+        <a href="/half-day/#sample"><img src="/assets/demo/ys-7_t.jpg" alt="每題帶走的 AI 提示詞頁" width="640" height="360" loading="lazy"><span>每題帶走的 AI 提示詞</span></a>
+        <a href="/workshop/#sample"><img src="/assets/demo/pm2-06_t.jpg" alt="工作坊的小試驗卡" width="453" height="640" loading="lazy"><span>工作坊：帶走的試驗卡</span></a>
+      </div>
+      <p class="note">教材實頁（示意）；點圖看完整說明。</p>
       <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen，創辦人，親自授課</h3><p>芝加哥大學 Booth MBA，修過 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監。</p></div></div>
       <a class="more" href="/about/">關於我們 →</a>
     </section>
@@ -410,7 +451,7 @@ home = f"""
     <section class="sec" id="next">
       <p class="eyebrow">06　下一步</p>
       <h2>從一個你想推動的行為開始</h2>
-      <p class="sub">誰？在什麼時候？希望完成什麼動作？一句話就夠。不適合，我們會直說。</p>
+      <p class="sub">例如：「我希望<b>業務同仁</b>，<b>每次拜訪客戶後</b>，<b>當天用 AI 整理會議紀錄</b>。」拆成三格填就好。不適合，我們會直說。</p>
       {microform('home')}
       <div class="cta"><a class="btn secondary" href="/quiz/">還不確定？兩分鐘小測驗</a><a class="btn secondary" href="/downloads/">先下載一頁介紹</a></div>
       <div class="contact">
@@ -517,7 +558,7 @@ contact = f'''
     <h1>談企業內訓需求：留下一件事，我們回信</h1>
     <p class="lead">說你那件推不動的事，我們回信告訴你可能卡在哪、從哪一個課程開始最省。不適合，我們會直說。</p>
     {('<div class="cta-row"><a class="btn primary" href="'+book+'" target="_blank" rel="noopener">線上預約時間</a></div>') if book else ''}
-    <p class="sub">填三格，留 Email；不想填表的，寫信到 <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> 也可以。</p>
+    <p class="sub">例如：「我希望<b>業務同仁</b>，<b>每次拜訪客戶後</b>，<b>當天用 AI 整理會議紀錄</b>。」拆成三格填就好；不想填表的，寫信到 <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> 也可以。</p>
     {microform('contact')}
     <h2>還沒準備好聊？</h2>
     <div class="menu">
