@@ -124,6 +124,27 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .creds li{display:grid;grid-template-columns:6.5em 1fr;gap:10px}
 .creds b{color:var(--orange)}
 @media (max-width:480px){.creds li{grid-template-columns:1fr}.stations{grid-template-columns:1fr 1fr}}
+/* ---- sample galleries ---- */
+.demo{margin:26px 0 8px;padding:16px 16px 10px;border:1px solid var(--line);border-radius:14px;background:var(--sky)}
+.demo h2{margin:0 0 4px;font-size:20px}
+.demo .sub{color:var(--mute);font-size:14.5px;margin:0 0 12px}
+.demo .k{display:inline-block;font-size:12px;color:var(--orange);font-weight:700;margin:10px 0 6px}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 6px}
+.gal figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;min-width:0}
+.gal a{display:block}
+.gal img{width:100%;height:auto;display:block;border-radius:6px;border:1px solid var(--line);background:#fff}
+.gal figcaption{font-size:12.5px;line-height:1.45;margin:6px 2px 2px;color:var(--mute)}
+.gal figcaption b{display:block;color:var(--navy);font-size:13px}
+.gal.two{grid-template-columns:1fr 1fr}
+.demo .note{font-size:12.5px;color:var(--mute);margin:8px 0 4px}
+.walk{display:grid;gap:8px;margin:0 0 10px}
+.walk .w{display:grid;grid-template-columns:7.5em 1fr;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.walk .w b{color:var(--orange)}
+.walk .w b small{display:block;color:var(--mute);font-weight:400;font-size:12px}
+.walk .w p{margin:0 0 4px}
+.walk .w .ans{color:var(--navy);font-weight:700}
+.walk .w .why{color:var(--mute);font-size:13px}
+@media (max-width:600px){.gal{grid-template-columns:1fr 1fr}.walk .w{grid-template-columns:1fr;gap:4px}}
 '''
 
 def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current=None, noindex=False):
@@ -201,10 +222,72 @@ def write(path, content):
 # ---------- content pages from hub views ----------
 cfg = json.loads((pathlib.Path(__file__).parent/'config.json').read_text(encoding='utf-8')) if (pathlib.Path(__file__).parent/'config.json').exists() else {}
 FORM_KEY = cfg.get('form_key','')
+# ---------- 實物示例（示意）與虛構示範案例 ----------
+(OUT/'assets/demo').mkdir(parents=True, exist_ok=True)
+for f in (pathlib.Path(__file__).parent/'demo').glob('*.jpg'):
+    shutil.copy(f, OUT/'assets/demo'/f.name)
+
+def fig(src, title, cap, w, h):
+    return (f'<figure><a href="/assets/demo/{src}.jpg" target="_blank" rel="noopener">'
+            f'<img src="/assets/demo/{src}_t.jpg" alt="{html.escape(title)}" width="{w}" height="{h}" loading="lazy"></a>'
+            f'<figcaption><b>{title}</b>{cap}</figcaption></figure>')
+
+_ys = [
+ ('ys-1','① 決定頁','報價之後，第幾天、用什麼理由跟進？先選你現在是哪一種。'),
+ ('ys-2','② 規律','跟進的兩個開關：時點讓他自己說，理由替他拆問號。'),
+ ('ys-3','③ 案例之一','疫苗提醒信多一格「寫下你打算去的日期與時間」，接種 33%→37%。'),
+ ('ys-4','④ 案例之二','紐約傳票重新設計＋開庭前簡訊，缺席率下降 36%。'),
+ ('ys-5','⑤ 案例之三','「新的開始」效應：跟進日挑月初、連假後，不挑第 N 天。'),
+ ('ys-6','⑥ 換你判斷','提案後兩週，採購已讀不回，四封跟進信你發哪一封？'),
+ ('ys-7','⑦ AI 提示詞','回去把上一次沒下文的報價貼給 AI，讓它寫「拆一個問號」的跟進。'),
+ ('ys-8','⑧ 延伸卡','課堂沒講到的，回去自己看：兩篇研究、各一句怎麼用。'),
+ ('ys-9','⑨ 設計案','從概念推出來的解方，還沒量過：只寫預期方向與怎麼測。'),
+]
+HALF_DEMO = '''
+    <section class="demo" id="sample">
+      <h2>一題長什麼樣（示意）</h2>
+      <p class="sub">取自模組「客人說『我再想想』，然後就沒下文」第六題〈報價之後：第幾天、用什麼理由跟進？〉。一題九頁、約 25 分鐘：前六頁課堂上走，後三頁帶回去用。點圖可放大。</p>
+      <div class="k">課堂上：一個決定 → 一個規律、三個案例 → 一次判斷</div>
+      <div class="gal">''' + ''.join(fig(s,t,c,640,360) for s,t,c in _ys[:6]) + '''</div>
+      <div class="k">帶走：AI 提示詞、延伸卡、設計案</div>
+      <div class="gal">''' + ''.join(fig(s,t,c,640,360) for s,t,c in _ys[6:]) + '''</div>
+      <p class="note">示意頁面，非客戶實績；案例數字為公開研究（出處見各頁頁尾），台上只講方向與幅度。每題版面相同，內容依你挑的題目而定。</p>
+    </section>
+'''
+
+WS_DEMO = '''
+    <section class="demo" id="sample">
+      <h2>帶走的那張最小試驗卡，長什麼樣（示意）</h2>
+      <p class="sub">下半段第⑤站，每組只填一張：試什麼、找誰試、試多久、看哪個數字、誰負責、哪一天回來看。左邊是學員手冊裡的示範頁（虛構題目：業務拜訪完客戶，沒有當天把結果填進 CRM），右邊是空白卡。點圖可放大。</p>
+      <div class="gal two">''' + fig('pm2-06','第⑤站｜小試驗（示範頁）','先小、短、看得到：一週、一個數字，回來看。',640,904) + fig('pm2-10','小試驗卡（空白）','回去填自己的題目，先試，再改。',640,904) + '''</div>
+      <p class="note">示意，取自全天工作坊學員手冊；題目與數字皆為虛構教學情境。</p>
+    </section>
+'''
+
+WS_CASE = '''
+    <section class="demo" id="case">
+      <h2>示範：如果是一家選品電商，六站會走成這樣（虛構案例）</h2>
+      <p class="sub">「暖島選品」是我們教學用的虛構公司，數字為教學設計，不是任何客戶的實績。老闆帶來的題目：「廣告有投，結帳掉一半。」已經打算加碼廣告、加深折扣、上湊單模組。</p>
+      <div class="walk">
+        <div class="w"><b>① 找行為<small>Pinpoint</small></b><div><p class="ans">消費者在進入結帳後完成付款——每一次結帳。</p><p class="why">「轉換率低」是數字，不是行為。先把題目改寫成「誰、在什麼時候、做了什麼看得見的動作」；加入購物車只是上游，離結果還隔四步。</p></div></div>
+        <div class="w"><b>② 拆解<small>Reconstruct</small></b><div><p class="ans">三個月 9,360 次進結帳，4,700 次完成。結帳四步裡，「配送方式與運費」之後掉了 2,680 次，比其他三步加起來還多。</p><p class="why">進站、加購、進結帳三段都正常，廣告不是問題；斷在最後一段，而且只有一個斷崖。</p></div></div>
+        <div class="w"><b>③ 找卡點<small>Obstacle</small></b><div><p class="ans">最值得先驗證的方向：運費到最後一步才冒出來——他以為總價就是螢幕上那個數字。</p><p class="why">AI 從 67 種常見卡點列出十個候選，團隊逐條對證據：有客戶原話或後台數字支持的才算命中（3 條），機制合理但沒證據的列待確認（2 條），其餘排除（5 條）。老闆自認的「廣告受眾不準」，證據不支持。</p></div></div>
+        <div class="w"><b>④ 找改法<small>Prescribe</small></b><div><p class="ans">購物車頁就把運費講清楚：「再 ○○ 元免運」，不等到最後一步。</p><p class="why">四個候選裡成本最低、也唯一對準卡點的一個。加碼廣告是往漏斗上面倒水，折扣是用錢補一個資訊問題。上線前先問資訊部三題：差額能不能即時算、曝光能不能記錄、車金額能不能分群撈。</p></div></div>
+        <div class="w"><b>⑤ 小試驗<small>Experiment</small></b><div><p class="ans">先在一部分流量上試，看「配送方式與運費」之後的流失有沒有收窄；開跑前先講好收窄多少才算數。</p><p class="why">平台能分流就分組比，不能就前後比、並說清楚那只是可行性測試。只改這一件事，跟已經排定的折扣、廣告、首頁改版錯開——同一個月四件事一起上，數字動了也不知道是誰的功勞。</p></div></div>
+        <div class="w"><b>⑥ 看數字<small>Loop</small></b><div><p class="ans">結帳每天都在發生，一到兩週先看一次：留、改、或換下一個卡點（待確認的那兩條）。</p><p class="why">老闆原本的三個動作沒有被否決，只是排到後面；先用最便宜的一招驗證方向，再決定錢往哪裡放。</p></div></div>
+      </div>
+      <p class="note">虛構教學案例，公司、人物與數字均為教學設計；卡點判定為「有證據支持、待驗證的假設」，不是結論。你的題目會在課前收件表先談定，當天帶著自己的數字走這六站。</p>
+    </section>
+'''
+
 bodies = {}
 for key in ['trial','half','ws','surf','how','trial-prep','half-prep','ws-prep','surf-prep']:
     v = links(strip_section(views[key]))
     v = extract_images(v, key)
+    if key == 'half':
+        v = v.replace('<h2>模組一覽', HALF_DEMO + '    <h2>模組一覽', 1)
+    if key == 'ws':
+        v = v.replace('<div class="price">', WS_DEMO + WS_CASE + '    <div class="price">', 1)
     bodies[key] = v
     if key.endswith('-prep'):
         v = f'<div class="prep">{v}</div>'
@@ -277,7 +360,8 @@ home = f"""
       {_ex}
       <h3>同一招，用在你公司長這樣</h3>
       <div class="vs">
-        <div class="card"><h3>改前</h3><p>「附上報價，請參考，有問題再聯絡。」</p><p class="note">沒有下一步、沒有時間；球在客戶手上，而他最容易做的是什麼都不做。</p></div>
+        <div class="card"><h3>改前</h3><p>「附上報價，請參考，有問題再聯絡。」</p><p class="note">沒有下一步、沒有時間；球在客戶手上。</p></div>
+        <div class="card"><h3>卡點</h3><p>他最容易做的，是什麼都不做。</p><p class="note">不是不想買，是這封信沒有替他決定「下一步是什麼、什麼時候」。</p></div>
         <div class="card us"><h3>改後</h3><p>「附上報價。我週四下午打給您，看有沒有要調的地方。」</p><p class="note">下一步和時間都先幫他定好；他只要不反對。跟綠電那一格是同一個原理。</p></div>
       </div>
       <p class="note">示意，取自半天課「客人說『我再想想』」模組；非客戶實績。</p>
@@ -319,6 +403,7 @@ home = f"""
         <a class="choice" href="/workshop/"><span><span class="q">想把方法留在組織裡</span><span class="a">全天工作坊｜上半段看懂道理，下半段帶自己的痛點走 PROPEL；帶走一份最小試驗設計</span></span><span class="go">→</span></a>
         <a class="choice" href="/surf/"><span><span class="q">行銷業務團隊，要原廠方法與證書</span><span class="a">SURF™ 原廠班｜歐洲 MINDWORX 原廠課程，中文授課，含原廠結業證書</span></span><span class="go">→</span></a>
       </div>
+      <p class="sub">想先看實際長什麼樣？<a class="more" href="/half-day/#sample">模組課一題九頁（示意）→</a>　<a class="more" href="/workshop/#case">工作坊六站走一遍（虛構案例）→</a></p>
       <h3 style="margin-top:18px">課程模組都用你的痛點命名</h3>
       <div class="mods">
         <div class="card"><h3>你想讓誰改變：客人</h3><div class="n2">不買、不回、不續</div><ul><li>價格怎麼開、怎麼談</li><li>加了購物車，沒結帳</li><li>客人說「我再想想」，然後就沒下文</li><li>產品賣出去了，客戶卻沒在用</li></ul></div>
