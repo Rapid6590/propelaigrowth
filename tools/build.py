@@ -173,10 +173,14 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .strip-cap{margin:-2px 0 10px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:-1px;margin-right:4px}
 .dot.o{background:var(--orange)}.dot.g{background:#B8C4CE;margin-left:6px}
-.thumbs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0 4px}
+.thumbs{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:10px;margin:12px 0 10px}
 .thumbs a{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;text-decoration:none;color:var(--navy);font-size:13px;font-weight:700}
-.thumbs img{width:100%;height:150px;object-fit:cover;object-position:top;display:block;border-radius:6px;border:1px solid var(--line);background:#fff;margin-bottom:6px}
-@media (max-width:700px){.hero{grid-template-columns:1fr}.thumbs{grid-template-columns:1fr 1fr 1fr;gap:6px}.thumbs img{height:90px}.thumbs a{font-size:11.5px;padding:4px}}
+.thumbs a.main{grid-row:1/3}
+.thumbs a.main span{font-size:14px}
+.thumbs em{font-style:normal;font-weight:400;color:var(--mute);font-size:12px;margin-left:4px}
+.thumbs img{width:100%;height:120px;object-fit:cover;object-position:top;display:block;border-radius:6px;border:1px solid var(--line);background:#fff;margin-bottom:6px}
+.thumbs a.main img{height:auto;aspect-ratio:16/9}
+@media (max-width:700px){.hero{grid-template-columns:1fr}.thumbs{grid-template-columns:1fr 1fr;gap:8px}.thumbs a.main{grid-row:auto;grid-column:1/3}.thumbs img{height:96px}.thumbs a{font-size:12px}}
 '''
 
 def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current=None, noindex=False):
@@ -353,18 +357,18 @@ home = f"""
         <p class="lead">客戶不做決定、員工不用新工具、SOP 沒人照做——Propel AI 用行為經濟學和 AI，帶你的團隊找出卡點，改環境，不改人。</p>
       </div>
       <svg class="hero-v" viewBox="0 0 320 200" role="img" aria-label="原本：每個人都要再說服一次；改環境之後：路徑清楚，少一步，適時提醒">
-        <g font-family="Noto Sans TC,sans-serif" font-size="12" font-weight="700" fill="#003054">
-          <text x="10" y="22">原本：每個人都要再說服一次</text>
-          <text x="10" y="122">改環境：路清楚、少一步、適時提醒</text>
+        <g font-family="Noto Sans TC,sans-serif" font-size="14" font-weight="700" fill="#003054">
+          <text x="10" y="24">原本：每個人都要再說服一次</text>
+          <text x="10" y="124">改環境：讓行為自己發生</text>
         </g>
         <g stroke="#C9D3DB" stroke-width="6" stroke-linecap="round"><line x1="20" y1="60" x2="300" y2="60"/></g>
         <g fill="#5C6B78"><circle cx="30" cy="60" r="8"/><circle cx="120" cy="60" r="8"/><circle cx="210" cy="60" r="8"/></g>
         <g fill="#DDE3E8"><rect x="66" y="44" width="30" height="32" rx="5"/><rect x="156" y="44" width="30" height="32" rx="5"/><rect x="246" y="44" width="30" height="32" rx="5"/></g>
-        <g font-family="Noto Sans TC,sans-serif" font-size="10" fill="#5C6B78"><text x="58" y="92">資訊不清</text><text x="148" y="92">步驟繁瑣</text><text x="240" y="92">反覆提醒</text></g>
+        <g font-family="Noto Sans TC,sans-serif" font-size="11.5" fill="#5C6B78"><text x="56" y="94">資訊不清</text><text x="146" y="94">步驟繁瑣</text><text x="236" y="94">反覆提醒</text></g>
         <g stroke="#F06000" stroke-width="6" stroke-linecap="round"><line x1="20" y1="160" x2="290" y2="160"/></g>
         <polygon points="288,148 310,160 288,172" fill="#F06000"/>
         <g fill="#F06000"><circle cx="30" cy="160" r="8"/><circle cx="115" cy="160" r="8"/><circle cx="200" cy="160" r="8"/></g>
-        <g font-family="Noto Sans TC,sans-serif" font-size="10" fill="#003054"><text x="56" y="188">預設先選好</text><text x="142" y="188">少一個欄位</text><text x="226" y="188">那一刻提醒</text></g>
+        <g font-family="Noto Sans TC,sans-serif" font-size="11.5" font-weight="700" fill="#003054"><text x="50" y="190">預設先選好</text><text x="138" y="190">少一個欄位</text><text x="222" y="190">那一刻提醒</text></g>
       </svg>
     </div>
     <div class="menu doors">
@@ -439,11 +443,10 @@ home = f"""
         <div><b>MINDWORX 授權</b><span>SURF™ 台灣授權講師與教練</span></div>
       </div>
       <div class="thumbs">
-        <a href="/half-day/#sample"><img src="/assets/demo/ys-1_t.jpg" alt="模組課一題的決定頁" width="640" height="360" loading="lazy"><span>模組課：一題長什麼樣</span></a>
-        <a href="/half-day/#sample"><img src="/assets/demo/ys-7_t.jpg" alt="每題帶走的 AI 提示詞頁" width="640" height="360" loading="lazy"><span>每題帶走的 AI 提示詞</span></a>
-        <a href="/workshop/#sample"><img src="/assets/demo/pm2-06_t.jpg" alt="工作坊的小試驗卡" width="453" height="640" loading="lazy"><span>工作坊：帶走的試驗卡</span></a>
+        <a class="main" href="/half-day/#sample"><img src="/assets/demo/ys-1.jpg" alt="模組課一題的決定頁" width="1024" height="576"><span>模組課一題的第一頁：先選你是哪一種 <em>示意</em></span></a>
+        <a href="/half-day/#sample"><img src="/assets/demo/ys-7_t.jpg" alt="每題帶走的 AI 提示詞頁" width="640" height="360"><span>每題帶走的 AI 提示詞</span></a>
+        <a href="/workshop/#sample"><img src="/assets/demo/pm2-06_t.jpg" alt="工作坊的小試驗卡" width="453" height="640"><span>工作坊帶走的試驗卡</span></a>
       </div>
-      <p class="note">教材實頁（示意）；點圖看完整說明。</p>
       <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen，創辦人，親自授課</h3><p>芝加哥大學 Booth MBA，修過 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監。</p></div></div>
       <a class="more" href="/about/">關於我們 →</a>
     </section>
