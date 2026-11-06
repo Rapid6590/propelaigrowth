@@ -516,14 +516,7 @@ contact = f'''
     <span class="pill">聯絡</span>
     <h1>談企業內訓需求：留下一件事，我們回信</h1>
     <p class="lead">說你那件推不動的事，我們回信告訴你可能卡在哪、從哪一個課程開始最省。不適合，我們會直說。</p>
-    <p class="note">企業內訓與工作坊的詢問用這張表；個人想學行為經濟學，看 <a href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener">LinkedIn</a> 上的文章就夠了。</p>
-    <ul class="facts">
-      <li><b>公司</b><span>啟進智能決策有限公司 Propel AI｜統一編號 61933866</span></li>
-      <li><b>窗口</b><span>George Chen 陳朝智（創辦人）｜george.chen@propelaigrowth.com</span></li>
-      <li><b>地址</b><span>台北市忠孝東路五段 1-2 號 12 樓｜課程到你公司上，雙北以外交通費另計</span></li>
-    </ul>
     {('<div class="cta-row"><a class="btn primary" href="'+book+'" target="_blank" rel="noopener">線上預約時間</a></div>') if book else ''}
-    <h2>說一件事就好</h2>
     <p class="sub">填三格，留 Email；不想填表的，寫信到 <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> 也可以。</p>
     {microform('contact')}
     <h2>還沒準備好聊？</h2>
