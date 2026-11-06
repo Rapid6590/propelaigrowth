@@ -341,3 +341,19 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .walk .w .ans{color:var(--navy);font-weight:700}
 .walk .w .why{color:var(--mute);font-size:13px}
 @media (max-width:600px){.gal{grid-template-columns:1fr 1fr}.walk .w{grid-template-columns:1fr;gap:4px}}
+/* ---- home v0.3 chunking ---- */
+.vs.three{grid-template-columns:1fr 1fr 1fr}
+.vs.three .card p{font-size:14px;margin:0 0 4px}
+.strip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0 10px}
+.strip div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.strip b{display:block;font-size:22px;color:var(--orange);line-height:1.1}
+.strip span{display:block;font-size:13.5px;color:var(--navy);font-weight:700;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px;font-size:14px}
+.chips span{background:var(--sky);border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--navy);font-weight:700}
+.chips i{color:var(--orange);font-style:normal}
+.links{display:flex;flex-wrap:wrap;gap:6px 22px;margin:4px 0}
+.facts4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.facts4 div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.facts4 b{display:block;color:var(--orange);font-size:14px;margin-bottom:4px}
+.facts4 span{font-size:13.5px;color:var(--mute);line-height:1.45}
+@media (max-width:700px){.vs.three{grid-template-columns:1fr}.strip{grid-template-columns:repeat(3,1fr)}.facts4{grid-template-columns:1fr 1fr}}
