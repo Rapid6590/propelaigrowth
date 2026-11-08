@@ -30,7 +30,7 @@ DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要�
         'how':'數字是結果；可以動手的是行為。環境→行為→指標，每個指標背後都是一條行為鏈。',
         'quiz':'三題、用點的、不用留資料。看看那件推不動的事能不能用這個方法處理。',
         'picker':'三題答完，落到你的模組。十六個主題、四個現成組合。',
-        'docs':'一頁介紹 PDF：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班、PROPEL 六站。'}
+        'docs':'一頁介紹 PDF：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班、PROPEL™ 六站。'}
 
 # ---------- views ----------
 markers = [(m.start(), m.group(1)) for m in re.finditer(r'  <!-- ===== ([A-Z /:a-z]+) ===== -->', src)]
@@ -349,6 +349,11 @@ for key in ['trial','half','ws','surf','how','trial-prep','half-prep','ws-prep',
     </div>
     <p class="note">示意，非客戶實績。</p>
     '''+'<h2>跟常見的做法，哪裡不一樣</h2>', 1)
+        v = v.rstrip() + '''
+    <h2>這套看法，走的是一條固定的路</h2>
+    <p>我們把它整理成 PROPEL™ 六站：找行為、拆解、找卡點、開處方、小試驗、看數字。全天工作坊就是照這條路走，每一站都有一張可以帶走的紙。</p>
+    <p><a class="more" href="/workshop/#case">看六站走一遍（虛構案例）→</a>　<a class="more" href="/downloads/">PROPEL™ 架構兩頁 PDF →</a></p>
+'''
     if key == 'ws':
         v = v.replace('<div class="price">', WS_DEMO + WS_CASE + '    <div class="price">', 1)
     bodies[key] = v
@@ -428,7 +433,7 @@ home = f"""
 
     <section class="sec" id="method">
       <p class="eyebrow">03</p>
-      <h2>PROPEL 六站：是流程，不是軟體</h2>
+      <h2>PROPEL™ 六站：是流程，不是軟體</h2>
       <div class="strip">
         <div><b>P</b><i>Pinpoint</i><span>找行為</span></div><div><b>R</b><i>Reconstruct</i><span>拆解</span></div><div><b>O</b><i>Obstacle</i><span>找卡點</span></div><div><b>P</b><i>Prescribe</i><span>找改法</span></div><div><b>E</b><i>Experiment</i><span>小試驗</span></div><div class="later"><b>L</b><i>Loop</i><span>看數字</span></div>
       </div>
@@ -480,7 +485,7 @@ DOCS = [
  ('half','半天課・全天課　一頁介紹','半天六題、全天十二題，用你本來就在做的決定當題目：每題一個規律、三個案例、一次判斷、一段 AI 提示詞。背面是模組一覽與四個現成組合。','Propel_AI_半天課全天課_一頁介紹.pdf'),
  ('workshop','全天工作坊　一頁介紹','上午看懂行為的規律，下午帶你們自己的題目走五站，當場拍板一個小規模、可以追蹤數字的試驗。每場上限 16 人。','Propel_AI_全天工作坊_一頁介紹.pdf'),
  ('surf','SURF™ 原廠班　一頁介紹','歐洲 MINDWORX 的方法，主題只有一個：怎麼讓客戶說 YES。台灣授權講師中文授課，半天、全天都發原廠結業證書。','Propel_AI_SURF原廠班_一頁介紹.pdf'),
- ('propel','我們怎麼做：PROPEL 六站（兩頁）','第 1 頁：像看診一樣，先找出症狀背後卡在哪一步，再開處方。第 2 頁：從找行為到看數字的六站流程，工作坊就是照這條路走。','Propel_AI_PROPEL架構兩頁.pdf'),
+ ('propel','我們怎麼做：PROPEL™ 六站（兩頁）','第 1 頁：像看診一樣，先找出症狀背後卡在哪一步，再開處方。第 2 頁：從找行為到看數字的六站流程，工作坊就是照這條路走。','Propel_AI_PROPEL架構兩頁.pdf'),
 ]
 rows=[]
 for key,title,desc,fname in DOCS:
@@ -544,7 +549,7 @@ about = '''
     <p>過程中會用到我們自己開發的 AI 輔助工具，背後是整理好的 67 種常見卡點與 101 種改法。順序是固定的：團隊先想，AI 再補上可能漏看的地方，講師帶你看，最後由團隊決定。課程結束後，AI 還能繼續陪你練習——我們提供寫好的提示詞，回到公司，把自己的實際狀況貼進平常用的 AI 工具，就能照課堂上的原理和步驟再走一遍。</p>
     <h2>方法、教材與夥伴</h2>
     <ul class="facts">
-      <li><b>方法</b><span>PROPEL 六站流程：Pinpoint、Reconstruct、Obstacle、Prescribe、Experiment、Loop——從模糊問題走到可測試方案</span></li>
+      <li><b>方法</b><span>PROPEL™ 六站流程：Pinpoint、Reconstruct、Obstacle、Prescribe、Experiment、Loop——從模糊問題走到可測試方案</span></li>
       <li><b>教材</b><span>八個痛點、150 份模組教材；半天六題、全天十二題，每題一個決定、一條規律、三個案例、一段 AI 提示詞</span></li>
       <li><b>資料庫</b><span>整理好的 67 種常見卡點與 101 種改法，是 AI 工具與講義背後的底</span></li>
       <li><b>夥伴</b><span>歐洲 MINDWORX：2015 年成立的行為經濟學顧問公司，現於歐洲與北美設點，服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司；Propel AI 是其 SURF™ Method 台灣授權講師與教練</span></li>
