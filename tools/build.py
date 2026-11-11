@@ -19,12 +19,12 @@ URL = {'home':'/preview/' if PREVIEW else '/', 'trial':'/trial/', 'half':'/half-
        'trial-prep':'/trial/prep/', 'half-prep':'/half-day/prep/', 'ws-prep':'/workshop/prep/', 'surf-prep':'/surf/prep/',
        'about':'/about/', 'contact':'/contact/', 'articles':'/articles/', 'clients':'/clients/',
        'en':'/en/', 'en-how':'/en/how/', 'en-about':'/en/about/', 'en-contact':'/en/contact/'}
-TITLE = {'home':'Propel AI 啟進智能決策｜行為經濟學 × AI：讓你想要的行為更容易發生', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
+TITLE = {'home':'Propel AI 啟進智能決策｜行為經濟學・行為設計工作坊', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
          'how':'我們怎麼看問題', 'quiz':'兩分鐘小測驗', 'picker':'選題器', 'docs':'課程介紹下載',
          'trial-prep':'59 分鐘試駕 課前說明', 'half-prep':'半天課・全天課 課前說明', 'ws-prep':'全天工作坊 課前說明', 'surf-prep':'SURF™ 原廠班 課前說明',
          'about':'關於 Propel AI', 'contact':'聯絡我們', 'articles':'文章', 'clients':'客戶怎麼說',
          'en':'Propel AI｜Behavioral economics and AI for business teams', 'en-how':'How we think', 'en-about':'About Propel AI', 'en-contact':'Contact'}
-DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要的行為更容易發生。課程與工作坊：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班。',
+DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要的行為更容易發生。行為設計課程與工作坊：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班。',
         'trial':'59 分鐘到你公司上：一個小實驗、一題半天課、寫下你最想先讓誰做什麼。NT$ 8,900（未稅），上限 30 人。',
         'half':'用你本來就在做的決定當題目：半天六題、全天十二題，每題一個規律、三個案例、一次判斷、一段 AI 提示詞。',
         'ws':'帶一個推不動的痛點來，走五站，當場拍板一個小規模、可以追蹤數字的試驗。每場上限 16 人。',
@@ -443,7 +443,7 @@ home = f"""
       <div class="hero-t">
         <p class="eyebrow">講了三次，他還是沒做？</p>
         <h1>先不急著加預算，讓你想要的行為更容易發生</h1>
-        <p class="lead">課程與工作坊：用行為經濟學和 AI，改環境，不改人。</p>
+        <p class="lead">行為設計課程與工作坊：用行為經濟學和 AI，改環境，不改人。</p>
       </div>
       <svg class="hero-v" viewBox="0 0 320 200" role="img" aria-label="原本：每個人都要再說服一次；改環境之後：路徑清楚，少一步，適時提醒">
         <g font-family="Noto Sans TC,sans-serif" font-size="14" font-weight="700" fill="#003054">
