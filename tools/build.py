@@ -19,12 +19,12 @@ URL = {'home':'/preview/' if PREVIEW else '/', 'trial':'/trial/', 'half':'/half-
        'trial-prep':'/trial/prep/', 'half-prep':'/half-day/prep/', 'ws-prep':'/workshop/prep/', 'surf-prep':'/surf/prep/',
        'about':'/about/', 'contact':'/contact/', 'articles':'/articles/', 'clients':'/clients/',
        'en':'/en/', 'en-how':'/en/how/', 'en-about':'/en/about/', 'en-contact':'/en/contact/'}
-TITLE = {'home':'Propel AI 啟進智能決策｜行為經濟學企業內訓・行為設計工作坊', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
+TITLE = {'home':'Propel AI 啟進智能決策｜行為經濟學 × AI：讓你想要的行為更容易發生', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
          'how':'我們怎麼看問題', 'quiz':'兩分鐘小測驗', 'picker':'選題器', 'docs':'課程介紹下載',
          'trial-prep':'59 分鐘試駕 課前說明', 'half-prep':'半天課・全天課 課前說明', 'ws-prep':'全天工作坊 課前說明', 'surf-prep':'SURF™ 原廠班 課前說明',
          'about':'關於 Propel AI', 'contact':'聯絡我們', 'articles':'文章', 'clients':'客戶怎麼說',
          'en':'Propel AI｜Behavioral economics and AI for business teams', 'en-how':'How we think', 'en-about':'About Propel AI', 'en-contact':'Contact'}
-DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要的行為更容易發生。企業培訓與工作坊：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班。',
+DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要的行為更容易發生。課程與工作坊：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班。',
         'trial':'59 分鐘到你公司上：一個小實驗、一題半天課、寫下你最想先讓誰做什麼。NT$ 8,900（未稅），上限 30 人。',
         'half':'用你本來就在做的決定當題目：半天六題、全天十二題，每題一個規律、三個案例、一次判斷、一段 AI 提示詞。',
         'ws':'帶一個推不動的痛點來，走五站，當場拍板一個小規模、可以追蹤數字的試驗。每場上限 16 人。',
@@ -33,7 +33,7 @@ DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要�
         'quiz':'三題、用點的、不用留資料。看看那件推不動的事能不能用這個方法處理。',
         'picker':'三題答完，落到你的模組。十六個主題、四個現成組合。',
         'docs':'一頁介紹 PDF：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班、PROPEL™ 六站。',
-        'en':'Workshops and training that bring behavioral economics and AI into everyday business decisions. Change the environment, not the person. Taipei, Taiwan.',
+        'en':'Courses and workshops that bring behavioral economics and AI into everyday business decisions. Change the environment, not the person. Taipei, Taiwan.',
         'en-how':'Metrics are outcomes. Behavior is what you can work on. How Propel AI looks at a problem, with three examples of changing the environment.',
         'en-about':'Propel AI turns behavioral economics research into steps a business team can practice at work, then watches the effect in their own numbers.',
         'en-contact':'Tell us one thing you would like to make happen, and we will write back within two working days.'}
@@ -443,7 +443,7 @@ home = f"""
       <div class="hero-t">
         <p class="eyebrow">講了三次，他還是沒做？</p>
         <h1>先不急著加預算，讓你想要的行為更容易發生</h1>
-        <p class="lead">企業內訓與工作坊：用行為經濟學和 AI，改環境，不改人。</p>
+        <p class="lead">課程與工作坊：用行為經濟學和 AI，改環境，不改人。</p>
       </div>
       <svg class="hero-v" viewBox="0 0 320 200" role="img" aria-label="原本：每個人都要再說服一次；改環境之後：路徑清楚，少一步，適時提醒">
         <g font-family="Noto Sans TC,sans-serif" font-size="14" font-weight="700" fill="#003054">
@@ -587,7 +587,7 @@ write('/picker/', wrap_standalone('picker', (H/'picker_standalone.html').read_te
 about = '''
     <span class="pill">關於</span>
     <h1>我們做一件事：讓你想要的行為，更容易發生</h1>
-    <p class="lead">提案做了，客戶卻遲遲沒有下一步；AI 工具買了，團隊卻沒有用起來；SOP 寫清楚了，現場還是照舊。Propel AI 透過企業培訓與工作坊，教團隊運用行為經濟學和 AI，找出客戶不往下談、同仁沒有行動的原因，再調整流程、訊息與做決定的環境。</p>
+    <p class="lead">提案做了，客戶卻遲遲沒有下一步；AI 工具買了，團隊卻沒有用起來；SOP 寫清楚了，現場還是照舊。Propel AI 透過課程與工作坊，教團隊運用行為經濟學和 AI，找出客戶不往下談、同仁沒有行動的原因，再調整流程、訊息與做決定的環境。</p>
     <h2>我們相信的三件事</h2>
     <div class="cards">
       <div class="card"><h3>不把結果當行為</h3><p>業績、採用率是結果；能動手的是誰在什麼時候做哪個動作。</p></div>
@@ -629,7 +629,7 @@ write('/about/', page('about', about, desc='Propel AI 啟進智能決策：把�
 book = cfg.get('booking_url'); form = cfg.get('form_url')
 contact = f'''
     <span class="pill">聯絡</span>
-    <h1>談企業內訓需求：留下一件事，我們回信</h1>
+    <h1>留下一件你想推動的事，我們回信</h1>
     <p class="lead">說你那件推不動的事，我們回信告訴你可能卡在哪、從哪一個課程開始最省。不適合，我們會直說。</p>
     {('<div class="cta-row"><a class="btn primary" href="'+book+'" target="_blank" rel="noopener">線上預約時間</a></div>') if book else ''}
     <p class="sub">例如：「我希望<b>業務同仁</b>，<b>每次拜訪客戶後</b>，<b>當天用 AI 整理會議紀錄</b>。」拆成三格填就好；不想填表的，寫信到 <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> 也可以。</p>
@@ -667,7 +667,7 @@ en_home = f"""
       <div class="hero-t">
         <p class="eyebrow">You have explained it three times. They still haven't done it.</p>
         <h1>Before adding budget, make the behavior you want the easier choice</h1>
-        <p class="lead">Workshops and training programs that bring behavioral economics and AI into everyday business decisions. Our starting point is simple: change the environment, not the person.</p>
+        <p class="lead">Courses and workshops that bring behavioral economics and AI into everyday business decisions. Our starting point is simple: change the environment, not the person.</p>
       </div>
       <svg class="hero-v" viewBox="0 0 320 200" role="img" aria-label="Before: everyone has to be persuaded again. After changing the environment: a clear path, one step fewer, a reminder at the right moment">
         <g font-family="Noto Sans TC,sans-serif" font-size="13" font-weight="700" fill="#003054">
@@ -809,7 +809,7 @@ write('/en/how/', page('en-how', en_how))
 en_about = """
     <span class="pill">About</span>
     <h1>We do one thing: make the behavior you want the easier choice</h1>
-    <p class="lead">The proposal went out, and the client never took the next step. The AI tools were bought, and the team never really picked them up. The SOP was written clearly, and the floor kept working the way it always had. These are the situations Propel AI was built for. Through workshops and training, we teach teams to use behavioral economics and AI to find out why customers don't move forward and colleagues don't act, and then to adjust the process, the message, and the environment in which those decisions are made.</p>
+    <p class="lead">The proposal went out, and the client never took the next step. The AI tools were bought, and the team never really picked them up. The SOP was written clearly, and the floor kept working the way it always had. These are the situations Propel AI was built for. Through courses and workshops, we teach teams to use behavioral economics and AI to find out why customers don't move forward and colleagues don't act, and then to adjust the process, the message, and the environment in which those decisions are made.</p>
     <h2>Three things we believe</h2>
     <div class="cards">
       <div class="card"><h3>An outcome is not a behavior</h3><p>Revenue and adoption are results. What a team can actually work on is who does which action, and when.</p></div>
