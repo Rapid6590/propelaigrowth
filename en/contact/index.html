@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Contact｜Propel AI</title>
+<meta name="description" content="Tell us one thing you would like to make happen, and we will write back within two working days.">
+<link rel="canonical" href="https://propelaigrowth.com/en/contact/">
+
+<meta property="og:type" content="website"><meta property="og:site_name" content="Propel AI">
+<meta property="og:title" content="Contact｜Propel AI"><meta property="og:description" content="Tell us one thing you would like to make happen, and we will write back within two working days.">
+<meta property="og:url" content="https://propelaigrowth.com/en/contact/"><meta property="og:image" content="https://propelaigrowth.com/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" hreflang="zh-Hant" href="https://propelaigrowth.com/contact/"><link rel="alternate" hreflang="en" href="https://propelaigrowth.com/en/contact/"><link rel="alternate" hreflang="x-default" href="https://propelaigrowth.com/contact/">
+
+</head>
+<body class="pg-en-contact">
+<div class="wrap">
+  <header class="sitehead">
+    <a class="wordmark" href="/en/">PROPEL AI<small>Behavioral economics × behavior design × AI</small></a>
+    <nav class="sitenav" aria-label="Main menu"><a href="/en/#pain">Sound familiar?</a><a href="/en/how/">How we think</a><a href="/en/#method">Method</a><a href="/en/#courses">Programs</a><a href="/en/about/">About</a><a href="/en/contact/" aria-current="page">Contact</a><a class="lang" href="/contact/" hreflang="zh-Hant" lang="zh-Hant">中文</a></nav>
+  </header>
+<main>
+
+    <span class="pill">Contact</span>
+    <h1>Tell us one thing, and we'll write back</h1>
+    <p class="lead">Describe the one thing you haven't been able to get moving. We'll reply with where it is probably stuck and where it would make sense to start. If we are not the right fit for it, we will tell you that too.</p>
+    <p class="sub">An example of the kind of sentence we mean: "I want <b>our sales reps</b>, <b>after every client visit</b>, <b>to write up the meeting notes with AI on the same day</b>." Three boxes are all it takes. If you would rather not fill in a form, an email to <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> works just as well.</p>
+    
+      <form class="mform" id="mform-en-contact" novalidate>
+        <input type="hidden" name="access_key" value="bd8a88e6-6876-4006-bd60-a27433da737f">
+        <input type="hidden" name="subject" value="Website (EN): one thing I want to make happen">
+        <input type="hidden" name="from_name" value="Propel AI website (EN)">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+        <label><span>I want</span><input name="who" placeholder="e.g. our sales team / clients who received a quote" required></label>
+        <label><span>at</span><input name="when" placeholder="e.g. before the Monday meeting / within three days of the proposal" required></label>
+        <label><span>to</span><input name="what" placeholder="e.g. open the AI tool and draft a first version / confirm the next meeting" required></label>
+        <label><span>Company &amp; name</span><input name="name" placeholder="e.g. Acme Ltd., Mr. Chen" required></label>
+        <label><span>Email</span><input name="email" type="email" placeholder="so we can write back" required></label>
+        <div class="mrow"><button class="btn primary" type="submit">Send — we'll write back</button><span class="mnote">One sentence is enough. No fee, no sales call.</span></div>
+        <p class="mdone" hidden>Got it. We'll look at which behavior is worth working on first and write back within two working days.</p>
+      </form>
+    <h2>Not ready to talk yet?</h2>
+    <div class="menu">
+      <a class="choice" href="/en/how/"><span><span class="q">Read how we look at a problem</span><span class="a">Three examples of changing the environment, and one follow-up email</span></span><span class="go">→</span></a>
+      <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">George on LinkedIn</span><span class="a">See what he writes about each week</span></span><span class="go">→</span></a>
+    </div>
+    <p class="note">Programs are delivered in Mandarin.</p>
+    <div class="nav"><a href="/en/" class="prev">← Home</a></div>
+
+</main>
+  <footer class="sitefoot">
+    <div><b>Propel AI Co., Ltd.</b>｜Tax ID 61933866｜12F, No. 1-2, Sec. 5, Zhongxiao E. Rd., Taipei, Taiwan｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
+    <div>Licensed trainer and coach, MINDWORX SURF™ Method (Europe)｜We respect your decision; no follow-up marketing without your consent.</div>
+    <div class="disc">Program descriptions are pre-course information; actual arrangements follow the quotation and pre-course confirmation. Propel AI reserves the right to adjust program content and format.</div>
+  </footer>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('form.mform').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.reportValidity())return;
+      var d=new FormData(f);
+      var body='I want: '+d.get('who')+'\nat: '+d.get('when')+'\nto: '+d.get('what')+'\n\n'+d.get('name')+'\n'+d.get('email');
+      var key=d.get('access_key');
+      var done=function(){f.querySelector('.mdone').hidden=false;f.querySelectorAll('label,.mrow').forEach(function(x){x.hidden=true});};
+      if(!key){location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('Website (EN): one thing I want to make happen')+'&body='+encodeURIComponent(body);return;}
+      var btn=f.querySelector('button');btn.disabled=true;btn.textContent='Sending…';
+      d.append('message',body);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+        if(j.success){done();}else{throw 0;}
+      }).catch(function(){btn.disabled=false;btn.textContent='Send — we\'ll write back';location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('Website (EN): one thing I want to make happen')+'&body='+encodeURIComponent(body);});
+    });
+  });
+})();
+</script>
+</body>
+</html>

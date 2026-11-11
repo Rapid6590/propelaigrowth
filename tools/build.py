@@ -17,11 +17,13 @@ OGIMG = {'quiz':'og_quiz.png'}
 URL = {'home':'/preview/' if PREVIEW else '/', 'trial':'/trial/', 'half':'/half-day/', 'ws':'/workshop/', 'surf':'/surf/', 'how':'/how/',
        'quiz':'/quiz/', 'picker':'/picker/', 'docs':'/downloads/',
        'trial-prep':'/trial/prep/', 'half-prep':'/half-day/prep/', 'ws-prep':'/workshop/prep/', 'surf-prep':'/surf/prep/',
-       'about':'/about/', 'contact':'/contact/', 'articles':'/articles/', 'clients':'/clients/'}
+       'about':'/about/', 'contact':'/contact/', 'articles':'/articles/', 'clients':'/clients/',
+       'en':'/en/', 'en-how':'/en/how/', 'en-about':'/en/about/', 'en-contact':'/en/contact/'}
 TITLE = {'home':'Propel AI 啟進智能決策｜行為經濟學企業內訓・行為設計工作坊', 'trial':'59 分鐘試駕', 'half':'半天課・全天課', 'ws':'全天工作坊', 'surf':'SURF™ 原廠班',
          'how':'我們怎麼看問題', 'quiz':'兩分鐘小測驗', 'picker':'選題器', 'docs':'課程介紹下載',
          'trial-prep':'59 分鐘試駕 課前說明', 'half-prep':'半天課・全天課 課前說明', 'ws-prep':'全天工作坊 課前說明', 'surf-prep':'SURF™ 原廠班 課前說明',
-         'about':'關於 Propel AI', 'contact':'聯絡我們', 'articles':'文章', 'clients':'客戶怎麼說'}
+         'about':'關於 Propel AI', 'contact':'聯絡我們', 'articles':'文章', 'clients':'客戶怎麼說',
+         'en':'Propel AI｜Behavioral economics and AI for business teams', 'en-how':'How we think', 'en-about':'About Propel AI', 'en-contact':'Contact'}
 DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要的行為更容易發生。企業培訓與工作坊：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班。',
         'trial':'59 分鐘到你公司上：一個小實驗、一題半天課、寫下你最想先讓誰做什麼。NT$ 8,900（未稅），上限 30 人。',
         'half':'用你本來就在做的決定當題目：半天六題、全天十二題，每題一個規律、三個案例、一次判斷、一段 AI 提示詞。',
@@ -30,7 +32,14 @@ DESC = {'home':'用行為經濟學和 AI，先不急著加預算，讓你想要�
         'how':'數字是結果；可以動手的是行為。環境→行為→指標，每個指標背後都是一條行為鏈。',
         'quiz':'三題、用點的、不用留資料。看看那件推不動的事能不能用這個方法處理。',
         'picker':'三題答完，落到你的模組。十六個主題、四個現成組合。',
-        'docs':'一頁介紹 PDF：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班、PROPEL™ 六站。'}
+        'docs':'一頁介紹 PDF：59 分鐘試駕、半天課・全天課、全天工作坊、SURF™ 原廠班、PROPEL™ 六站。',
+        'en':'Workshops and training that bring behavioral economics and AI into everyday business decisions. Change the environment, not the person. Taipei, Taiwan.',
+        'en-how':'Metrics are outcomes. Behavior is what you can work on. How Propel AI looks at a problem, with three examples of changing the environment.',
+        'en-about':'Propel AI turns behavioral economics research into steps a business team can practice at work, then watches the effect in their own numbers.',
+        'en-contact':'Tell us one thing you would like to make happen, and we will write back within two working days.'}
+
+ALT = {'home':'en','how':'en-how','about':'en-about','contact':'en-contact'}
+ALT.update({v:k for k,v in ALT.items()})
 
 # ---------- views ----------
 markers = [(m.start(), m.group(1)) for m in re.finditer(r'  <!-- ===== ([A-Z /:a-z]+) ===== -->', src)]
@@ -65,6 +74,7 @@ def extract_images(v, prefix):
     return re.sub(r'src="data:([a-z/+]+);base64,([A-Za-z0-9+/=]+)"', rep, v)
 
 # ---------- chrome ----------
+NAV_EN = [('/en/#pain','Sound familiar?'),('/en/how/','How we think'),('/en/#method','Method'),('/en/#courses','Programs'),('/en/about/','About'),('/en/contact/','Contact')]
 NAV = [('/#pain','痛點'),('/how/','怎麼看問題'),('/#method','方法'),('/#courses','課程'),('/about/','為什麼是我們'),('/contact/','聯絡')]
 SITE_CSS = '''
 /* ---- site chrome ---- */
@@ -72,6 +82,8 @@ SITE_CSS = '''
 .sitenav{display:flex;gap:4px;flex-wrap:wrap}
 .sitenav a{color:var(--mute);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:999px}
 .sitenav a:hover,.sitenav a[aria-current]{color:var(--navy);background:var(--sky)}
+.sitenav a.lang{border:1px solid var(--line);margin-left:6px;font-weight:700;color:var(--navy)}
+.pg-en .wordmark small,.pg-en-how .wordmark small,.pg-en-about .wordmark small,.pg-en-contact .wordmark small{letter-spacing:.02em}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sitenav a:hover, :root:not([data-theme="light"]) .sitenav a[aria-current]{color:var(--fg)} }
 .sitefoot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--mute);line-height:1.7}
 .sitefoot a{color:var(--mute)}
@@ -189,6 +201,10 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .tiles.two{grid-template-columns:1fr 1fr}
 .tile{display:flex;flex-direction:column;gap:8px;min-height:150px;padding:20px 20px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;color:var(--navy);transition:border-color .15s,transform .15s}
 .tile:hover{border-color:var(--orange);transform:translateY(-2px)}
+div.tile:hover{border-color:var(--line);transform:none}
+[lang=en] .mform label{grid-template-columns:8.5em 1fr}
+@media (max-width:480px){[lang=en] .mform label{grid-template-columns:1fr}}
+div.tile.hot:hover{border-color:#F3B48A}
 .tile.hot{border-color:#F3B48A;background:#FFF6EF}
 .tile .k{font-size:12.5px;font-weight:700;color:var(--orange)}
 .tile b{font-size:18px;line-height:1.4}
@@ -200,13 +216,54 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 @media (max-width:700px){.tiles,.tiles.two{grid-template-columns:1fr}.tile{min-height:0}}
 '''
 
+FOOT_EN = '''
+</main>
+  <footer class="sitefoot">
+    <div><b>Propel AI Co., Ltd.</b>｜Tax ID 61933866｜12F, No. 1-2, Sec. 5, Zhongxiao E. Rd., Taipei, Taiwan｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
+    <div>Licensed trainer and coach, MINDWORX SURF™ Method (Europe)｜We respect your decision; no follow-up marketing without your consent.</div>
+    <div class="disc">Program descriptions are pre-course information; actual arrangements follow the quotation and pre-course confirmation. Propel AI reserves the right to adjust program content and format.</div>
+  </footer>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('form.mform').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.reportValidity())return;
+      var d=new FormData(f);
+      var body='I want: '+d.get('who')+'\\nat: '+d.get('when')+'\\nto: '+d.get('what')+'\\n\\n'+d.get('name')+'\\n'+d.get('email');
+      var key=d.get('access_key');
+      var done=function(){f.querySelector('.mdone').hidden=false;f.querySelectorAll('label,.mrow').forEach(function(x){x.hidden=true});};
+      if(!key){location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('Website (EN): one thing I want to make happen')+'&body='+encodeURIComponent(body);return;}
+      var btn=f.querySelector('button');btn.disabled=true;btn.textContent='Sending…';
+      d.append('message',body);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+        if(j.success){done();}else{throw 0;}
+      }).catch(function(){btn.disabled=false;btn.textContent='Send — we\\'ll write back';location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('Website (EN): one thing I want to make happen')+'&body='+encodeURIComponent(body);});
+    });
+  });
+})();
+</script>
+</body>
+</html>
+'''
+
 def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current=None, noindex=False):
+    en = key.startswith('en')
     title = title or TITLE[key]; desc = desc or DESC.get(key, DESC['home'])
-    full = title if key=='home' else f'{title}｜Propel AI 啟進智能決策'
+    full = title if key in ('home','en') else (f'{title}｜Propel AI' if en else f'{title}｜Propel AI 啟進智能決策')
     url = SITE + URL[key]
-    nav = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if (nav_current or URL[key])==h else ""}>{t}</a>' for h,t in NAV)
+    nav = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if (nav_current or URL[key])==h else ""}>{t}</a>' for h,t in (NAV_EN if en else NAV))
+    alt = ALT.get(key)
+    if en:   nav += f'<a class="lang" href="{URL[alt] if alt else "/"}" hreflang="zh-Hant" lang="zh-Hant">中文</a>'
+    else:    nav += f'<a class="lang" href="{URL[alt] if alt else "/en/"}" hreflang="en" lang="en">EN</a>'
+    if alt:
+        zh_u, en_u = (URL[alt], url) if en else (url, URL[alt])
+        if not zh_u.startswith('http'): zh_u = SITE + zh_u
+        if not en_u.startswith('http'): en_u = SITE + en_u
+        extra_head += f'<link rel="alternate" hreflang="zh-Hant" href="{zh_u}"><link rel="alternate" hreflang="en" href="{en_u}"><link rel="alternate" hreflang="x-default" href="{zh_u}">\n'
     head = f'''<!doctype html>
-<html lang="zh-Hant">
+<html lang="{"en" if en else "zh-Hant"}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -214,7 +271,7 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{url}">
 {'<meta name="robots" content="noindex,nofollow">' if (noindex or PREVIEW) else ''}
-<meta property="og:type" content="website"><meta property="og:site_name" content="Propel AI 啟進智能決策">
+<meta property="og:type" content="website"><meta property="og:site_name" content="{"Propel AI" if en else "Propel AI 啟進智能決策"}">
 <meta property="og:title" content="{html.escape(full)}"><meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/{OGIMG.get(key,"og.png")}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,12 +283,12 @@ def page(key, body, title=None, desc=None, extra_head='', wrap=True, nav_current
 <body class="pg-{key}">
 <div class="wrap">
   <header class="sitehead">
-    <a class="wordmark" href="{URL['home']}">PROPEL AI<small>啟進智能決策｜行為經濟學 × 行為設計 × AI</small></a>
-    <nav class="sitenav" aria-label="主選單">{nav}</nav>
+    <a class="wordmark" href="{URL['en'] if en else URL['home']}">PROPEL AI<small>{'Behavioral economics × behavior design × AI' if en else '啟進智能決策｜行為經濟學 × 行為設計 × AI'}</small></a>
+    <nav class="sitenav" aria-label="{'Main menu' if en else '主選單'}">{nav}</nav>
   </header>
 <main>
 '''
-    foot = '''
+    foot = FOOT_EN if en else '''
 </main>
   <footer class="sitefoot">
     <div><b>Propel AI｜啟進智能決策有限公司</b>｜統一編號 61933866｜台北市忠孝東路五段 1-2 號 12 樓｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
@@ -587,6 +644,225 @@ contact = f'''
 '''
 write('/contact/', page('contact', contact, desc='留下一件你想推動的事，我們回信告訴你可能卡在哪、從哪裡開始最省。'))
 
+
+# ---------- English pages (/en/) v0.1 — texts from 英文官網四頁初稿 v0.2 + George's 1111 decisions ----------
+def microform_en(ctx):
+    return f"""
+      <form class="mform" id="mform-{ctx}" novalidate>
+        <input type="hidden" name="access_key" value="{FORM_KEY}">
+        <input type="hidden" name="subject" value="Website (EN): one thing I want to make happen">
+        <input type="hidden" name="from_name" value="Propel AI website (EN)">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+        <label><span>I want</span><input name="who" placeholder="e.g. our sales team / clients who received a quote" required></label>
+        <label><span>at</span><input name="when" placeholder="e.g. before the Monday meeting / within three days of the proposal" required></label>
+        <label><span>to</span><input name="what" placeholder="e.g. open the AI tool and draft a first version / confirm the next meeting" required></label>
+        <label><span>Company &amp; name</span><input name="name" placeholder="e.g. Acme Ltd., Mr. Chen" required></label>
+        <label><span>Email</span><input name="email" type="email" placeholder="so we can write back" required></label>
+        <div class="mrow"><button class="btn primary" type="submit">Send — we'll write back</button><span class="mnote">One sentence is enough. No fee, no sales call.</span></div>
+        <p class="mdone" hidden>Got it. We'll look at which behavior is worth working on first and write back within two working days.</p>
+      </form>"""
+
+en_home = f"""
+    <div class="hero">
+      <div class="hero-t">
+        <p class="eyebrow">You have explained it three times. They still haven't done it.</p>
+        <h1>Before adding budget, make the behavior you want the easier choice</h1>
+        <p class="lead">Workshops and training programs that bring behavioral economics and AI into everyday business decisions. Our starting point is simple: change the environment, not the person.</p>
+      </div>
+      <svg class="hero-v" viewBox="0 0 320 200" role="img" aria-label="Before: everyone has to be persuaded again. After changing the environment: a clear path, one step fewer, a reminder at the right moment">
+        <g font-family="Noto Sans TC,sans-serif" font-size="13" font-weight="700" fill="#003054">
+          <text x="10" y="24">Before: persuade everyone, every time</text>
+          <text x="10" y="124">After: let the behavior happen on its own</text>
+        </g>
+        <g stroke="#C9D3DB" stroke-width="6" stroke-linecap="round"><line x1="20" y1="60" x2="300" y2="60"/></g>
+        <g fill="#5C6B78"><circle cx="30" cy="60" r="8"/><circle cx="120" cy="60" r="8"/><circle cx="210" cy="60" r="8"/></g>
+        <g fill="#DDE3E8"><rect x="66" y="44" width="30" height="32" rx="5"/><rect x="156" y="44" width="30" height="32" rx="5"/><rect x="246" y="44" width="30" height="32" rx="5"/></g>
+        <g font-family="Noto Sans TC,sans-serif" font-size="10.5" fill="#5C6B78"><text x="52" y="94">unclear info</text><text x="138" y="94">too many steps</text><text x="226" y="94">nagging</text></g>
+        <g stroke="#F06000" stroke-width="6" stroke-linecap="round"><line x1="20" y1="160" x2="290" y2="160"/></g>
+        <polygon points="288,148 310,160 288,172" fill="#F06000"/>
+        <g fill="#F06000"><circle cx="30" cy="160" r="8"/><circle cx="115" cy="160" r="8"/><circle cx="200" cy="160" r="8"/></g>
+        <g font-family="Noto Sans TC,sans-serif" font-size="10.5" font-weight="700" fill="#003054"><text x="40" y="190">default set</text><text x="118" y="190">one field fewer</text><text x="214" y="190">timely nudge</text></g>
+      </svg>
+    </div>
+    <div class="menu doors">
+      <a class="choice hot" href="/en/contact/"><span><span class="q">Have a specific problem in mind?</span><span class="a">Tell us about it in one sentence, and we'll write back</span></span><span class="go">→</span></a>
+    </div>
+
+    <section class="sec" id="pain">
+      <p class="eyebrow">01</p>
+      <h2>Does this sound familiar?</h2>
+      <p class="sub">These are the three things we hear most often, almost word for word:</p>
+      <div class="tiles">
+        <div class="tile"><span class="k">Customers</span><b>"The proposal was solid, and the client still said, let me think about it."</b></div>
+        <div class="tile"><span class="k">Employees</span><b>"We bought the AI tools and wrote the guidelines. Nobody uses them."</b></div>
+        <div class="tile"><span class="k">The floor</span><b>"The SOP is crystal clear. People on the floor still do it the old way."</b></div>
+      </div>
+      <p class="big">Three different complaints, but they describe the same situation: the behavior you were counting on didn't happen.</p>
+    </section>
+
+    <section class="sec" id="how">
+      <p class="eyebrow">02</p>
+      <h2>Metrics are outcomes. Behavior is what you can actually work on.</h2>
+      <p>Every number a company watches — revenue, adoption, repeat purchase — sits at the end of a chain. Somewhere in that chain, a specific person has to do a specific thing at a specific moment, and whether they do it depends a great deal on what they see in front of them, how many steps it takes, and what happens by default.</p>
+      <div class="chain slim">
+        <div class="c"><b>Environment</b>what they see, how many steps, what the default is</div><div class="ar">▶</div>
+        <div class="c"><b>Behavior</b>who, at what moment, does which action</div><div class="ar">▶</div>
+        <div class="c"><b>Metric</b>revenue, adoption rate, repeat purchase</div>
+      </div>
+      <p class="big">Behavior is not decided by the person alone. A large part of it is decided by the environment, and the environment is something you can arrange in advance.</p>
+      <a class="more" href="/en/how/">Four examples: the default, the second option, who speaks first, and the follow-up email →</a>
+    </section>
+
+    <section class="sec" id="method">
+      <p class="eyebrow">03</p>
+      <h2>PROPEL™: six stations. It is a process, not a piece of software.</h2>
+      <div class="strip">
+        <div><b>P</b><i>Pinpoint</i><span>the behavior</span></div><div><b>R</b><i>Reconstruct</i><span>the chain</span></div><div><b>O</b><i>Obstacle</i><span>find it</span></div><div><b>P</b><i>Prescribe</i><span>a fix</span></div><div><b>E</b><i>Experiment</i><span>small scale</span></div><div class="later"><b>L</b><i>Loop</i><span>to the numbers</span></div>
+      </div>
+      <p>In every session the order is the same:</p>
+      <div class="chips"><span>the team thinks first</span><i>→</i><span>AI fills in the gaps</span><i>→</i><span>the instructor guides the judgment</span><i>→</i><span>the team makes the call</span></div>
+      <a class="more" href="/en/how/#propel">How this way of thinking becomes a path →</a>
+    </section>
+
+    <section class="sec" id="courses">
+      <p class="eyebrow">04</p>
+      <h2>Where would you like to start?</h2>
+      <div class="tiles two">
+        <div class="tile hot"><span class="k">Not sure whether this applies to you?</span><b>59-minute test drive</b><span class="d">We come to your office and work through one real question together. This is where most companies begin.</span></div>
+        <div class="tile"><span class="k">Which decisions could your team be making better?</span><b>Half-day or full-day course</b><span class="d">Six or twelve questions, each one built around a single decision.</span></div>
+        <div class="tile"><span class="k">Already know what's stuck?</span><b>Full-day workshop</b><span class="d">Bring your own problem and leave with an experiment you can run the following week.</span></div>
+        <div class="tile"><span class="k">Sales and marketing teams looking for the original method and certificate?</span><b>SURF™ by MINDWORX</b><span class="d">The European program, delivered by a licensed trainer.</span></div>
+      </div>
+      <p class="note">Programs are delivered in Mandarin. Detailed program pages are in Mandarin; <a href="/en/contact/">write to us</a> and we'll tell you which one fits.</p>
+    </section>
+
+    <section class="sec" id="why">
+      <p class="eyebrow">05</p>
+      <h2>What you actually get</h2>
+      <p class="sub">This is not a slide deck and a handout. Over the past two years we have built the materials a team needs to practice, not just listen:</p>
+      <div class="facts4">
+        <div><b>150</b><span>ready-made teaching modules</span></div>
+        <div><b>67 / 101</b><span>common sticking points / fixes, each with its source</span></div>
+        <div><b>AI</b><span>a question picker, a two-minute quiz, and a written prompt for every question</span></div>
+        <div><b>MINDWORX</b><span>licensed SURF™ Method trainer and coach</span></div>
+      </div>
+      <a class="more" href="/en/about/">Every session is taught by George Chen in person｜About us →</a>
+    </section>
+
+    <section class="sec" id="next">
+      <p class="eyebrow">06</p>
+      <h2>Tell us one thing you would like to make happen</h2>
+      <p class="sub">Think of it as a sentence with three blanks: I want <b>who</b>, at <b>when</b>, to <b>do what</b>. Fill in the three boxes and send — one sentence is enough. There is no fee and no sales call afterwards; we read it, think about which behavior is worth working on first, and write back within two working days.</p>
+      {microform_en('en-home')}
+    </section>
+"""
+write('/en/', page('en', en_home, nav_current='/en/'))
+
+en_how = """
+    <span class="pill">How we think</span>
+    <h1>Metrics are outcomes. Behavior is what you can work on.</h1>
+    <p class="lead">At Propel AI we use behavioral economics, with AI as a working tool, to make the behavior you want the easier choice — and we try to do it before anyone adds budget.</p>
+    <h2>How we look at a problem</h2>
+    <p>When a number is not moving, most companies look at the people and ask why they are not trying harder. We look one step earlier, at the environment those people are working in: what they see, how many steps the task takes, and what happens if they do nothing. That is the step most companies skip, and it is usually where the answer is.</p>
+    <div class="chain">
+      <div class="c"><b>Environment</b>what they see, how many steps, what the default is<br><span class="note">the step we add</span></div><div class="ar">▶</div>
+      <div class="c"><b>Behavior</b>a specific person, at a specific moment, doing one visible action<br><span class="note">the part you can change</span></div><div class="ar">▶</div>
+      <div class="c"><b>Metric</b>revenue, adoption rate, repeat purchase<br><span class="note">moves only when the behavior moves</span></div>
+    </div>
+    <h2>Behind every metric is a chain of behavior</h2>
+    <table>
+      <tr><th>At this moment</th><th>this person does this action</th><th>and only then does this metric move</th></tr>
+      <tr><td>A shopper with items in the cart, just before leaving the site</td><td>clicks "Checkout"</td><td>checkout rate</td></tr>
+      <tr><td>A salesperson, at the start of the working day</td><td>opens the AI tool to draft the plan</td><td>adoption rate</td></tr>
+      <tr><td>A customer, in the week the product is about to run out</td><td>clicks "Buy again"</td><td>repeat purchase</td></tr>
+    </table>
+    <p>So we don't start with "how do we grow revenue." We start with a narrower question: who, at what moment, is not doing which action?</p>
+    <h2>What does "changing the environment" look like? Three examples</h2>
+    <div class="cards">
+      <div class="card"><h3>Change the default</h3><p>A green electricity plan — same plan, same price. When customers had to tick a box to opt in, 7% took it. When they were enrolled by default and could untick to opt out, 69% stayed in.</p></div>
+      <div class="card"><h3>Offer two options instead of one</h3><p>On a product page, showing a single option led 9% of visitors to buy. Showing two options side by side raised that to 66%.</p></div>
+      <div class="card"><h3>Speak first</h3><p>When a customer asks "roughly how much," opening with "what's your budget?" and opening with a reasoned number lead to very different places. The side that names a number first tends to pull the final price its way.</p></div>
+    </div>
+    <p class="note">External studies, not Propel AI client results｜Sources: Ebeling &amp; Lotz (2015) Nature Climate Change｜Mochon (2013) J. Consumer Research｜Gunia et al. (2013) Personality and Social Psychology Bulletin</p>
+    <h2>The same idea, applied in your company: the follow-up email after a quote</h2>
+    <div class="vs three">
+      <div class="card"><h3>Before</h3><p>"Please find the quote attached. Let me know if you have any questions."</p><p class="note">The ball is entirely in the client's court</p></div>
+      <div class="card"><h3>Where it sticks</h3><p>The easiest thing for a busy client to do with that email is nothing.</p><p class="note">Nobody has set the next step, or a time for it</p></div>
+      <div class="card us"><h3>After</h3><p>"Quote attached. I'll call you Thursday afternoon to see whether anything needs adjusting."</p><p class="note">The next step is already decided; the client only has to not object</p></div>
+    </div>
+    <p class="note">An illustration, not a client result.</p>
+    <h2>How this differs from the usual approach</h2>
+    <div class="cards">
+      <div class="card"><h3>We aim at the environment, not the person</h3><p>Explaining again, issuing an instruction, repeating the message — these work for as long as someone keeps pushing, and the numbers tend to slide back the moment the effort stops.</p></div>
+      <div class="card"><h3>We look before we spend</h3><p>Find the step where things are stuck first, and only then decide whether money is actually needed.</p></div>
+      <div class="card"><h3>You judge, AI supplements, you decide</h3><p>What AI offers is a second opinion, and we treat it as a hypothesis until the numbers say otherwise.</p></div>
+    </div>
+    <h2 id="propel">This way of looking at a problem follows a fixed path</h2>
+    <p>We call it PROPEL™ — six stations, from pinpointing the behavior to looping back to the numbers: <b>P</b>inpoint, <b>R</b>econstruct, <b>O</b>bstacle, <b>P</b>rescribe, <b>E</b>xperiment, <b>L</b>oop. The full-day workshop walks that path from beginning to end, and every station leaves the team with one sheet of paper they can use the following week.</p>
+    <div class="cta">
+      <a class="btn primary" href="/en/contact/">Tell us one thing, and we'll write back</a>
+    </div>
+    <div class="nav"><a href="/en/" class="prev">← Home</a><a href="/en/about/">About Propel AI →</a></div>
+"""
+write('/en/how/', page('en-how', en_how))
+
+en_about = """
+    <span class="pill">About</span>
+    <h1>We do one thing: make the behavior you want the easier choice</h1>
+    <p class="lead">The proposal went out, and the client never took the next step. The AI tools were bought, and the team never really picked them up. The SOP was written clearly, and the floor kept working the way it always had. These are the situations Propel AI was built for. Through workshops and training, we teach teams to use behavioral economics and AI to find out why customers don't move forward and colleagues don't act, and then to adjust the process, the message, and the environment in which those decisions are made.</p>
+    <h2>Three things we believe</h2>
+    <div class="cards">
+      <div class="card"><h3>An outcome is not a behavior</h3><p>Revenue and adoption are results. What a team can actually work on is who does which action, and when.</p></div>
+      <div class="card"><h3>Personality is not the cause</h3><p>"He's lazy" or "she doesn't care" is where the conversation usually ends, and it is rarely where the problem is. More often the step takes too much effort, is too easy to forget, or nobody has gone first.</p></div>
+      <div class="card"><h3>A hypothesis is not a conclusion</h3><p>Every fix is a guess until it has been tried on a small scale and the numbers have been read. Then the team keeps it, adjusts it, or replaces it.</p></div>
+    </div>
+    <h2>Why behavioral economics</h2>
+    <p>Companies know their own sales process very well. What they see less clearly is the process from the customer's side: what he has to do at each step, what he is worried about, and who else has to sign off before he can say yes. Those things the customer must get done don't always appear anywhere in our process, and they are exactly what behavioral economics is about. Beyond need and willingness, how the options are laid out, how many steps it takes, and how the reminder arrives all shape a decision.</p>
+    <p>For a long time, behavioral economics was something governments and large corporations brought in through consultants. Most companies have heard of it and would like to try it on their own business, but they rarely know where to begin: the research takes time to read, and there has been no set of tools that connects the findings to the steps of everyday work. That connection is what we have spent the last few years building — turning research findings into steps a business team can practice at work, and then watching the effect in their own numbers.</p>
+    <h2>What teams practice in the room</h2>
+    <div class="cards">
+      <div class="card"><div class="n">1</div><h3>Break it into a visible action</h3><p>"Grow revenue" or "get people to use the tool" becomes who, at what moment, does which action.</p></div>
+      <div class="card"><div class="n">2</div><h3>Find where it sticks and design a fix</h3><p>Work out why that action might stall, and design a change that doesn't begin by adding budget.</p></div>
+      <div class="card"><div class="n">3</div><h3>Read your own numbers</h3><p>Try the change on a small scale, look at the numbers, and then decide whether to keep it, adjust it, or move to another spot. How long to watch depends on how often the behavior happens; for frequent behaviors, one to two weeks is enough for a first look.</p></div>
+    </div>
+    <p>Along the way the team works with an AI tool we built ourselves, backed by a library of 67 common sticking points and 101 fixes. The order never changes: the team thinks first, AI adds what might have been overlooked, the instructor guides the judgment, and the team decides. After the course, the AI stays with you — we provide written prompts, so that back at the office you can paste your real situation into whatever AI tool you normally use and walk through the same steps again.</p>
+    <h2>Method, materials, partner</h2>
+    <ul class="facts">
+      <li><b>Method</b><span>PROPEL™, six stations: Pinpoint, Reconstruct, Obstacle, Prescribe, Experiment, Loop. From a fuzzy problem to a fix you can test.</span></li>
+      <li><b>Materials</b><span>Eight pain points and 150 teaching modules. Six questions in a half day, twelve in a full day; each question is one decision, one principle, three cases, and one AI prompt.</span></li>
+      <li><b>Library</b><span>67 common sticking points and 101 fixes. This is what sits underneath both the AI tool and the handouts.</span></li>
+      <li><b>Partner</b><span>MINDWORX, a European behavioral economics consultancy founded in 2015 and now present in Europe and North America, with work for companies in the Allianz, Generali, UniCredit and Zurich groups. Propel AI is its licensed SURF™ Method trainer and coach for Taiwan.</span></li>
+    </ul>
+    <h2>Who teaches</h2>
+    <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen｜Founder. He teaches every session himself.</h3><p>George holds an MBA from the University of Chicago Booth School of Business (with Honors, top 20% of the class), where he took a course taught by Richard Thaler, the 2017 Nobel laureate in economics. He spent many years at Oracle, as Marketing Director for Oracle Hong Kong and Taiwan and as APAC Applications Campaign Lead, and he is a licensed trainer and coach for the MINDWORX SURF™ Method. "How do you get a customer to take the next step?" was the question his teams worked on at Oracle year after year.</p></div></div>
+    <p class="note">Full credentials are in the company profile and in the pre-course notes for each program. SURF™ is MINDWORX's method; Propel AI's own courses and workshops are of our own design.</p>
+    <h2>Company</h2>
+    <ul class="facts">
+      <li><b>Name</b><span>Propel AI Co., Ltd.（啟進智能決策有限公司）</span></li>
+      <li><b>Tax ID</b><span>61933866</span></li>
+      <li><b>Address</b><span>12F, No. 1-2, Sec. 5, Zhongxiao E. Rd., Taipei, Taiwan</span></li>
+      <li><b>Contact</b><span>george.chen@propelaigrowth.com｜<a href="/en/contact/">Tell us one thing</a></span></li>
+    </ul>
+    <div class="nav"><a href="/en/" class="prev">← Home</a><a href="/en/how/">How we think →</a></div>
+"""
+write('/en/about/', page('en-about', en_about))
+
+en_contact = f"""
+    <span class="pill">Contact</span>
+    <h1>Tell us one thing, and we'll write back</h1>
+    <p class="lead">Describe the one thing you haven't been able to get moving. We'll reply with where it is probably stuck and where it would make sense to start. If we are not the right fit for it, we will tell you that too.</p>
+    <p class="sub">An example of the kind of sentence we mean: "I want <b>our sales reps</b>, <b>after every client visit</b>, <b>to write up the meeting notes with AI on the same day</b>." Three boxes are all it takes. If you would rather not fill in a form, an email to <a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a> works just as well.</p>
+    {microform_en('en-contact')}
+    <h2>Not ready to talk yet?</h2>
+    <div class="menu">
+      <a class="choice" href="/en/how/"><span><span class="q">Read how we look at a problem</span><span class="a">Three examples of changing the environment, and one follow-up email</span></span><span class="go">→</span></a>
+      <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">George on LinkedIn</span><span class="a">See what he writes about each week</span></span><span class="go">→</span></a>
+    </div>
+    <p class="note">Programs are delivered in Mandarin.</p>
+    <div class="nav"><a href="/en/" class="prev">← Home</a></div>
+"""
+write('/en/contact/', page('en-contact', en_contact))
+
 # ---------- articles (from data/articles.json) ----------
 arts = json.loads((pathlib.Path(__file__).parent/'data/articles.json').read_text(encoding='utf-8')) if (pathlib.Path(__file__).parent/'data/articles.json').exists() else []
 items=[]
@@ -622,7 +898,7 @@ if cl['quotes'] or cl['cases']:
 # ---------- static files ----------
 (OUT/'CNAME').write_text('propelaigrowth.com\n')
 (OUT/'robots.txt').write_text('User-agent: *\nDisallow: /\n' if PREVIEW else f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
-urls = [URL[k] for k in ['home','how','trial','half','ws','surf','trial-prep','half-prep','ws-prep','surf-prep','quiz','picker','docs','about','contact','articles']] + [f'/articles/{a["slug"]}/' for a in arts]
+urls = [URL[k] for k in ['home','how','trial','half','ws','surf','trial-prep','half-prep','ws-prep','surf-prep','quiz','picker','docs','about','contact','articles','en','en-how','en-about','en-contact']] + [f'/articles/{a["slug"]}/' for a in arts]
 (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{SITE}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
 (OUT/'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#003054"/><text x="32" y="44" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="900" fill="#F06000" text-anchor="middle">P</text></svg>')
 (OUT/'404.html').write_text(page('home', '<span class="pill">404</span><h1>這一頁不在這裡</h1><p class="lead">可能是網址打錯，或這一頁搬家了。</p><div class="menu"><a class="choice" href="/"><span><span class="q">回首頁</span><span class="a">從「你現在是哪一種」開始</span></span><span class="go">→</span></a></div>', title='找不到這一頁', noindex=True), encoding='utf-8')

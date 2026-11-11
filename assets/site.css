@@ -268,6 +268,8 @@ footer{margin-top:28px;font-size:12px;color:var(--mute);text-align:center}
 .sitenav{display:flex;gap:4px;flex-wrap:wrap}
 .sitenav a{color:var(--mute);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:999px}
 .sitenav a:hover,.sitenav a[aria-current]{color:var(--navy);background:var(--sky)}
+.sitenav a.lang{border:1px solid var(--line);margin-left:6px;font-weight:700;color:var(--navy)}
+.pg-en .wordmark small,.pg-en-how .wordmark small,.pg-en-about .wordmark small,.pg-en-contact .wordmark small{letter-spacing:.02em}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sitenav a:hover, :root:not([data-theme="light"]) .sitenav a[aria-current]{color:var(--fg)} }
 .sitefoot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--mute);line-height:1.7}
 .sitefoot a{color:var(--mute)}
@@ -385,6 +387,10 @@ img.av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
 .tiles.two{grid-template-columns:1fr 1fr}
 .tile{display:flex;flex-direction:column;gap:8px;min-height:150px;padding:20px 20px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;color:var(--navy);transition:border-color .15s,transform .15s}
 .tile:hover{border-color:var(--orange);transform:translateY(-2px)}
+div.tile:hover{border-color:var(--line);transform:none}
+[lang=en] .mform label{grid-template-columns:8.5em 1fr}
+@media (max-width:480px){[lang=en] .mform label{grid-template-columns:1fr}}
+div.tile.hot:hover{border-color:#F3B48A}
 .tile.hot{border-color:#F3B48A;background:#FFF6EF}
 .tile .k{font-size:12.5px;font-weight:700;color:var(--orange)}
 .tile b{font-size:18px;line-height:1.4}
