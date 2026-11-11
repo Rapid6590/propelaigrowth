@@ -665,7 +665,7 @@ def microform_en(ctx):
 en_home = f"""
     <div class="hero">
       <div class="hero-t">
-        <p class="eyebrow">You have explained it three times. They still haven't done it.</p>
+        <p class="eyebrow">You've explained it three times. They still haven't done it.</p>
         <h1>Before adding budget, make the behavior you want the easier choice</h1>
         <p class="lead">Courses and workshops that bring behavioral economics and AI into everyday business decisions. Our starting point is simple: change the environment, not the person.</p>
       </div>
@@ -691,26 +691,26 @@ en_home = f"""
     <section class="sec" id="pain">
       <p class="eyebrow">01</p>
       <h2>Does this sound familiar?</h2>
-      <p class="sub">These are the three things we hear most often, almost word for word:</p>
+      <p class="sub">Three situations that may sound familiar:</p>
       <div class="tiles">
         <div class="tile"><span class="k">Customers</span><b>"The proposal was solid, and the client still said, let me think about it."</b></div>
         <div class="tile"><span class="k">Employees</span><b>"We bought the AI tools and wrote the guidelines. Nobody uses them."</b></div>
-        <div class="tile"><span class="k">The floor</span><b>"The SOP is crystal clear. People on the floor still do it the old way."</b></div>
+        <div class="tile"><span class="k">Frontline</span><b>"The SOP is crystal clear. Frontline teams still do it the old way."</b></div>
       </div>
       <p class="big">Three different complaints, but they describe the same situation: the behavior you were counting on didn't happen.</p>
     </section>
 
     <section class="sec" id="how">
       <p class="eyebrow">02</p>
-      <h2>Metrics are outcomes. Behavior is what you can actually work on.</h2>
+      <h2>Metrics tell you the result. Behavior gives you a place to start.</h2>
       <p>Every number a company watches — revenue, adoption, repeat purchase — sits at the end of a chain. Somewhere in that chain, a specific person has to do a specific thing at a specific moment, and whether they do it depends a great deal on what they see in front of them, how many steps it takes, and what happens by default.</p>
       <div class="chain slim">
         <div class="c"><b>Environment</b>what they see, how many steps, what the default is</div><div class="ar">▶</div>
         <div class="c"><b>Behavior</b>who, at what moment, does which action</div><div class="ar">▶</div>
         <div class="c"><b>Metric</b>revenue, adoption rate, repeat purchase</div>
       </div>
-      <p class="big">Behavior is not decided by the person alone. A large part of it is decided by the environment, and the environment is something you can arrange in advance.</p>
-      <a class="more" href="/en/how/">Four examples: the default, the second option, who speaks first, and the follow-up email →</a>
+      <p class="big">People don't act in isolation. What they see, how many steps they face, and what happens by default all shape what they do — and those are things you can arrange in advance.</p>
+      <a class="more" href="/en/how/">Three examples from research, and one from your inbox: the default, the second option, who speaks first, the follow-up email →</a>
     </section>
 
     <section class="sec" id="method">
@@ -719,7 +719,7 @@ en_home = f"""
       <div class="strip">
         <div><b>P</b><i>Pinpoint</i><span>the behavior</span></div><div><b>R</b><i>Reconstruct</i><span>the chain</span></div><div><b>O</b><i>Obstacle</i><span>find it</span></div><div><b>P</b><i>Prescribe</i><span>a fix</span></div><div><b>E</b><i>Experiment</i><span>small scale</span></div><div class="later"><b>L</b><i>Loop</i><span>to the numbers</span></div>
       </div>
-      <p>In every session the order is the same:</p>
+      <p>In the full-day workshop the team walks the first five stations; the sixth, Loop, happens back at work. In every session the order is the same:</p>
       <div class="chips"><span>the team thinks first</span><i>→</i><span>AI fills in the gaps</span><i>→</i><span>the instructor guides the judgment</span><i>→</i><span>the team makes the call</span></div>
       <a class="more" href="/en/how/#propel">How this way of thinking becomes a path →</a>
     </section>
@@ -728,9 +728,9 @@ en_home = f"""
       <p class="eyebrow">04</p>
       <h2>Where would you like to start?</h2>
       <div class="tiles two">
-        <div class="tile hot"><span class="k">Not sure whether this applies to you?</span><b>59-minute test drive</b><span class="d">We come to your office and work through one real question together. This is where most companies begin.</span></div>
+        <div class="tile hot"><span class="k">Not sure whether this applies to you?</span><b>59-minute test drive</b><span class="d">We come to your office and teach one exercise from the course, for real. The recommended place to start.</span></div>
         <div class="tile"><span class="k">Which decisions could your team be making better?</span><b>Half-day or full-day course</b><span class="d">Six or twelve questions, each one built around a single decision.</span></div>
-        <div class="tile"><span class="k">Already know what's stuck?</span><b>Full-day workshop</b><span class="d">Bring your own problem and leave with an experiment you can run the following week.</span></div>
+        <div class="tile"><span class="k">Already know what's stuck?</span><b>Full-day workshop</b><span class="d">Bring your own problem and leave with a small, measurable test to run back at work.</span></div>
         <div class="tile"><span class="k">Sales and marketing teams looking for the original method and certificate?</span><b>SURF™ by MINDWORX</b><span class="d">The European program, delivered by a licensed trainer.</span></div>
       </div>
       <p class="note">Programs are delivered in Mandarin. Detailed program pages are in Mandarin; <a href="/en/contact/">write to us</a> and we'll tell you which one fits.</p>
@@ -741,7 +741,7 @@ en_home = f"""
       <h2>What you actually get</h2>
       <p class="sub">This is not a slide deck and a handout. Over the past two years we have built the materials a team needs to practice, not just listen:</p>
       <div class="facts4">
-        <div><b>150</b><span>ready-made teaching modules</span></div>
+        <div><b>150</b><span>prepared teaching materials</span></div>
         <div><b>67 / 101</b><span>common sticking points / fixes, each with its source</span></div>
         <div><b>AI</b><span>a question picker, a two-minute quiz, and a written prompt for every question</span></div>
         <div><b>MINDWORX</b><span>licensed SURF™ Method trainer and coach</span></div>
@@ -760,10 +760,10 @@ write('/en/', page('en', en_home, nav_current='/en/'))
 
 en_how = """
     <span class="pill">How we think</span>
-    <h1>Metrics are outcomes. Behavior is what you can work on.</h1>
+    <h1>Metrics tell you the result. Behavior gives you a place to start.</h1>
     <p class="lead">At Propel AI we use behavioral economics, with AI as a working tool, to make the behavior you want the easier choice — and we try to do it before anyone adds budget.</p>
     <h2>How we look at a problem</h2>
-    <p>When a number is not moving, most companies look at the people and ask why they are not trying harder. We look one step earlier, at the environment those people are working in: what they see, how many steps the task takes, and what happens if they do nothing. That is the step most companies skip, and it is usually where the answer is.</p>
+    <p>When a number is not moving, most companies look at the people and ask why they are not trying harder. We look one step earlier, at the environment those people are working in: what they see, how many steps the task takes, and what happens if they do nothing. That is the step that usually gets skipped, and it is often where the answer is.</p>
     <div class="chain">
       <div class="c"><b>Environment</b>what they see, how many steps, what the default is<br><span class="note">the step we add</span></div><div class="ar">▶</div>
       <div class="c"><b>Behavior</b>a specific person, at a specific moment, doing one visible action<br><span class="note">the part you can change</span></div><div class="ar">▶</div>
@@ -779,8 +779,8 @@ en_how = """
     <p>So we don't start with "how do we grow revenue." We start with a narrower question: who, at what moment, is not doing which action?</p>
     <h2>What does "changing the environment" look like? Three examples</h2>
     <div class="cards">
-      <div class="card"><h3>Change the default</h3><p>A green electricity plan — same plan, same price. When customers had to tick a box to opt in, 7% took it. When they were enrolled by default and could untick to opt out, 69% stayed in.</p></div>
-      <div class="card"><h3>Offer two options instead of one</h3><p>On a product page, showing a single option led 9% of visitors to buy. Showing two options side by side raised that to 66%.</p></div>
+      <div class="card"><h3>Change the default</h3><p>A green electricity plan — same plan, same price. When customers had to tick a box to opt in, 7% took it. When they were enrolled by default and could untick to opt out, 69% chose it.</p></div>
+      <div class="card"><h3>Offer two options instead of one</h3><p>In a published choice experiment, 9% of participants chose to buy when shown a single option; 66% did when shown two options side by side.</p></div>
       <div class="card"><h3>Speak first</h3><p>When a customer asks "roughly how much," opening with "what's your budget?" and opening with a reasoned number lead to very different places. The side that names a number first tends to pull the final price its way.</p></div>
     </div>
     <p class="note">External studies, not Propel AI client results｜Sources: Ebeling &amp; Lotz (2015) Nature Climate Change｜Mochon (2013) J. Consumer Research｜Gunia et al. (2013) Personality and Social Psychology Bulletin</p>
@@ -798,7 +798,7 @@ en_how = """
       <div class="card"><h3>You judge, AI supplements, you decide</h3><p>What AI offers is a second opinion, and we treat it as a hypothesis until the numbers say otherwise.</p></div>
     </div>
     <h2 id="propel">This way of looking at a problem follows a fixed path</h2>
-    <p>We call it PROPEL™ — six stations, from pinpointing the behavior to looping back to the numbers: <b>P</b>inpoint, <b>R</b>econstruct, <b>O</b>bstacle, <b>P</b>rescribe, <b>E</b>xperiment, <b>L</b>oop. The full-day workshop walks that path from beginning to end, and every station leaves the team with one sheet of paper they can use the following week.</p>
+    <p>We call it PROPEL™ — six stations, from pinpointing the behavior to looping back to the numbers: <b>P</b>inpoint, <b>R</b>econstruct, <b>O</b>bstacle, <b>P</b>rescribe, <b>E</b>xperiment, <b>L</b>oop. In the full-day workshop the team walks the first five stations and leaves with one sheet of paper from each; the sixth, Loop, happens back at work, with your own numbers.</p>
     <div class="cta">
       <a class="btn primary" href="/en/contact/">Tell us one thing, and we'll write back</a>
     </div>
@@ -809,7 +809,7 @@ write('/en/how/', page('en-how', en_how))
 en_about = """
     <span class="pill">About</span>
     <h1>We do one thing: make the behavior you want the easier choice</h1>
-    <p class="lead">The proposal went out, and the client never took the next step. The AI tools were bought, and the team never really picked them up. The SOP was written clearly, and the floor kept working the way it always had. These are the situations Propel AI was built for. Through courses and workshops, we teach teams to use behavioral economics and AI to find out why customers don't move forward and colleagues don't act, and then to adjust the process, the message, and the environment in which those decisions are made.</p>
+    <p class="lead">The proposal went out, and the client never took the next step. The AI tools were bought, and the team never really picked them up. The SOP was written clearly, and frontline teams kept working the way they always had. These are the situations Propel AI was built for. Through courses and workshops, we teach teams to use behavioral economics and AI to find out why customers don't move forward and colleagues don't act, and then to adjust the process, the message, and the environment in which those decisions are made.</p>
     <h2>Three things we believe</h2>
     <div class="cards">
       <div class="card"><h3>An outcome is not a behavior</h3><p>Revenue and adoption are results. What a team can actually work on is who does which action, and when.</p></div>
@@ -817,21 +817,21 @@ en_about = """
       <div class="card"><h3>A hypothesis is not a conclusion</h3><p>Every fix is a guess until it has been tried on a small scale and the numbers have been read. Then the team keeps it, adjusts it, or replaces it.</p></div>
     </div>
     <h2>Why behavioral economics</h2>
-    <p>Companies know their own sales process very well. What they see less clearly is the process from the customer's side: what he has to do at each step, what he is worried about, and who else has to sign off before he can say yes. Those things the customer must get done don't always appear anywhere in our process, and they are exactly what behavioral economics is about. Beyond need and willingness, how the options are laid out, how many steps it takes, and how the reminder arrives all shape a decision.</p>
-    <p>For a long time, behavioral economics was something governments and large corporations brought in through consultants. Most companies have heard of it and would like to try it on their own business, but they rarely know where to begin: the research takes time to read, and there has been no set of tools that connects the findings to the steps of everyday work. That connection is what we have spent the last few years building — turning research findings into steps a business team can practice at work, and then watching the effect in their own numbers.</p>
+    <p>Companies know their own sales process very well. What they see less clearly is the process from the customer's side: what they have to do at each step, what they are worried about, and who else has to sign off before they can say yes. Those things the customer must get done don't always appear anywhere in our process, and they are exactly what behavioral economics is about. Beyond need and willingness, how the options are laid out, how many steps it takes, and how the reminder arrives all shape a decision.</p>
+    <p>For a long time, behavioral economics was something governments and large corporations brought in through consultants. Most companies have heard of it and would like to try it on their own business, but they rarely know where to begin: the research takes time to read, and there have been few practical tools that connect the findings to the steps of everyday work. That connection is what we have spent the last few years building — turning research findings into steps a business team can practice at work, and then watching the effect in their own numbers.</p>
     <h2>What teams practice in the room</h2>
     <div class="cards">
       <div class="card"><div class="n">1</div><h3>Break it into a visible action</h3><p>"Grow revenue" or "get people to use the tool" becomes who, at what moment, does which action.</p></div>
       <div class="card"><div class="n">2</div><h3>Find where it sticks and design a fix</h3><p>Work out why that action might stall, and design a change that doesn't begin by adding budget.</p></div>
       <div class="card"><div class="n">3</div><h3>Read your own numbers</h3><p>Try the change on a small scale, look at the numbers, and then decide whether to keep it, adjust it, or move to another spot. How long to watch depends on how often the behavior happens; for frequent behaviors, one to two weeks is enough for a first look.</p></div>
     </div>
-    <p>Along the way the team works with an AI tool we built ourselves, backed by a library of 67 common sticking points and 101 fixes. The order never changes: the team thinks first, AI adds what might have been overlooked, the instructor guides the judgment, and the team decides. After the course, the AI stays with you — we provide written prompts, so that back at the office you can paste your real situation into whatever AI tool you normally use and walk through the same steps again.</p>
+    <p>Along the way the team works with an AI tool we built ourselves, backed by a library of 67 common sticking points and 101 fixes. The order never changes: the team thinks first, AI adds what might have been overlooked, the instructor guides the judgment, and the team decides. After the course, the prompts go with you — one written prompt for each exercise, so that back at the office you can paste your real situation into whatever AI tool you normally use and walk through the same steps again.</p>
     <h2>Method, materials, partner</h2>
     <ul class="facts">
       <li><b>Method</b><span>PROPEL™, six stations: Pinpoint, Reconstruct, Obstacle, Prescribe, Experiment, Loop. From a fuzzy problem to a fix you can test.</span></li>
-      <li><b>Materials</b><span>Eight pain points and 150 teaching modules. Six questions in a half day, twelve in a full day; each question is one decision, one principle, three cases, and one AI prompt.</span></li>
+      <li><b>Materials</b><span>Eight pain points and 150 teaching materials. Six questions in a half day, twelve in a full day; each question is one decision, one principle, three cases, and one AI prompt.</span></li>
       <li><b>Library</b><span>67 common sticking points and 101 fixes. This is what sits underneath both the AI tool and the handouts.</span></li>
-      <li><b>Partner</b><span>MINDWORX, a European behavioral economics consultancy founded in 2015 and now present in Europe and North America, with work for companies in the Allianz, Generali, UniCredit and Zurich groups. Propel AI is its licensed SURF™ Method trainer and coach for Taiwan.</span></li>
+      <li><b>Partner</b><span>MINDWORX, a European behavioral economics consultancy founded in 2015 and now present in Europe and North America, with work for companies in the Allianz, Generali, UniCredit and Zurich groups. Propel AI is a licensed SURF™ Method trainer and coach in Taiwan.</span></li>
     </ul>
     <h2>Who teaches</h2>
     <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen｜Founder. He teaches every session himself.</h3><p>George holds an MBA from the University of Chicago Booth School of Business (with Honors, top 20% of the class), where he took a course taught by Richard Thaler, the 2017 Nobel laureate in economics. He spent many years at Oracle, as Marketing Director for Oracle Hong Kong and Taiwan and as APAC Applications Campaign Lead, and he is a licensed trainer and coach for the MINDWORX SURF™ Method. "How do you get a customer to take the next step?" was the question his teams worked on at Oracle year after year.</p></div></div>
