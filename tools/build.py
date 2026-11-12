@@ -918,3 +918,6 @@ print('built', sum(1 for _ in OUT.rglob('index.html')), 'pages;', len(list((OUT/
 if not PREVIEW:
     import subprocess, sys
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'aeo_patch.py'), str(OUT)], check=True)
+# ---------- AEO 第二層：痛點句問答頁 /q/（資料 tools/data/pain_pages.json）----------
+if not PREVIEW:
+    subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'pain_pages.py'), str(OUT)], check=True)

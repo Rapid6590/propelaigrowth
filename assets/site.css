@@ -414,3 +414,16 @@ div.tile.hot:hover{border-color:#F3B48A}
 .faqp p{margin:0;font-size:16px;line-height:1.8}
 .sitefoot .flinks{margin-top:6px}
 /* /aeo:css */
+
+/* q:css */
+.q-ans{background:var(--sky);border-left:4px solid var(--orange);border-radius:10px;padding:14px 16px;font-size:17px;line-height:1.8;margin:0 0 22px}
+.q-cause{display:grid;gap:10px;margin:0 0 18px}
+.q-cause .card b{display:block;color:var(--orange);font-size:13px;letter-spacing:.08em;margin-bottom:4px}
+.q-cause .card p{margin:0;font-size:15px;line-height:1.7}
+.q-step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 18px}
+.q-step b{display:block;margin-bottom:4px}
+.q-rel a{display:block;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--navy-text);font-weight:700}
+.q-rel a:last-child{border-bottom:0}
+.q-byline{font-size:13px;color:var(--mute);margin:0 0 18px}
+.q-list .choice.soon{opacity:.55}
+/* /q:css */
