@@ -400,3 +400,17 @@ div.tile.hot:hover{border-color:#F3B48A}
 .pg-home p.big{margin:10px 0 12px}
 .facts4 b{font-size:20px}
 @media (max-width:700px){.tiles,.tiles.two{grid-template-columns:1fr}.tile{min-height:0}}
+
+/* aeo:css */
+.faqb details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0 14px;margin-top:8px}
+.faqb summary{cursor:pointer;font-weight:700;color:var(--navy-text);padding:11px 0;list-style:none;display:flex;gap:10px;align-items:baseline}
+.faqb summary::-webkit-details-marker{display:none}
+.faqb summary::before{content:"＋";color:var(--orange);font-weight:900;flex:none}
+.faqb details[open] summary::before{content:"－"}
+.faqb details p{padding-bottom:12px;font-size:15px;margin:0}
+.faqp section{padding:14px 0;border-bottom:1px solid var(--line)}
+.faqp section:last-child{border-bottom:0}
+.faqp h3{font-size:17px;line-height:1.5;color:var(--navy-text);margin:0 0 6px;text-wrap:balance}
+.faqp p{margin:0;font-size:16px;line-height:1.8}
+.sitefoot .flinks{margin-top:6px}
+/* /aeo:css */

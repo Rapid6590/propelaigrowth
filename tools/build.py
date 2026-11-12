@@ -612,7 +612,7 @@ about = '''
       <li><b>夥伴</b><span>歐洲 MINDWORX：2015 年成立的行為經濟學顧問公司，現於歐洲與北美設點，服務過 Allianz、Generali、UniCredit、Zurich 等集團旗下公司；Propel AI 是其 SURF™ Method 台灣授權講師與教練</span></li>
     </ul>
     <h2>誰來上課</h2>
-    <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen 陳朝智｜創辦人，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業），修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監；歐洲 MINDWORX SURF™ Method 授權講師與教練。「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題。</p></div></div>
+    <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen 陳朝智｜創辦人・行為設計師，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業），修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監；歐洲 MINDWORX SURF™ Method 授權講師與教練。「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題。</p></div></div>
     <p class="note">完整講師資歷與認證，見公司簡介與各課程的課前說明。SURF™ 是 MINDWORX 的方法；Propel AI 的課程與工作坊是我們自己設計的架構。</p>
     <h2>公司</h2>
     <ul class="facts">
@@ -638,7 +638,7 @@ contact = f'''
     <div class="menu">
       <a class="choice" href="/quiz/"><span><span class="q">先做兩分鐘小測驗</span><span class="a">三題、用點的、不用留資料</span></span><span class="go">→</span></a>
       <a class="choice" href="/downloads/"><span><span class="q">下載一頁介紹</span><span class="a">轉給同事或老闆看</span></span><span class="go">→</span></a>
-      <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">LinkedIn 上的 George</span><span class="a">看他平常在寫什麼</span></span><span class="go">→</span></a>
+      <a class="choice" href="https://www.linkedin.com/in/propelai" target="_blank" rel="noopener"><span><span class="q">LinkedIn 上的 George</span><span class="a">看他平常在寫什麼</span></span><span class="go">→</span></a>
     </div>
     <div class="nav"><a href="/" class="prev">← 回首頁</a></div>
 '''
@@ -834,7 +834,7 @@ en_about = """
       <li><b>Partner</b><span>MINDWORX, a European behavioral economics consultancy founded in 2015 and now present in Europe and North America, with work for companies in the Allianz, Generali, UniCredit and Zurich groups. Propel AI is a licensed SURF™ Method trainer and coach in Taiwan.</span></li>
     </ul>
     <h2>Who teaches</h2>
-    <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen｜Founder. He teaches every session himself.</h3><p>George holds an MBA from the University of Chicago Booth School of Business (with Honors, top 20% of the class), where he took a course taught by Richard Thaler, the 2017 Nobel laureate in economics. He spent many years at Oracle, as Marketing Director for Oracle Hong Kong and Taiwan and as APAC Applications Campaign Lead, and he is a licensed trainer and coach for the MINDWORX SURF™ Method. "How do you get a customer to take the next step?" was the question his teams worked on at Oracle year after year.</p></div></div>
+    <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen｜Founder &amp; Behavioral Designer. He teaches every session himself.</h3><p>George holds an MBA from the University of Chicago Booth School of Business (with Honors, top 20% of the class), where he took a course taught by Richard Thaler, the 2017 Nobel laureate in economics. He spent many years at Oracle, as Marketing Director for Oracle Hong Kong and Taiwan and as APAC Applications Campaign Lead, and he is a licensed trainer and coach for the MINDWORX SURF™ Method. "How do you get a customer to take the next step?" was the question his teams worked on at Oracle year after year.</p></div></div>
     <p class="note">Full credentials are in the company profile and in the pre-course notes for each program. SURF™ is MINDWORX's method; Propel AI's own courses and workshops are of our own design.</p>
     <h2>Company</h2>
     <ul class="facts">
@@ -856,7 +856,7 @@ en_contact = f"""
     <h2>Not ready to talk yet?</h2>
     <div class="menu">
       <a class="choice" href="/en/how/"><span><span class="q">Read how we look at a problem</span><span class="a">Three examples of changing the environment, and one follow-up email</span></span><span class="go">→</span></a>
-      <a class="choice" href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener"><span><span class="q">George on LinkedIn</span><span class="a">See what he writes about each week</span></span><span class="go">→</span></a>
+      <a class="choice" href="https://www.linkedin.com/in/propelai" target="_blank" rel="noopener"><span><span class="q">George on LinkedIn</span><span class="a">See what he writes about each week</span></span><span class="go">→</span></a>
     </div>
     <p class="note">Programs are delivered in Mandarin.</p>
     <div class="nav"><a href="/en/" class="prev">← Home</a></div>
@@ -872,7 +872,7 @@ for a in arts:
     <span class="pill">文章｜{a['date']}</span>
     <h1>{html.escape(a['title'])}</h1>
     {body}
-    <p class="note">這篇也發在 <a href="{a.get('linkedin','https://www.linkedin.com/in/digitalgeorge')}" target="_blank" rel="noopener">LinkedIn</a>。想聊這一題，<a href="/contact/">留下一件事</a>。</p>
+    <p class="note">這篇也發在 <a href="{a.get('linkedin','https://www.linkedin.com/in/propelai')}" target="_blank" rel="noopener">LinkedIn</a>。想聊這一題，<a href="/contact/">留下一件事</a>。</p>
     <div class="nav"><a href="/articles/" class="prev">← 所有文章</a><a href="/">回首頁 ⌂</a></div>
 '''
     p = OUT/'articles'/slug; p.mkdir(parents=True, exist_ok=True)
@@ -882,7 +882,7 @@ articles = f'''
     <span class="pill">文章</span>
     <h1>一個畫面，一個看法，一個問句</h1>
     <p class="lead">每週一篇，從一件日常的小事看「為什麼講了三次，他還是沒做」。先在 LinkedIn 發，這裡留一份。</p>
-    <div class="menu">{''.join(items) if items else '<div class="empty">第一篇整理中。想先看的話，<a href="https://www.linkedin.com/in/digitalgeorge" target="_blank" rel="noopener">LinkedIn 上已經有幾篇</a>。</div>'}</div>
+    <div class="menu">{''.join(items) if items else '<div class="empty">第一篇整理中。想先看的話，<a href="https://www.linkedin.com/in/propelai" target="_blank" rel="noopener">LinkedIn 上已經有幾篇</a>。</div>'}</div>
     <div class="nav"><a href="/" class="prev">← 回首頁</a><a href="/contact/">留下一件事 →</a></div>
 '''
 write('/articles/', page('articles', articles, desc='Propel AI 文章：每週一篇，從日常小事看為什麼講了三次他還是沒做。'))
@@ -913,3 +913,8 @@ shutil.copy(pathlib.Path(__file__).parent/'og.png', OUT/'assets/og.png')
 shutil.copy(pathlib.Path(__file__).parent/'og_quiz.png', OUT/'assets/og_quiz.png')
 shutil.copy(pathlib.Path(__file__).parent/'george.jpg', OUT/'assets/george.jpg')
 print('built', sum(1 for _ in OUT.rglob('index.html')), 'pages;', len(list((OUT/'assets/img').iterdir())), 'images')
+
+# ---------- AEO 第一層（/faq/、課程頁問答、結構化資料、robots、llms.txt）：見 tools/aeo_patch.py ----------
+if not PREVIEW:
+    import subprocess, sys
+    subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'aeo_patch.py'), str(OUT)], check=True)
