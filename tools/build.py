@@ -921,3 +921,5 @@ if not PREVIEW:
 # ---------- AEO 第二層：痛點句問答頁 /q/（資料 tools/data/pain_pages.json）----------
 if not PREVIEW:
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'pain_pages.py'), str(OUT)], check=True)
+# ---------- 主選單與首頁痛點卡（常見卡點入口）：見 tools/nav_patch.py ----------
+    subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'nav_patch.py'), str(OUT)], check=True)
