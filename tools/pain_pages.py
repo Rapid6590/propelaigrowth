@@ -93,7 +93,8 @@ for a in DATA:
 
 # 索引頁
 items = ''.join(f'<a class="choice" href="/q/{a["slug"]}/"><span><span class="q">{esc(a["pain"])}</span><span class="a">{esc(a["answer"][:38])}…</span></span><span class="go">→</span></a>' for a in DATA)
-items += ''.join(f'<span class="choice soon"><span><span class="q">{esc(t)}</span><span class="a">整理中</span></span></span>' for t in PLANNED)
+LIVE_TITLES = {a['pain'] for a in DATA}  # 已上線的題不再列「整理中」
+items += ''.join(f'<span class="choice soon"><span><span class="q">{esc(t)}</span><span class="a">整理中</span></span></span>' for t in PLANNED if t not in LIVE_TITLES)
 idx = f'''
     <span class="pill">常見卡點</span>
     <h1>推了很久，卻還是沒發生的那幾件事</h1>

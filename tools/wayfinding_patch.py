@@ -83,7 +83,7 @@ for f in sorted(ROOT.glob('**/index.html')):
     if url not in PAGES or url == '/map/': continue
     chain, cur = PAGES[url]
     s = f.read_text(encoding='utf-8'); o = s
-    s = re.sub(r'<!-- wf:top -->.*?<!-- /wf:top -->\n?', '', s, flags=re.S)
+    s = re.sub(r'<main>\n<!-- wf:top -->.*?<!-- /wf:top -->\n', '<main>', s, flags=re.S)
     block = '<!-- wf:top -->' + crumb_html(chain) + (steps_html(cur) if cur else '') + '<!-- /wf:top -->\n'
     s = s.replace('<main>', '<main>\n' + block, 1)
     if s != o: f.write_text(s, encoding='utf-8'); n += 1

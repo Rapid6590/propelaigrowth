@@ -923,5 +923,7 @@ if not PREVIEW:
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'pain_pages.py'), str(OUT)], check=True)
 # ---------- 主選單與首頁痛點卡（常見卡點入口）：見 tools/nav_patch.py ----------
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'nav_patch.py'), str(OUT)], check=True)
+# ---------- 文章頁 /articles/<slug>/（LinkedIn 貼文留一份）：見 tools/articles.py ----------
+    subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'articles.py'), str(OUT)], check=True)
 # ---------- 四步路徑條、麵包屑、/map/ 網站地圖：見 tools/wayfinding_patch.py ----------
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'wayfinding_patch.py'), str(OUT)], check=True)
