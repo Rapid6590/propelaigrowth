@@ -925,5 +925,7 @@ if not PREVIEW:
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'nav_patch.py'), str(OUT)], check=True)
 # ---------- 文章頁 /articles/<slug>/（LinkedIn 貼文留一份）：見 tools/articles.py ----------
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'articles.py'), str(OUT)], check=True)
-# ---------- 四步路徑條、麵包屑、/map/ 網站地圖：見 tools/wayfinding_patch.py ----------
+# ---------- 算算看 /calc/（決策點的複利，三條示範鏈）：見 tools/calc_page.py ----------
+    subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'calc_page.py'), str(OUT)], check=True)
+# ---------- 主選單四步、展開列、麵包屑、/courses/、/map/：見 tools/wayfinding_patch.py（一定最後跑）----------
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'wayfinding_patch.py'), str(OUT)], check=True)

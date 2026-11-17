@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>算算看：每一關多一點，最後差多少？｜Propel AI 啟進智能決策</title>
+<meta name="description" content="一件事要成，得連過好幾關。把每一關的通過率填進去，看每關多一點，乘起來差多少。三條示範：賣給消費者、賣給企業客戶、讓民眾辦得成。不用留資料。">
+<link rel="canonical" href="https://propelaigrowth.com/calc/">
+
+<meta property="og:type" content="website"><meta property="og:site_name" content="Propel AI 啟進智能決策">
+<meta property="og:title" content="算算看：每一關多一點，最後差多少？｜Propel AI"><meta property="og:description" content="一件事要成，得連過好幾關。把每一關的通過率填進去，看每關多一點，乘起來差多少。三條示範：賣給消費者、賣給企業客戶、讓民眾辦得成。不用留資料。">
+<meta property="og:url" content="https://propelaigrowth.com/calc/"><meta property="og:image" content="https://propelaigrowth.com/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+
+
+</head>
+<body class="pg-calc">
+<div class="wrap">
+  <header class="sitehead">
+    <a class="wordmark" href="/">PROPEL AI<small>啟進智能決策｜行為經濟學 × 行為設計 × AI</small></a>
+    <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>
+    <nav class="wf-nav" aria-label="主選單"><a href="/q/"><i>1</i>找到卡住的事</a><a href="/how/" aria-current="step"><i>2</i>看懂為什麼</a><a href="/courses/"><i>3</i>選一個開始</a><a href="/contact/"><i>4</i>聊一聊</a></nav>
+    <nav class="wf-sub" aria-label="這一步裡的頁面"><span>這一步有</span><a href="/how/">怎麼看問題</a><a href="/articles/">文章</a><a href="/calc/" aria-current="page">算算看</a><a href="/downloads/">一頁介紹下載</a></nav>
+  </header>
+<main>
+    <span class="pill">算算看</span>
+    <h1>每一關多一點，最後差多少？</h1>
+    <p class="lead">一件事要成，客人、員工或民眾得連過好幾關。十關各多 10%，乘起來是 2.6 倍；各少 10%，只剩 0.35。下面三條是示範，數字都可以改成你自己的。</p>
+    <div class="cc">
+      <div class="cc-tabs" role="tablist" aria-label="選一條示範流程"><button type="button" role="tab" aria-selected="true">賣給消費者</button><button type="button" role="tab" aria-selected="false">賣給企業客戶</button><button type="button" role="tab" aria-selected="false">讓民眾辦得成</button></div>
+      <div class="cc-start"><label for="cc-start">從</label><input id="cc-start" type="number" inputmode="numeric" min="0" step="1" value="10000"><span id="cc-startlabel"></span><span class="note">開始</span></div>
+      <div class="cc-head" aria-hidden="true"><span>每一關</span><span>原本通過</span><span>多幾 %</span><span>之後</span><span>先動</span><span></span></div>
+      <div id="cc-rows"></div>
+      <button class="cc-add" id="cc-add" type="button">＋ 再加一關</button>
+      <div class="cc-out" aria-live="polite">
+        <h2>走完全部的關，還剩多少</h2>
+        <div class="cc-bar r0"><div class="t"><b>原本</b><small>什麼都沒動</small></div><div class="b"><i id="cc-b0"></i><span id="cc-v0"></span></div></div>
+        <div class="cc-bar r1"><div class="t"><b>這一輪</b><small id="cc-t1"></small></div><div class="b"><i id="cc-b1"></i><span id="cc-v1"></span></div></div>
+        <div class="cc-bar r2"><div class="t"><b>幾輪之後</b><small id="cc-t2"></small></div><div class="b"><i id="cc-b2"></i><span id="cc-v2"></span></div></div>
+        <p class="cc-say" id="cc-say"></p>
+      </div>
+      <p class="disc">數字為示意，不是承諾；每一關實際多少，只能在你自己的流程裡量。這一頁的數字只在你的瀏覽器裡算，不會送出。</p>
+      <details><summary>示範改法參考了哪些研究</summary><p id="cc-src" style="margin:6px 0 0"></p></details>
+      <div class="cc-bridge">
+        <h2>「我的流程不是這幾關」</h2>
+        <p>對，上面是示範，不是範本。全天工作坊的第二站，就是把你自己那件事拆成四到七步，圈出最卡的一兩步。</p>
+        <p>一次只動圈出來的那一兩步，兩週看一個數字；每一關都動過，是幾輪下來的事。</p>
+      </div>
+      <div class="cta-row" style="margin-top:18px">
+        <a class="btn primary" href="/workshop/">看全天工作坊怎麼拆 →</a>
+        <a class="btn secondary" href="/quiz/">還不確定？先做兩分鐘小測驗</a>
+      </div>
+    </div>
+<script>
+(function(){
+  var CHAINS = [{"id":"b2c","tab":"賣給消費者","start":10000,"unit":"人","startLabel":"看到廣告的人","endLabel":"付款完成","gates":[["看到廣告 → 點進來",3,20,"「現省 300」改成「再兩天就少 300」",true],["進站 → 看到商品頁",60,15,"第一屏跟廣告說同一句話，只放一個主推入口",false],["商品頁 → 加入購物車",30,20,"放真實的購買數字，主推規格先選好",false],["購物車 → 開始結帳",40,20,"運費在第一頁就講，欄位從十個減到四個",true],["結帳 → 付款完成",85,5,"加一行保證，沒付完的一小時內提醒一次",false]],"src":"Kahneman & Tversky (1979)；Iyengar & Lepper (2000)；Chernev et al. (2015)；Goldstein et al. (2008)；Egebark & Ekström (2016)；FCA Occasional Paper No. 2 (2013)；Leventhal et al. (1965)"},{"id":"b2b","tab":"賣給企業客戶","start":100,"unit":"家","startLabel":"名單上的客戶","endLabel":"續約","gates":[["約到做決定的人",20,15,"請求小而具體，加一句「不方便也沒關係」",true],["同意下一步",50,20,"會議結束前寫下日期、誰做什麼",false],["報價後選定方案",40,25,"方案給三個不給八個，標出多數客戶選的那個",true],["內部簽核通過",60,15,"替他準備給老闆的一頁，第一行寫不做的代價",false],["到期續約",70,10,"到期前 90 天提醒，附一頁這一年的成果",false]],"src":"Carpenter (2013)；Milkman et al. (2011)；Iyengar & Lepper (2000)；Tversky & Kahneman (1974)；Kahneman & Tversky (1979)；Karlan et al. (2016)"},{"id":"gov","tab":"讓民眾辦得成","start":10000,"unit":"位","startLabel":"符合資格的民眾","endLabel":"辦成","gates":[["收到通知 → 決定要辦",40,15,"通知第一行寫要做什麼、哪一天前；屬實的話，加一句「多數人已經辦了」",false],["決定要辦 → 找到申請入口",50,20,"連結直接到申請表，不先到機關首頁",true],["找到入口 → 開始填",60,20,"機關查得到的資料，經同意後先帶入；12 欄減到 3 欄",true],["開始填 → 送出",70,10,"表單最後留一格：「你打算哪一天送件？」",false],["送出 → 辦成（含補件）",80,10,"補件通知寫明缺哪一件、哪一天前、從哪裡補",false]],"src":"Hallsworth et al. (2017)；Behavioural Insights Team《EAST》(2014)；Bettinger et al. (2012)；Milkman et al. (2011)；Leventhal et al. (1965)"}];
+  var $ = function(id){ return document.getElementById(id); };
+  var state = null, MAXG = 7, MING = 2;
+  function clone(c){ return {id:c.id, start:c.start, unit:c.unit, startLabel:c.startLabel, endLabel:c.endLabel, src:c.src,
+    gates:c.gates.map(function(g){ return {name:g[0], base:g[1], lift:g[2], how:g[3], pick:g[4]}; })}; }
+  function num(v, lo, hi){ v = parseFloat(v); if (!isFinite(v)) v = 0; return Math.min(hi, Math.max(lo, v)); }
+  function fmt(x){
+    if (x >= 100) return Math.round(x).toLocaleString('en-US');
+    if (x >= 10) return (Math.round(x * 10) / 10).toFixed(1);
+    return (Math.round(x * 100) / 100).toFixed(x >= 1 ? 1 : 2);
+  }
+  function pct(x){ var r = Math.round(x * 10) / 10; return (r % 1 === 0 ? r.toFixed(0) : r.toFixed(1)) + '%'; }
+  function after(g){ return Math.min(100, g.base * (1 + g.lift / 100)); }
+
+  function load(i){
+    state = clone(CHAINS[i]);
+    var tabs = document.querySelectorAll('.cc-tabs button');
+    for (var k = 0; k < tabs.length; k++) tabs[k].setAttribute('aria-selected', k === i ? 'true' : 'false');
+    $('cc-start').value = state.start; $('cc-startlabel').textContent = state.unit + '（' + state.startLabel + '）';
+    $('cc-src').textContent = state.src;
+    rows(); calc();
+  }
+  function rows(){
+    var box = $('cc-rows'); box.innerHTML = '';
+    state.gates.forEach(function(g, i){
+      var d = document.createElement('div'); d.className = 'cc-row' + (g.pick ? ' on' : '');
+      d.innerHTML =
+        '<div class="cc-name"><i>' + (i + 1) + '</i><input type="text" aria-label="第 ' + (i + 1) + ' 關的名字" maxlength="24"></div>' +
+        '<div class="cc-f"><label>原本通過</label><input type="number" inputmode="decimal" min="0" max="100" step="1" aria-label="第 ' + (i + 1) + ' 關原本通過幾 %"><span class="u">%</span></div>' +
+        '<div class="cc-f"><label>多幾 %</label><span class="u">+</span><input type="number" inputmode="decimal" min="0" max="200" step="5" aria-label="第 ' + (i + 1) + ' 關多幾 %"><span class="u">%</span></div>' +
+        '<div class="cc-after"></div>' +
+        '<div class="cc-pick"><label><input type="checkbox" aria-label="這一輪先動第 ' + (i + 1) + ' 關"><span hidden>這一輪先動</span></label></div>' +
+        '<button class="cc-del" type="button" aria-label="拿掉第 ' + (i + 1) + ' 關" title="拿掉這一關">×</button>' +
+        (g.how ? '<div class="cc-how"><b>示範改法</b>　' + g.how.replace(/</g, '&lt;') + '</div>' : '') +
+        '<div class="cc-cum"></div>';
+      var ins = d.querySelectorAll('input');
+      ins[0].value = g.name; ins[1].value = g.base; ins[2].value = g.lift; ins[3].checked = !!g.pick;
+      ins[0].addEventListener('input', function(){ g.name = this.value; if (g.how){ g.how = ''; var h = d.querySelector('.cc-how'); if (h) h.remove(); } });
+      ins[1].addEventListener('input', function(){ g.base = num(this.value, 0, 100); calc(); });
+      ins[2].addEventListener('input', function(){ g.lift = num(this.value, 0, 200); calc(); });
+      ins[3].addEventListener('change', function(){ g.pick = this.checked; d.classList.toggle('on', g.pick); calc(); });
+      d.querySelector('.cc-del').addEventListener('click', function(){ if (state.gates.length > MING){ state.gates.splice(i, 1); rows(); calc(); } });
+      box.appendChild(d);
+    });
+    $('cc-add').hidden = state.gates.length >= MAXG;
+    var dels = box.querySelectorAll('.cc-del');
+    for (var k = 0; k < dels.length; k++) dels[k].style.visibility = state.gates.length > MING ? 'visible' : 'hidden';
+  }
+  function calc(){
+    var s = num($('cc-start').value, 0, 1e9), a = s, b = s, c = s, picked = 0, maxLift = 0, capped = false;
+    var els = $('cc-rows').children;
+    state.gates.forEach(function(g, i){
+      var af = after(g);
+      if (g.base * (1 + g.lift / 100) > 100) capped = true;
+      a *= g.base / 100; c *= af / 100; b *= (g.pick ? af : g.base) / 100;
+      if (g.pick) picked++;
+      if (g.lift > maxLift) maxLift = g.lift;
+      els[i].querySelector('.cc-after').textContent = pct(af);
+      els[i].querySelector('.cc-cum').textContent = '走到這一關還剩：原本 ' + fmt(a) + ' ' + state.unit + '，每關都動過之後 ' + fmt(c) + ' ' + state.unit;
+    });
+    var n = state.gates.length, top = Math.max(a, b, c, 1e-9);
+    function bar(id, v){ $(id).style.width = Math.max(1, v / top * 100) + '%'; }
+    bar('cc-b0', a); bar('cc-b1', b); bar('cc-b2', c);
+    $('cc-v0').textContent = fmt(a) + ' ' + state.unit;
+    $('cc-v1').innerHTML = fmt(b) + ' ' + state.unit + (a > 0 && picked ? '<em>' + (b / a).toFixed(1) + ' 倍</em>' : '');
+    $('cc-v2').innerHTML = fmt(c) + ' ' + state.unit + (a > 0 ? '<em>' + (c / a).toFixed(1) + ' 倍</em>' : '');
+    $('cc-t1').textContent = picked ? '只動打勾的 ' + picked + ' 關' : '還沒勾要先動哪一關';
+    $('cc-t2').textContent = n + ' 關都動過';
+    var say = '';
+    if (a > 0 && maxLift > 0){
+      say = (maxLift <= 30 ? '最多的一關也只多了 <b>' : '最多的一關多了 <b>') + maxLift + '%</b>；' + n + ' 關乘起來，是原本的 <b>' + (c / a).toFixed(1) + ' 倍</b>。';
+      if (picked && picked < n) say += '這一輪只動 ' + picked + ' 關，就已經是 <b>' + (b / a).toFixed(1) + ' 倍</b>。';
+    } else { say = '把每一關的數字填上去，下面就會算。'; }
+    if (capped) say += '有一關已經推到 100%：通過率最多就是全部的人，再往上沒有了。';
+    $('cc-say').innerHTML = say;
+  }
+  var tabs = document.querySelectorAll('.cc-tabs button');
+  for (var k = 0; k < tabs.length; k++) (function(i){ tabs[i].addEventListener('click', function(){ load(i); }); })(k);
+  $('cc-start').addEventListener('input', calc);
+  $('cc-add').addEventListener('click', function(){ if (state.gates.length < MAXG){ state.gates.push({name:'再一關', base:50, lift:10, how:'', pick:false}); rows(); calc(); } });
+  load(0);
+})();
+</script>
+</main>
+  <footer class="sitefoot">
+    <div><b>Propel AI｜啟進智能決策有限公司</b>｜統一編號 61933866｜台北市忠孝東路五段 1-2 號 12 樓｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
+    <div>歐洲 MINDWORX SURF™ Method 授權講師與教練｜尊重您的決定；未經同意，不進行後續行銷聯繫。</div>
+    <!-- aeo:foot --><div class="flinks"><a href="/q/">常見卡點</a>｜<a href="/faq/">常見問題</a>｜<a href="/quiz/">兩分鐘小測驗</a>｜<a href="/contact/">聯絡</a>｜<a href="/map/">網站地圖</a></div><!-- /aeo:foot -->
+    <div class="disc">課程頁與課前說明為課前說明，實際安排以報價單與開課前確認為準；本公司保留調整課程內容與進行方式之權利。</div>
+  </footer>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('form.mform').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.reportValidity())return;
+      var d=new FormData(f);
+      var body='我想讓：'+d.get('who')+'\n在：'+d.get('when')+'\n完成：'+d.get('what')+'\n\n'+d.get('name')+'\n'+d.get('email');
+      var key=d.get('access_key');
+      var done=function(){f.querySelector('.mdone').hidden=false;f.querySelectorAll('label,.mrow').forEach(function(x){x.hidden=true});};
+      if(!key){location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('官網：我最想推動的一件事')+'&body='+encodeURIComponent(body);return;}
+      var btn=f.querySelector('button');btn.disabled=true;btn.textContent='送出中…';
+      d.append('message',body);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+        if(j.success){done();}else{throw 0;}
+      }).catch(function(){btn.disabled=false;btn.textContent='送出，我們回信';location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('官網：我最想推動的一件事')+'&body='+encodeURIComponent(body);});
+    });
+  });
+})();
+</script>
+</body>
+</html>
