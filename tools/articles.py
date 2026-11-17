@@ -73,6 +73,7 @@ for i, a in enumerate(LIVE):
     nxt = ''
     links = [(f"/q/{q}/", PAIN[q]['pain']) for q in a.get('related_q', []) if q in PAIN]
     if a.get('quiz'): links.append(('/quiz/', '兩分鐘小測驗：你那件事卡在哪一格？'))
+    if a.get('linkedin'): links.append((a['linkedin'], '到 LinkedIn 原文留言'))
     if links:
         nxt = '<div class="art-next"><b>接著看</b>' + ''.join(f'<a href="{u}">{esc(t)} →</a>' for u, t in links) + '</div>'
     prev = LIVE[i + 1] if i + 1 < len(LIVE) else None
@@ -82,7 +83,7 @@ for i, a in enumerate(LIVE):
     body = f'''<!-- wf:top --><nav class="wf-crumb" aria-label="你在哪裡"><a href="/">首頁</a><span>›</span><a href="/articles/">文章</a><span>›</span><b>{esc(a['title'])}</b></nav><!-- /wf:top -->
     <span class="pill">文章 · 第 {a['no']} 篇</span>
     <h1>{esc(a['title'])}</h1>
-    <p class="art-meta">George Chen 陳朝智・行為設計師｜{zhdate(a['date'])}｜先發在 <a href="{LI}" target="_blank" rel="noopener">LinkedIn</a>，這裡留一份</p>
+    <p class="art-meta">George Chen 陳朝智・行為設計師｜{zhdate(a['date'])}｜先發在 <a href="{a.get('linkedin', LI)}" target="_blank" rel="noopener">LinkedIn</a>{'（原文與留言）' if a.get('linkedin') else ''}，這裡留一份</p>
     {figs}
     <div class="art-body">{body_p}</div>
     {src}
@@ -93,7 +94,7 @@ for i, a in enumerate(LIVE):
            'description': a['deck'], 'datePublished': a['date'], 'inLanguage': 'zh-Hant', 'url': SITE + url,
            'image': [SITE + s for s, _ in a['images']],
            'author': {'@type': 'Person', 'name': 'George Chen 陳朝智', 'jobTitle': '行為設計師', 'url': LI},
-           'publisher': {'@id': ORG_ID}, 'mainEntityOfPage': SITE + url}
+           'publisher': {'@id': ORG_ID}, 'mainEntityOfPage': SITE + url, **({'sameAs': a['linkedin']} if a.get('linkedin') else {})}
     wr(url.lstrip('/') + 'index.html', shell(url, a['title'], a['deck'], body, ld(obj), og_image=a['images'][0][0]))
 
 # 索引頁
