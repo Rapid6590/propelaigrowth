@@ -1,11 +1,13 @@
-# wayfinding_patch.py v0.4 (2026-11-18；v0.3 第二層瘦身 SUB_HIDE；v0.4 主層與下一層用線連起來) — 主選單＝四步；所在那步展開一排；麵包屑；/courses/ 入口；/map/ 網站地圖
+# wayfinding_patch.py v0.5 (2026-11-18；v0.3 第二層瘦身 SUB_HIDE；v0.4 主層與下一層用線連起來；v0.5 首頁不展開、滑鼠移上去才展開) — 主選單＝四步；所在那步展開一排；麵包屑；/courses/ 入口；/map/ 網站地圖
 # 用法：python3 tools/wayfinding_patch.py <站台根目錄>   可重跑（冪等）。只改中文頁，不碰 /en/。
 # v0.2：George 裁示「主選單改成四步」——主選單、所在步驟展開列、/map/ 三處都從下面這一份 STEPS 產生，
 #       不再有另一條路徑條。新增一頁只要加進 STEPS 對應那一步的 items。
 #       /quiz/、/picker/ 是獨立工具頁（自己的版面），不放主選單。
 # v0.4：George 說「主層次跟下一層之間有一條線做連結」（比照工作坊簡報的進度條）——
 #       所在那一步往下拉一條線，接到一個有框的盒子，盒子裡是這一步的頁面（有框的小格，目前頁填色）。
-#       首頁、網站地圖、404 沒有「所在那一步」→ 四步各自展開，一眼看到全部頁面。
+#       （v0.4 曾讓首頁四步全展開；George 看過說首頁先只列主層。）
+# v0.5：首頁、網站地圖、404 只列四步。任何一頁，滑鼠移到（或鍵盤停在）不是所在的那一步，才往下展開它的頁面，
+#       浮在內容上面、不推動版面。手機沒有滑鼠：點那一步就到該步的入口頁，那裡的盒子是開的。
 import sys, re, json, html, pathlib
 ROOT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()
 SITE = 'https://propelaigrowth.com'
@@ -69,38 +71,41 @@ CSS = '''
 .sitehead>.lang{font-size:14px;font-weight:700;color:var(--navy-text);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
 .sitehead>.lang:hover{background:var(--sky)}
 .wf-nav{flex:1 0 100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 6px}
-.wf-nav>a{position:relative;display:flex;gap:8px;align-items:center;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--mute);text-decoration:none;font-size:14px;line-height:1.3}
-.wf-nav>a i{flex:0 0 22px;height:22px;border-radius:50%;background:var(--line);color:var(--fg);font-style:normal;font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
-.wf-nav>a:hover{border-color:var(--navy);color:var(--navy-text)}
-.wf-nav>a[aria-current]{border:2px solid var(--orange);padding:8px 9px;background:var(--tint);color:var(--navy-text);font-weight:700}
-.wf-nav>a[aria-current] i{background:var(--orange);color:#fff}
+.wf-step{position:relative;min-width:0}
+.wf-step>a{position:relative;display:flex;gap:8px;align-items:center;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--mute);text-decoration:none;font-size:14px;line-height:1.3}
+.wf-step>a i{flex:0 0 22px;height:22px;border-radius:50%;background:var(--line);color:var(--fg);font-style:normal;font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
+.wf-step>a:hover{border-color:var(--navy);color:var(--navy-text)}
+.wf-step>a[aria-current]{border:2px solid var(--orange);padding:8px 9px;background:var(--tint);color:var(--navy-text);font-weight:700}
+.wf-step>a[aria-current] i{background:var(--orange);color:#fff}
 .wf-nav a:focus-visible,.sitehead>.lang:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 /* 連結線：所在那一步往下接到盒子 */
-.wf-nav>a[aria-current]::after,.wf-all>a::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:14px;margin-left:-1px;background:var(--orange)}
-.wf-all>a::after{background:#9DB0BF;height:13px}
+.wf-step>a[aria-current]::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:14px;margin-left:-1px;background:var(--orange)}
 .wf-sub{grid-column:1/-1;justify-self:start;box-sizing:border-box;min-width:calc(25% - 5px);max-width:100%;display:flex;flex-wrap:wrap;gap:6px;padding:7px;border:2px solid var(--orange);border-radius:12px;background:var(--card)}
 .wf-sub.t2{margin-left:calc(25% + 1.5px)}
 .wf-sub.t3{justify-self:end;min-width:calc(50% - 3px)}
 .wf-sub.t4{justify-self:end}
-.wf-sub a{display:block;padding:5px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--navy-text);text-decoration:none;font-size:13.5px;line-height:1.35;white-space:nowrap}
-.wf-sub a:hover{border-color:var(--navy);background:var(--sky)}
+.wf-sub a,.wf-drop a{display:block;padding:5px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--navy-text);text-decoration:none;font-size:13.5px;line-height:1.35;white-space:nowrap}
+.wf-sub a:hover,.wf-drop a:hover{border-color:var(--navy);background:var(--sky)}
 .wf-sub a[aria-current]{background:var(--accent-ink);border-color:var(--accent-ink);color:#fff;font-weight:700}
-/* 首頁等：四步各自展開 */
-.wf-all .wf-sub{grid-column:auto;justify-self:stretch;align-self:start;min-width:0;margin-left:0;flex-direction:column;flex-wrap:nowrap;gap:5px;border:1.5px solid #9DB0BF}
-.wf-all .wf-sub a{white-space:normal}
+/* 別的步驟：滑鼠移上去（或鍵盤停在上面）才展開，浮在內容上面 */
+.wf-drop{display:none}
+@media (hover:hover) and (min-width:641px){
+.wf-step:not(.cur)>a::after{content:"▾";margin-left:auto;font-size:11px;color:var(--mute)}
+.wf-step:not(.cur):hover>a,.wf-step:not(.cur):focus-within>a{border-color:var(--navy);color:var(--navy-text)}
+.wf-step:not(.cur):hover>.wf-drop,.wf-step:not(.cur):focus-within>.wf-drop{display:block}
+.wf-drop{position:absolute;z-index:30;left:0;top:100%;min-width:100%;padding-top:13px;box-sizing:border-box}
+.wf-step:nth-child(4)>.wf-drop{left:auto;right:0}
+.wf-drop::before{content:"";position:absolute;left:50%;top:0;width:2px;height:13px;margin-left:-1px;background:var(--navy)}
+.wf-step:nth-child(4)>.wf-drop::before{left:auto;right:calc(50% - 1px);margin:0}
+.wf-drop>div{display:flex;flex-direction:column;gap:5px;padding:7px;border:2px solid var(--navy);border-radius:12px;background:var(--card);box-shadow:0 8px 22px rgba(0,48,84,.14)}
+}
 .wf-crumb{font-size:13px;color:var(--mute);margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .wf-crumb a{color:var(--mute);text-decoration:none}.wf-crumb a:hover{color:var(--navy-text);text-decoration:underline}
 .wf-crumb b{color:var(--fg);font-weight:600}
 @media (max-width:640px){
-.wf-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.wf-nav>a{font-size:13.5px;padding:8px 9px;order:1}.wf-nav>a[aria-current]{padding:7px 8px}
-.wf-nav>a:nth-of-type(n+3){order:3}.wf-sub{justify-self:stretch;min-width:0;order:2}.wf-sub.t2{margin-left:0}.wf-sub.t3,.wf-sub.t4{order:4;justify-self:stretch;min-width:0}
+.wf-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.wf-step{order:1}.wf-step>a{font-size:13.5px;padding:8px 9px}.wf-step>a[aria-current]{padding:7px 8px}
+.wf-step:nth-child(n+3){order:3}.wf-sub{justify-self:stretch;min-width:0;order:2}.wf-sub.t2{margin-left:0}.wf-sub.t3,.wf-sub.t4{order:4;justify-self:stretch;min-width:0}
 .wf-sub a{padding:5px 9px}
-/* 首頁（手機）：一步一列，左邊是步驟、右邊是它的頁面，中間一條橫線 */
-.wf-all{grid-template-columns:auto minmax(0,1fr);gap:8px 12px}
-.wf-all>a:nth-of-type(1){order:1}.wf-all>a:nth-of-type(2){order:3}.wf-all>a:nth-of-type(3){order:5}.wf-all>a:nth-of-type(4){order:7}
-.wf-all .wf-sub.t1{order:2}.wf-all .wf-sub.t2{order:4}.wf-all .wf-sub.t3{order:6}.wf-all .wf-sub.t4{order:8}
-.wf-all>a{align-self:start}.wf-all>a::after{left:100%;top:50%;width:13px;height:2px;margin:-1px 0 0}
-.wf-all .wf-sub{flex-direction:row;flex-wrap:wrap;padding:5px;gap:4px}.wf-all .wf-sub a{white-space:nowrap;padding:4px 8px;font-size:13px}
 }
 .map-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 24px}
 .map-col{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
@@ -115,24 +120,23 @@ CSS = '''
 css = re.sub(r'\n/\* wf:css \*/.*?/\* /wf:css \*/\n', '', rd('assets/site.css'), flags=re.S)
 wr('assets/site.css', css + CSS)
 
-def sub_html(i, item):
+def sub_links(i, item):
     # 第二層瘦身（2026-11-18 George 同意）：SUB_HIDE 裡的頁不出現在盒子裡，除非人就在那一頁；網站地圖照列
-    st = STEPS[i - 1]
-    links = [f'<a href="{it[0]}"' + (' aria-current="page"' if it[0] == item else '') + f'>{esc(it[1])}</a>'
-             for it in st['items'] if it[0] not in SUB_HIDE or it[0] == item]
-    return f'<div class="wf-sub t{i}" role="group" aria-label="{esc(st["name"])}：這一步裡的頁面">' + ''.join(links) + '</div>'
+    return ''.join(f'<a href="{it[0]}"' + (' aria-current="page"' if it[0] == item else '') + f'>{esc(it[1])}</a>'
+                   for it in STEPS[i - 1]['items'] if it[0] not in SUB_HIDE or it[0] == item)
 
 def header_html(wordmark, step, item):
     nav = []
     for i, st in enumerate(STEPS, 1):
-        cur = ' aria-current="step"' if i == step else ''
-        nav.append(f'<a href="{st["href"]}"{cur}><i>{i}</i>{st["name"]}</a>')
-    # 有所在那一步：只展開那一步（線接到盒子）。沒有（首頁、網站地圖、404）：四步都展開。
-    subs = [sub_html(step, item)] if step else [sub_html(i, None) for i in range(1, len(STEPS) + 1)]
-    cls = 'wf-nav' if step else 'wf-nav wf-all'
+        if i == step:   # 所在那一步：盒子固定開著（放在四步後面、佔一整列），這裡不放浮出的那一份
+            nav.append(f'<div class="wf-step cur"><a href="{st["href"]}" aria-current="step"><i>{i}</i>{st["name"]}</a></div>')
+        else:
+            nav.append(f'<div class="wf-step"><a href="{st["href"]}"><i>{i}</i>{st["name"]}</a>'
+                       f'<div class="wf-drop" role="group" aria-label="{esc(st["name"])}：這一步裡的頁面"><div>{sub_links(i, None)}</div></div></div>')
+    sub = (f'<div class="wf-sub t{step}" role="group" aria-label="{esc(STEPS[step - 1]["name"])}：這一步裡的頁面">' + sub_links(step, item) + '</div>') if step else ''
     out = ['<header class="sitehead">', '    ' + wordmark,
            '    <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>',
-           f'    <nav class="{cls}" aria-label="主選單">' + ''.join(nav) + ''.join(subs) + '</nav>',
+           '    <nav class="wf-nav" aria-label="主選單">' + ''.join(nav) + sub + '</nav>',
            '  </header>']
     return '\n'.join(out)
 
@@ -188,7 +192,7 @@ if m:
 
 # ---- /map/ 網站地圖：同一份 STEPS ----
 body = ['<span class="pill">網站地圖</span><h1>整個網站，只有四步</h1>',
-        '<p class="lead">找到你卡住的事 → 看懂為什麼 → 選一個開始 → 聊一聊。上方選單就是這四步：你在哪一步，那一格會亮，往下一條線接到的盒子，就是這一步裡的頁面。</p>',
+        '<p class="lead">找到你卡住的事 → 看懂為什麼 → 選一個開始 → 聊一聊。上方選單就是這四步：你在哪一步，那一格會亮，往下一條線接到的盒子，就是這一步裡的頁面；滑鼠移到別的步驟，也會看到它底下有哪些頁面。</p>',
         '<div class="map-cols">']
 for i, st in enumerate(STEPS, 1):
     body.append(f'<div class="map-col"><h2><i>{i}</i>{esc(st["name"])}</h2><ul>')
@@ -217,4 +221,4 @@ for f in files:
     if '<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->' in s and '/map/">網站地圖' not in s:
         s = s.replace('<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->', '<a href="/contact/">聯絡</a>｜<a href="/map/">網站地圖</a></div><!-- /aeo:foot -->')
     if s != o: f.write_text(s, encoding='utf-8'); n += 1
-print(f'wayfinding v0.4: {n} 頁更新（主選單四步＋連結線展開盒＋麵包屑）；/courses/、/map/ 已產生')
+print(f'wayfinding v0.5: {n} 頁更新（主選單四步＋所在步驟展開盒＋其餘滑鼠移上去展開＋麵包屑）；/courses/、/map/ 已產生')

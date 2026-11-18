@@ -44,6 +44,7 @@ CSS = '''
 .q-rel a:last-child{border-bottom:0}
 .q-byline{font-size:13px;color:var(--mute);margin:0 0 18px}
 .q-list .choice.soon{opacity:.55}
+.q-group{margin:22px 0 0}.q-group h2{font-size:15px;font-weight:700;color:var(--navy-text);margin:0 0 10px;padding:0 0 6px;border-bottom:2px solid var(--orange);display:inline-block}
 /* /q:css */
 '''
 css = re.sub(r'\n/\* q:css \*/.*?/\* /q:css \*/\n', '', rd('assets/site.css'), flags=re.S)
@@ -92,14 +93,23 @@ for a in DATA:
     wr(url.lstrip('/') + 'index.html', shell(url, a['pain'], a['desc'], body, ld({'@context': 'https://schema.org', '@graph': [art, fq]})))
 
 # 索引頁
-items = ''.join(f'<a class="choice" href="/q/{a["slug"]}/"><span><span class="q">{esc(a["pain"])}</span><span class="a">{esc(a["answer"][:38])}…</span></span><span class="go">→</span></a>' for a in DATA)
+# 分組（2026-11-18 George：跟選題器一樣分成對客人／對員工／對民眾，不要一長串）。新題目加進對應那一組的關鍵字。
+GROUPS = [('對客人', ['提案', '價格', '送樣', '購物車']), ('對員工', ['AI 工具', 'SOP', '新人']), ('對民眾', ['民眾'])]
+def group_of(title):
+    for g, keys in GROUPS:
+        if any(k in title for k in keys): return g
+    return GROUPS[0][0]
 LIVE_TITLES = {a['pain'] for a in DATA}  # 已上線的題不再列「整理中」
-items += ''.join(f'<span class="choice soon"><span><span class="q">{esc(t)}</span><span class="a">整理中</span></span></span>' for t in PLANNED if t not in LIVE_TITLES)
+blocks = ''
+for g, _ in GROUPS:
+    live = ''.join(f'<a class="choice" href="/q/{a["slug"]}/"><span><span class="q">{esc(a["pain"])}</span><span class="a">{esc(a["answer"][:38])}…</span></span><span class="go">→</span></a>' for a in DATA if group_of(a['pain']) == g)
+    soon = ''.join(f'<span class="choice soon"><span><span class="q">{esc(t)}</span><span class="a">整理中</span></span></span>' for t in PLANNED if t not in LIVE_TITLES and group_of(t) == g)
+    if live or soon: blocks += f'<section class="q-group"><h2>{g}</h2><div class="menu q-list">{live}{soon}</div></section>'
 idx = f'''
     <span class="pill">常見卡點</span>
     <h1>推了很久，卻還是沒發生的那幾件事</h1>
     <p class="lead">每一題先直接回答，再給一個改法示意、一個有出處的研究、一件這週就能做的小事。</p>
-    <div class="menu q-list">{items}</div>
+    {blocks}
     <div class="nav"><a href="/" class="prev">← 回首頁</a><a href="/faq/">常見問題 →</a></div>
 '''
 wr('q/index.html', shell('/q/', '常見卡點', '客戶看完提案沒下文、AI 工具買了沒人用、SOP 沒人照做：每一題先直接回答，再給改法示意與有出處的研究。', idx,
