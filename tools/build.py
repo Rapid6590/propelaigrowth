@@ -613,7 +613,7 @@ about = '''
     </ul>
     <h2>誰來上課</h2>
     <div class="who"><img class="av" src="/assets/george.jpg" alt="George Chen" width="56" height="56"><div><h3>George Chen 陳朝智｜創辦人・行為設計師，親自授課</h3><p>芝加哥大學 Booth 商學院 MBA（With Honors，前 20% 畢業），修過 2017 諾貝爾經濟學獎得主 Richard Thaler 的課；前 Oracle 香港／台灣區行銷總監、人力資源產品線亞太區行銷總監；歐洲 MINDWORX SURF™ Method 授權講師與教練。「怎麼讓客戶願意往下走」，是他在 Oracle 多年一直面對的問題。</p></div></div>
-    <p class="note">完整講師資歷與認證，見公司簡介與各課程的課前說明。SURF™ 是 MINDWORX 的方法；Propel AI 的課程與工作坊是我們自己設計的架構。</p>
+    <p class="note">更多經歷與認證，見 George 的 <a href="https://www.linkedin.com/in/propelai" target="_blank" rel="noopener">LinkedIn</a>。需要正式的講師簡歷（內訓審核、核銷或標案附件用），來信 <a href="mailto:george.chen@propelaigrowth.com?subject=%E7%B4%A2%E5%8F%96%E8%AC%9B%E5%B8%AB%E7%B0%A1%E6%AD%B7">george.chen@propelaigrowth.com</a> 索取。SURF™ 是 MINDWORX 的方法；Propel AI 的課程與工作坊是我們自己設計的架構。</p>
     <h2>公司</h2>
     <ul class="facts">
       <li><b>名稱</b><span>啟進智能決策有限公司（Propel AI）</span></li>
