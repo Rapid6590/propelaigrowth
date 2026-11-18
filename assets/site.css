@@ -685,3 +685,8 @@ div.tile.hot:hover{border-color:#F3B48A}
 .map-col li.sub{padding-left:14px;font-size:13.5px}.map-col li.sub a{font-weight:500}
 @media (max-width:640px){.map-cols{grid-template-columns:1fr}}
 /* /wf:css */
+
+/* en:css */
+.wf-step.nodrop>a::after{content:none!important}
+@media (max-width:640px){.pg-en-calc .cc-after::before{content:"After"}}
+/* /en:css */
