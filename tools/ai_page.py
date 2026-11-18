@@ -1,10 +1,12 @@
-# ai_page.py v0.1 (2026-11-19) — /ai/「AI 做得出東西；東西不會自己變成行為」（我們跟 AI 的關係；掛在第二步「看懂為什麼」底下）
+# ai_page.py v0.2 (2026-11-19；v0.2 George 看過 v0.1 說「為什麼是現在：產出跟行為之間有一段距離」看不懂、跟主題接不上——
+#   改成客戶會問的話「AI 都在用了，為什麼公司還沒感覺？」：一個例子 → 一個現象 → 一個原因 → 所以我們做什麼；台灣那一格拿掉；
+#   「哪一步變貴了」三張卡不上頁（SHOW_WHY=False，要放回來改 True）。訊息要少、單刀直入。) — /ai/「AI 做得出東西；東西不會自己變成行為」（我們跟 AI 的關係；掛在第二步「看懂為什麼」底下）
 # 用法：python3 tools/ai_page.py <站台根目錄>   可重跑。順序：… → calc_page → picker_order_patch → big_decisions_page → ai_page → wayfinding。
 # 規矩（George 0921、1117–1119）：
 #   - 講的是「產出跟行為之間的落差」，不講 AI 的能力。不寫「AI 做不出行為」（2026 已有反證）。
 #   - 不寫導入失敗率（「○○% 專案失敗」「沒成功」）；MIT NANDA 的 95% 不用。
 #   - 67% 對 32% 是 Microsoft 模型裡的相對重要性，不是因果；頁上要寫明。
-#   - AIF 那兩個數字的分母都是「受訪企業」（228 家），不是員工人數：
+#   - （v0.2 起頁上不放台灣 AIF 那一格；別處要用時）AIF 那兩個數字的分母都是「受訪企業」（228 家），不是員工人數：
 #       61.8% 的企業＝員工自己用現成的生成式 AI 工具，公司沒禁止也沒提供；6.6% 的企業＝AI 完全整合進常規流程。
 #   - 日本例用四年實證的結果（2017–2020 年度、五家、約 30 萬戶、平均約 2%），不用第一年的期中速報。
 #   - 賓士例只寫機制（70 個參數、前 20 分鐘、咖啡杯與提示音），不引事故下降率。
@@ -24,19 +26,17 @@ TITLE = 'AI 做得出東西；東西不會自己變成行為'
 DESC = 'Propel AI 跟 AI 的關係：AI 是導航，不是油門。文案、簡報、報表 AI 都做得出來；客戶點頭、同仁照新流程做，要回頭看他做決定當下的環境。'
 
 # (小標, 標題, [(%, 這個數字是誰、說了什麼, 用橘色?)], 這一組在比什麼)
+SHOW_WHY = False   # 「有了 AI 之後，哪一步變貴了」三張卡；George 1119 要訊息簡單，先不上頁
+# (小標, 標題, [(%, 這個數字是誰、說了什麼, 用橘色?)], 這一組在比什麼, 放大?)
 STATS = [
-    ('全球', '人在用，公司還沒看到錢', [
+    ('不只你這樣', '個人變快了，公司的數字沒跟上', [
         (80, '的受訪者說，AI 提升了自己的生產力', False),
-        (37, '說，AI 對公司的獲利有正面貢獻', True)], ''),
-    ('台灣', '個人在用，組織還沒接上', [
-        (61.8, '的企業：員工自己找現成的 AI 工具來用，公司沒禁止、也沒提供', False),
-        (6.6, '的企業：把 AI 完全整合進公司的常規流程', True)], ''),
-    ('卡在哪', '環境的份量，是個人心態的兩倍多', [
-        (67, '組織環境：文化、主管支持、人才制度', True),
-        (32, '個人的心態與做法', False)], '兩者對「AI 帶來多少幫助」的相對重要性'),
+        (37, '說，AI 對公司的獲利有正面貢獻', True)], '', False),
+    ('原因', '差別在公司的環境，不在個人願不願意', [
+        (67, '公司的環境：文化、主管支持、人才制度', True),
+        (32, '個人的心態與做法', False)], '兩者對「AI 帶來多少幫助」的相對重要性', True),
 ]
 SRC1 = ('外部調查，非 Propel AI 客戶實績｜出處：McKinsey《The state of AI in 2026》（1,719 人、97 國）｜'
-        '人工智慧科技基金會《2026 台灣產業 AI 化大調查》（228 家企業）｜'
         'Microsoft《2026 Work Trend Index》（20,000 位在工作上用 AI 的人、10 個市場；67% 與 32% 是模型裡的相對重要性，不是因果）')
 
 CSS = '''
@@ -56,6 +56,21 @@ CSS = '''
 .ai-stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px 12px}
 .ai-stat h3{margin:0 0 10px;font-size:16.5px;color:var(--navy-text);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
 .ai-stat h3 small{font-size:12px;font-weight:700;color:#fff;background:var(--navy);border-radius:999px;padding:1px 10px}
+.ai-stat.ai-key{border:2px solid var(--orange)} .ai-stat.ai-key h3 small{background:var(--orange)}
+.ai-eg{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:12px 0 4px}
+.ai-eg svg{display:block;width:100%;height:auto}
+.ai-eg>i{font-style:normal;color:var(--orange);font-weight:900;font-size:20px}
+.ai-eg>i::before{content:"→"}
+.ai-eg .pane{fill:var(--sky)} .ai-eg .paper{fill:var(--card);stroke:var(--line);stroke-width:2}
+.ai-eg .t1{font-size:19px;font-weight:700;fill:var(--navy-text)} .ai-eg .t2{font-size:14.5px;fill:var(--mute)} .ai-eg .t3{font-size:14px;fill:#fff} .ai-eg .t4{font-size:14.5px;font-weight:700;fill:var(--accent-ink)}
+.ai-eg .k{font-size:16px;font-weight:700;fill:var(--navy-text)} .ai-eg .k.o{fill:var(--accent-ink)}
+.ai-say{font-size:18px;line-height:1.6;font-weight:700;color:var(--navy-text);margin:12px 2px 2px}
+.ai-say small{display:block;font-size:15.5px;font-weight:400;color:var(--fg);margin-top:2px}
+.ai-so{margin:14px 0 10px;background:var(--navy);color:#fff;border-radius:14px;padding:16px 18px 15px}
+.ai-so small{display:inline-block;font-size:12px;font-weight:700;background:var(--orange);border-radius:999px;padding:1px 10px;margin-bottom:6px}
+.ai-so b{display:block;font-size:19px;line-height:1.55}
+.ai-so b span,.ai-say span{display:inline-block}
+.ai-so>span{display:block;font-size:15px;line-height:1.6;margin-top:6px;opacity:.92}
 .ai-stat .cmp{color:var(--mute);font-size:13px;margin:-4px 0 8px}
 .ai-row{display:grid;grid-template-columns:86px 1fr;gap:4px 12px;align-items:center;margin:0 0 9px}
 .ai-row b{font-size:27px;font-weight:900;line-height:1;color:var(--navy-text);font-variant-numeric:tabular-nums;text-align:right}
@@ -90,7 +105,7 @@ CSS = '''
 .ai-strip{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin:12px 0 0;padding:13px 18px;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;background:var(--card);text-decoration:none;color:var(--navy-text)}
 .ai-strip:hover{border-color:var(--orange);border-left-color:var(--orange)}
 .ai-strip small{font-size:12.5px;font-weight:700;color:var(--mute)} .ai-strip b{font-size:16.5px} .ai-strip span{margin-left:auto;color:var(--orange);font-weight:700;font-size:13px}
-@media (max-width:700px){.ai-why,.ai-ex,.ai-do{grid-template-columns:1fr}.ai-why>div{display:grid;grid-template-columns:92px 1fr;gap:4px 12px;align-items:start}.ai-why svg{grid-row:1/3;margin:0}.ai-why h3{margin:0}
+@media (max-width:700px){.ai-eg{grid-template-columns:1fr;justify-items:center}.ai-eg>i::before{content:"↓"}.ai-why,.ai-ex,.ai-do{grid-template-columns:1fr}.ai-why>div{display:grid;grid-template-columns:92px 1fr;gap:4px 12px;align-items:start}.ai-why svg{grid-row:1/3;margin:0}.ai-why h3{margin:0}
 .ai-flow{grid-template-columns:1fr 1fr}.ai-flow li:nth-child(3)::before{display:none}.ai-fig .lab{font-size:26px}.ai-fig .lab.m{font-size:21px}.ai-fig .lab.sm{font-size:21px}.ai-fig .lab.hide-m{display:none}.ai-row{grid-template-columns:74px 1fr}.ai-row b{font-size:23px}}
 /* /ai:css */
 '''
@@ -164,32 +179,49 @@ ONE = ('<svg viewBox="0 0 720 200" role="img" aria-label="左邊：六個人看�
 BILL = '''<svg viewBox="0 0 300 150" role="img" aria-label="示意圖：一張用電通知，下面多了三條橫條，比較你家、相似的家庭、省電的家庭。"><rect x="40" y="6" width="220" height="138" rx="8" fill="var(--card)" stroke="var(--line)" stroke-width="2"/><rect x="40" y="6" width="220" height="24" rx="8" fill="var(--sky)"/><text x="54" y="23" font-size="12" font-weight="700" fill="var(--navy-text)">本月用電通知</text><path d="M54 44h90M54 56h60" stroke="var(--line)" stroke-width="4" stroke-linecap="round"/><text x="54" y="82" font-size="11" fill="var(--mute)">你家</text><rect x="108" y="73" width="136" height="11" rx="5" fill="var(--orange)"/><text x="54" y="104" font-size="11" fill="var(--mute)">相似家庭</text><rect x="108" y="95" width="104" height="11" rx="5" fill="var(--navy)"/><text x="54" y="126" font-size="11" fill="var(--mute)">省電家庭</text><rect x="108" y="117" width="66" height="11" rx="5" fill="var(--mute)"/><text x="262" y="142" font-size="10" fill="var(--mute)" text-anchor="end" dy="12"></text></svg>'''
 CUP = '''<svg viewBox="0 0 300 150" role="img" aria-label="示意圖：儀表板中間亮起一個咖啡杯圖示，旁邊寫著該休息了嗎。"><rect x="20" y="14" width="260" height="122" rx="60" fill="var(--navy)"/><circle cx="76" cy="75" r="40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/><path d="M76 75 L98 52" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="224" cy="75" r="40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/><path d="M224 75 L204 58" stroke="#fff" stroke-width="3" stroke-linecap="round"/><rect x="122" y="40" width="56" height="70" rx="8" fill="#fff" fill-opacity=".1"/><path d="M136 62 h22 v14 c0 7 -5 11 -11 11 s-11 -4 -11 -11 z" fill="var(--orange)"/><path d="M158 65 h4 c4 0 6 3 6 6 s-2 6 -6 6 h-4" fill="none" stroke="var(--orange)" stroke-width="3"/><path d="M142 56 c-2 -4 2 -5 0 -9 M150 56 c-2 -4 2 -5 0 -9" stroke="var(--orange)" stroke-width="2" fill="none" stroke-linecap="round"/><text x="150" y="102" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">該休息了嗎？</text></svg>'''
 
-def stat_block(tag, title, rows, cmp):
+EG_L = '''<svg viewBox="0 0 340 176" role="img" aria-label="一份提案，用 AI 一個小時就寫好。"><rect class="pane" width="340" height="176" rx="12"/>
+<rect class="paper" x="34" y="22" width="88" height="108" rx="8"/>
+<path d="M48 44h60M48 59h60M48 74h40M48 89h60M48 104h32" stroke="var(--line)" stroke-width="4" stroke-linecap="round"/>
+<circle cx="122" cy="26" r="16" fill="var(--orange)"/><path d="M114 26l6 6l10-12" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="t1" x="150" y="70">提案寫好了</text><text class="t2" x="150" y="96">用 AI，一個小時</text>
+<text class="k" x="170" y="160" text-anchor="middle">做出來：變快了</text></svg>'''
+EG_R = '''<svg viewBox="0 0 340 176" role="img" aria-label="客戶的訊息畫面：提案已讀，三天沒有回覆。"><rect class="pane" width="340" height="176" rx="12"/>
+<rect class="paper" x="34" y="18" width="272" height="116" rx="14"/>
+<rect x="128" y="32" width="164" height="34" rx="12" fill="var(--navy)"/><text class="t3" x="210" y="54" text-anchor="middle">提案在附件，請參考</text>
+<text class="t2" x="292" y="86" text-anchor="end">已讀</text>
+<circle cx="56" cy="110" r="4.5" fill="var(--line)"/><circle cx="72" cy="110" r="4.5" fill="var(--line)"/><circle cx="88" cy="110" r="4.5" fill="var(--line)"/>
+<text class="t4" x="106" y="115">三天了，沒有回覆</text>
+<text class="k o" x="170" y="160" text-anchor="middle">對方照著做：沒有變容易</text></svg>'''
+
+def stat_block(tag, title, rows, cmp, big=False):
     r = ''.join(f'<div class="ai-row{" o" if o else ""}"><b>{v:g}%</b><span>{esc(t)}</span><div class="ai-bar"><i style="width:{v:g}%"></i></div></div>' for v, t, o in rows)
     c = f'<p class="cmp">{esc(cmp)}</p>' if cmp else ''
-    return f'<div class="ai-stat"><h3><small>{esc(tag)}</small>{esc(title)}</h3>{c}{r}</div>'
+    return f'<div class="ai-stat{" ai-key" if big else ""}"><h3><small>{esc(tag)}</small>{esc(title)}</h3>{c}{r}</div>'
 stats = ''.join(stat_block(*s) for s in STATS)
 def nb(t): return ''.join(f'<span class="nb">{esc(x)}</span>' for x in t.split('|'))
 why = ''.join(f'<div>{ICON[i]}<h3>{nb(h)}</h3><p>{esc(p)}</p></div>' for i, (h, p) in enumerate(WHY))
 
+WHY_SEC = (f'''<section class="sec">
+<h2>有了 AI 之後，哪一步變貴了</h2>
+<div class="ai-why">{why}</div>
+<p class="note">出處：65% 見 Microsoft《2026 Work Trend Index》</p>
+</section>''' if SHOW_WHY else '')
+
 body = f'''<span class="pill">我們跟 AI 的關係</span>
 <h1><span class="nb">AI 做得出東西；</span><span class="nb">東西不會自己變成行為</span></h1>
-<p class="lead">文案、簡報、報表、程式碼，AI 都做得出來，而且越來越便宜。客戶點頭、同仁照新流程做、民眾來辦，不會因為多了一份產出就發生。</p>
+<p class="lead">文案、簡報、報表、程式碼，AI 都做得出來，而且越來越便宜。客戶點頭、同仁照新流程做、民眾來辦，不會因為多了一份文件就發生。</p>
 <figure class="ai-fig">{HERO}</figure>
 <p class="ai-cap">AI 是導航，不是油門。<small>路，它算得出來；車要動，油門還是要有人踩。</small></p>
 
 <section class="sec">
-<h2><span class="nb">為什麼是現在：</span><span class="nb">產出跟行為之間，</span><span class="nb">有一段距離</span></h2>
+<h2><span class="nb">AI 都在用了，</span><span class="nb">為什麼公司還沒感覺？</span></h2>
+<div class="ai-eg">{EG_L}<i></i>{EG_R}</div>
+<p class="ai-say"><span class="nb">AI 讓「做出來」變快了；</span><span class="nb">「對方照著做」，沒有變容易。</span><small>而業績，是對方做了才會動。</small></p>
 <div class="ai-stats">{stats}</div>
+<div class="ai-so"><small>所以</small><b>我們不教你用 AI。<br><span class="nb">我們處理 AI 做完之後的那一步：</span><span class="nb">讓客戶回覆、讓同仁照做。</span></b><span>做法是改他做事當下的環境：他看到什麼、要做幾步、提醒什麼時候出現。</span></div>
 <p class="note">{esc(SRC1)}</p>
 </section>
-
-<section class="sec">
-<h2>有了 AI 之後，哪一步變貴了</h2>
-<div class="ai-why">{why}</div>
-<p class="note">出處：65% 見 Microsoft《2026 Work Trend Index》</p>
-</section>
-
+{WHY_SEC}
 <section class="sec">
 <h2><span class="nb">以前，一套對所有人；</span><span class="nb">有了 AI，可以一人一套</span></h2>
 <p>同一張立牌、同一封信、同一個預設，過去能做的大多是這樣。現在，資料記得每個人實際做了什麼，AI 幫忙決定對他說什麼、什麼時候說。「改環境，不改人」沒有變；變的是提醒可以照每個人的情況給。</p>
