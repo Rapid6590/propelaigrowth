@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""選題器：四個模組的題目順序改成「這條路」的順序（v0.2，2026-11-18）。
+"""選題器：四個模組的題目順序改成「這條路」的順序（v0.3，2026-11-18）。
 
 用法：python3 tools/picker_order_patch.py <根目錄>
 
@@ -21,6 +21,12 @@ ORDER = {
     'FMC': ['分幾頁', '先問什麼', '自己填嗎', '勾好', '哪天做', '送出之後'],
     'FMG': ['分幾頁', '先問什麼', '自己填嗎', '勾好', '哪天辦', '送出之後'],
 }
+
+# 推薦理由裡把題目照順序念一遍的句子：（舊句, 新句）
+WHY_FIX = [
+    ('哪一欄能不能不要他填、哪一格能不能先勾好、先問什麼、要不要分頁、末尾要不要留一格讓他寫哪天辦、送出之後他看到什麼',
+     '要不要分頁、先問什麼、哪一欄能不能不要他填、哪一格能不能先勾好、末尾要不要留一格讓他寫哪天辦、送出之後他看到什麼'),
+]
 
 def main(root):
     p = pathlib.Path(root) / 'picker' / 'index.html'
@@ -57,10 +63,18 @@ def main(root):
         if tp:
             tp['items'] = sorted(perm[i] for i in tp['items'])
         changed.append(key)
+    # 推薦理由裡照舊順序列題目的句子，跟著改（找得到舊句才換；換過就不動）
+    for pl in D.get('PLANS', {}).values():
+        for o in pl['options']:
+            for old, new in WHY_FIX:
+                if old in o.get('why', ''):
+                    o['why'] = o['why'].replace(old, new)
+                    if 'why' not in changed:
+                        changed.append('why')
     if changed:
         s = s[:m.end()] + json.dumps(D, ensure_ascii=False, separators=(',', ':')) + s[m.end() + end:]
         p.write_text(s, encoding='utf-8')
-    print('picker_order_patch:', ('改了 ' + '、'.join(changed)) if changed else '已是路的順序，沒有變動')
+    print('picker_order_patch:', ('改了 ' + '、'.join('推薦理由' if c == 'why' else c for c in changed)) if changed else '已是路的順序，沒有變動')
 
 if __name__ == '__main__':
     main(sys.argv[1] if len(sys.argv) > 1 else '.')
