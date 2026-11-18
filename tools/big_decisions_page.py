@@ -83,7 +83,7 @@ CSS = '''
 .bd-cta .btn{display:inline-block;background:var(--orange);color:#fff;font-weight:700;border-radius:999px;padding:12px 24px;text-decoration:none}
 .bd-strip{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin:12px 0 0;padding:13px 18px;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;background:var(--card);text-decoration:none;color:var(--navy-text)}
 .bd-strip:hover{border-color:var(--orange);border-left-color:var(--orange)}
-.bd-strip small{font-size:12.5px;font-weight:700;color:var(--accent-ink)}
+.bd-strip small{font-size:12.5px;font-weight:700;color:var(--mute)}
 .bd-strip b{font-size:16.5px} .bd-strip span{margin-left:auto;color:var(--orange);font-weight:700;font-size:13px}
 @media (max-width:700px){.bd-qs,.bd-two,.bd-do{grid-template-columns:1fr}.bd-fig .lab{font-size:27px}.bd-fig .lab.m{font-size:23px}.bd-flow{flex-direction:column;align-items:flex-start}.bd-flow li+li::before{content:"↓";position:absolute;left:14px;top:-19px;margin:0}.bd-flow li{position:relative}.bd-flow{gap:20px}}
 /* /bd:css */

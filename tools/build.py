@@ -206,7 +206,7 @@ div.tile:hover{border-color:var(--line);transform:none}
 @media (max-width:480px){[lang=en] .mform label{grid-template-columns:1fr}}
 div.tile.hot:hover{border-color:#F3B48A}
 .tile.hot{border-color:#F3B48A;background:#FFF6EF}
-.tile .k{font-size:12.5px;font-weight:700;color:var(--orange)}
+.tile .k{font-size:12.5px;font-weight:700;color:var(--mute)}
 .tile b{font-size:18px;line-height:1.4}
 .tile .d{font-size:13.5px;color:var(--mute);line-height:1.5}
 .tile .go{margin-top:auto;font-size:13px;font-weight:700;color:var(--orange)}
