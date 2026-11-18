@@ -1,5 +1,6 @@
 # ai_page.py v0.2 (2026-11-19；v0.2 George 看過 v0.1 說「為什麼是現在：產出跟行為之間有一段距離」看不懂、跟主題接不上——
 #   改成客戶會問的話「AI 都在用了，為什麼公司還沒感覺？」：一個例子 → 一個現象 → 一個原因 → 所以我們做什麼；台灣那一格拿掉；
+#   「所以」那句 George 定為「我們做的，是 AI 做完之後的那一步」（不用「我們不教你用 AI」）；
 #   「哪一步變貴了」三張卡不上頁（SHOW_WHY=False，要放回來改 True）。訊息要少、單刀直入。) — /ai/「AI 做得出東西；東西不會自己變成行為」（我們跟 AI 的關係；掛在第二步「看懂為什麼」底下）
 # 用法：python3 tools/ai_page.py <站台根目錄>   可重跑。順序：… → calc_page → picker_order_patch → big_decisions_page → ai_page → wayfinding。
 # 規矩（George 0921、1117–1119）：
@@ -218,7 +219,7 @@ body = f'''<span class="pill">我們跟 AI 的關係</span>
 <div class="ai-eg">{EG_L}<i></i>{EG_R}</div>
 <p class="ai-say"><span class="nb">AI 讓「做出來」變快了；</span><span class="nb">「對方照著做」，沒有變容易。</span><small>而業績，是對方做了才會動。</small></p>
 <div class="ai-stats">{stats}</div>
-<div class="ai-so"><small>所以</small><b>我們不教你用 AI。<br><span class="nb">我們處理 AI 做完之後的那一步：</span><span class="nb">讓客戶回覆、讓同仁照做。</span></b><span>做法是改他做事當下的環境：他看到什麼、要做幾步、提醒什麼時候出現。</span></div>
+<div class="ai-so"><small>所以</small><b><span class="nb">我們做的，是 AI 做完之後的那一步：</span><span class="nb">讓客戶回覆、讓同仁照做。</span></b><span>做法是改他做事當下的環境：他看到什麼、要做幾步、提醒什麼時候出現。</span></div>
 <p class="note">{esc(SRC1)}</p>
 </section>
 {WHY_SEC}
