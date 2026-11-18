@@ -15,3 +15,5 @@ Propel AI 啟進智能決策 官網。靜態站，GitHub Pages 代管（main 分
 - 選題器題目順序（v0.1，2026-11-18）：`tools/picker_order_patch.py <根目錄>`——講義題號照模組路線圖的順序編，這支把 `/picker/` 裡四個模組（工具沒人照做、產品沒在用、價格、購物車／民眾）的題目排成同一個順序。只動順序，不動文字與網址；可重跑。選題器來源檔不在 repo，所以用補丁做；來源檔哪天改了順序，這支會自己變成不動。順序：… → calc_page → picker_order_patch → wayfinding。
 
 - 董事與高階主管場（v0.1，2026-11-18）：`tools/big_decisions_page.py <根目錄>`——產生 `/big-decisions/`「大決定之前，該問的都問了嗎？」（決策品質線；同一個網站底下的一頁），首頁課程段與 `/courses/` 底下各加一條入口，選單項目在 `wayfinding_patch.py` 的 `STEPS`。頁面上不放研究數字、不寫保證結果與免責。順序：… → calc_page → picker_order_patch → big_decisions_page → wayfinding。
+
+- AI 頁（v0.1，2026-11-19）：`tools/ai_page.py <根目錄>`——產生 `/ai/`「AI 做得出東西；東西不會自己變成行為」（我們跟 AI 的關係；第二步「看懂為什麼」底下，選單上叫「AI 時代」），首頁第 02 段加一個入口，選單項目在 `wayfinding_patch.py` 的 `STEPS`。頁上的數字都對過原始報告；措辭規矩寫在檔頭（不寫導入失敗率、67% 對 32% 是相對重要性不是因果、AIF 兩個數字的分母是受訪企業）。順序：… → big_decisions_page → ai_page → wayfinding。
