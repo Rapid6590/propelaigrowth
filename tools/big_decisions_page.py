@@ -67,7 +67,7 @@ CSS = '''
 .bd-sheet li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
 .bd-sheet li:last-child{border-bottom:0}
 .bd-sheet li::before{content:"";flex:0 0 15px;height:15px;margin-top:3px;border:1.5px solid var(--mute);border-radius:3px}
-.bd-sheet li:nth-child(1)::before,.bd-sheet li:nth-child(3)::before{background:var(--orange);border-color:var(--orange);box-shadow:inset 0 0 0 2.5px var(--card)}
+.bd-sheet li:nth-child(1)::before,.bd-sheet li:nth-child(2)::before,.bd-sheet li:nth-child(4)::before{background:var(--orange);border-color:var(--orange);box-shadow:inset 0 0 0 2.5px var(--card)}
 .bd-do{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .bd-do>div{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--card)}
 .bd-do h3{margin:0 0 6px;font-size:15px;color:var(--navy-text)}
@@ -152,7 +152,7 @@ body = f'''<span class="pill">給董事、獨立董事與高階主管</span>
 <h2>帶走一張會前檢核表</h2>
 <div class="bd-two">
 <div><p>課堂上勾出來的問題，最後收成一張表，放在議案資料的第一頁。下一次大決定表決前，照著問一遍。</p>
-<p>表上的題目會依你們的議案格式調整；這裡看到的是示意。</p></div>
+<p>表上的題目會依你們的議案格式調整；這裡看到的是示意。橘色三格，是一小時場會練到的。</p></div>
 <div class="bd-sheet"><h3>大決定・會前檢核表</h3><ul>{sheet}</ul></div>
 </div>
 </section>
