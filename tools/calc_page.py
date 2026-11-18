@@ -1,4 +1,4 @@
-# calc_page.py v0.1 (2026-11-18) — /calc/「算算看：每一關多一點，最後差多少？」（決策點的複利，三條示範鏈）
+# calc_page.py v0.2 (2026-11-18；v0.2 修表頭與欄位沒對齊：欄寬改用 px) — /calc/「算算看：每一關多一點，最後差多少？」（決策點的複利，三條示範鏈）
 # 用法：python3 tools/calc_page.py <站台根目錄>   可重跑。順序：… → articles → calc_page → wayfinding。
 # 規矩（George 1117–1118）：
 #   - 五關都在同一次交易／同一件申辦裡；回購、下次再來是下一條鏈，另算。
@@ -53,8 +53,8 @@ CSS = '''
 .cc input[type=number]{width:5.2em;text-align:right;font-variant-numeric:tabular-nums}
 .cc input:focus,.cc-tabs button:focus-visible,.cc-add:focus-visible,.cc-del:focus-visible{outline:3px solid var(--orange);outline-offset:1px}
 .cc-start input[type=number]{width:7.5em}
-.cc-head,.cc-row{display:grid;grid-template-columns:minmax(0,1fr) 5.8em 5.8em 4.4em 2.6em 1.6em;gap:8px;align-items:center}
-.cc-head{font-size:12px;color:var(--mute);letter-spacing:.04em;padding:0 12px 6px}
+.cc-head,.cc-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 104px 70px 44px 26px;gap:8px;align-items:center}
+.cc-head{font-size:12px;color:var(--mute);letter-spacing:.04em;padding:0 13px 6px}
 .cc-head span:nth-child(n+2){text-align:right}.cc-head span:nth-child(5){text-align:center}
 .cc-row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px}
 .cc-row.on{border-color:var(--orange)}

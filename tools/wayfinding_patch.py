@@ -1,4 +1,4 @@
-# wayfinding_patch.py v0.2 (2026-11-18) — 主選單＝四步；所在那步展開一排；麵包屑；/courses/ 入口；/map/ 網站地圖
+# wayfinding_patch.py v0.3 (2026-11-18；v0.3 第二層瘦身 SUB_HIDE) — 主選單＝四步；所在那步展開一排；麵包屑；/courses/ 入口；/map/ 網站地圖
 # 用法：python3 tools/wayfinding_patch.py <站台根目錄>   可重跑（冪等）。只改中文頁，不碰 /en/。
 # v0.2：George 裁示「主選單改成四步」——主選單、所在步驟展開列、/map/ 三處都從下面這一份 STEPS 產生，
 #       不再有另一條路徑條。新增一頁只要加進 STEPS 對應那一步的 items。
@@ -15,6 +15,9 @@ PAIN = json.loads((HERE / 'data' / 'pain_pages.json').read_text(encoding='utf-8'
 ARTS = {a['slug']: a for a in json.loads((HERE / 'data' / 'articles.json').read_text(encoding='utf-8'))}
 
 # ---- 唯一的一份清單：(網址, 選單上的名字, 網站地圖上的一句說明[, 課前說明網址]) ----
+# 展開列不列的頁：一頁介紹下載（各課程頁本來就有下載連結）、選題器（從 /courses/ 與首頁進）。頁面與網址都還在。
+SUB_HIDE = {'/downloads/', '/picker/'}
+
 STEPS = [
     {'name': '找到卡住的事', 'href': '/q/', 'items': [
         ('/q/', '常見卡點', '一句痛點、一頁直接回答，陸續補齊'),
@@ -100,7 +103,8 @@ def header_html(wordmark, step, item):
            '    <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>',
            '    <nav class="wf-nav" aria-label="主選單">' + ''.join(nav) + '</nav>']
     if step:
-        sub = [f'<a href="{it[0]}"' + (' aria-current="page"' if it[0] == item else '') + f'>{esc(it[1])}</a>' for it in STEPS[step - 1]['items']]
+        # 第二層瘦身（2026-11-18 George 同意）：SUB_HIDE 裡的頁不出現在展開列，除非人就在那一頁；網站地圖照列
+        sub = [f'<a href="{it[0]}"' + (' aria-current="page"' if it[0] == item else '') + f'>{esc(it[1])}</a>' for it in STEPS[step - 1]['items'] if it[0] not in SUB_HIDE or it[0] == item]
         out.append('    <nav class="wf-sub" aria-label="這一步裡的頁面"><span>這一步有</span>' + ''.join(sub) + '</nav>')
     out.append('  </header>')
     return '\n'.join(out)
@@ -186,4 +190,4 @@ for f in files:
     if '<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->' in s and '/map/">網站地圖' not in s:
         s = s.replace('<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->', '<a href="/contact/">聯絡</a>｜<a href="/map/">網站地圖</a></div><!-- /aeo:foot -->')
     if s != o: f.write_text(s, encoding='utf-8'); n += 1
-print(f'wayfinding v0.2: {n} 頁更新（主選單四步＋展開列＋麵包屑）；/courses/、/map/ 已產生')
+print(f'wayfinding v0.3: {n} 頁更新（主選單四步＋展開列＋麵包屑）；/courses/、/map/ 已產生')

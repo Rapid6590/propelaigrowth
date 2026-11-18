@@ -454,8 +454,8 @@ div.tile.hot:hover{border-color:#F3B48A}
 .cc input[type=number]{width:5.2em;text-align:right;font-variant-numeric:tabular-nums}
 .cc input:focus,.cc-tabs button:focus-visible,.cc-add:focus-visible,.cc-del:focus-visible{outline:3px solid var(--orange);outline-offset:1px}
 .cc-start input[type=number]{width:7.5em}
-.cc-head,.cc-row{display:grid;grid-template-columns:minmax(0,1fr) 5.8em 5.8em 4.4em 2.6em 1.6em;gap:8px;align-items:center}
-.cc-head{font-size:12px;color:var(--mute);letter-spacing:.04em;padding:0 12px 6px}
+.cc-head,.cc-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 104px 70px 44px 26px;gap:8px;align-items:center}
+.cc-head{font-size:12px;color:var(--mute);letter-spacing:.04em;padding:0 13px 6px}
 .cc-head span:nth-child(n+2){text-align:right}.cc-head span:nth-child(5){text-align:center}
 .cc-row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px}
 .cc-row.on{border-color:var(--orange)}
