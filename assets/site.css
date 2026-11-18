@@ -545,6 +545,11 @@ div.tile.hot:hover{border-color:#F3B48A}
 .bd-do ul{margin:0;padding-left:1.1em;font-size:14.5px;line-height:1.7}
 .bd-facts{margin:10px 0 0;padding-left:1.1em;line-height:1.8}
 .bd-cta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:18px 0 0}
+.bd-mail{margin:14px 0 0;font-size:14.5px;color:var(--mute);line-height:1.9}
+.bd-mail .row{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.bd-mail b{color:var(--fg);font-weight:700;user-select:all;white-space:nowrap}
+.bd-copy{font:inherit;font-size:13px;padding:3px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--navy-text);cursor:pointer}
+.bd-copy:hover{border-color:var(--orange)}
 .bd-cta .btn{display:inline-block;background:var(--orange);color:#fff;font-weight:700;border-radius:999px;padding:12px 24px;text-decoration:none}
 .bd-strip{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin:12px 0 0;padding:13px 18px;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;background:var(--card);text-decoration:none;color:var(--navy-text)}
 .bd-strip:hover{border-color:var(--orange);border-left-color:var(--orange)}

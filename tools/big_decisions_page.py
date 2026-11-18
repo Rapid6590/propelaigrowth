@@ -1,4 +1,4 @@
-# big_decisions_page.py v0.2 (2026-11-18；v0.2 George 定「先一小時一題」，拿掉三小時) — /big-decisions/「大決定之前，該問的都問了嗎？」（決策品質線 DQ：給董事、獨立董事與高階主管）
+# big_decisions_page.py v0.3 (2026-11-18；v0.2 George 定「先一小時一題」，拿掉三小時；v0.3 按鈕下面加一行看得到的信箱與複製鈕——有些人的電腦按 mailto 沒反應) — /big-decisions/「大決定之前，該問的都問了嗎？」（決策品質線 DQ：給董事、獨立董事與高階主管）
 # 用法：python3 tools/big_decisions_page.py <站台根目錄>   可重跑。順序：… → calc_page → picker_order_patch → big_decisions_page → wayfinding。
 # 規矩（George 1114–1118）：
 #   - 名稱＝痛點句「大決定之前，該問的都問了嗎？」；副標「後照鏡照不到的地方，先回頭看一眼」（朋友的原話：怕不知道自己不知道什麼、後照鏡盲點）。
@@ -75,6 +75,11 @@ CSS = '''
 .bd-do ul{margin:0;padding-left:1.1em;font-size:14.5px;line-height:1.7}
 .bd-facts{margin:10px 0 0;padding-left:1.1em;line-height:1.8}
 .bd-cta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:18px 0 0}
+.bd-mail{margin:14px 0 0;font-size:14.5px;color:var(--mute);line-height:1.9}
+.bd-mail .row{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.bd-mail b{color:var(--fg);font-weight:700;user-select:all;white-space:nowrap}
+.bd-copy{font:inherit;font-size:13px;padding:3px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--navy-text);cursor:pointer}
+.bd-copy:hover{border-color:var(--orange)}
 .bd-cta .btn{display:inline-block;background:var(--orange);color:#fff;font-weight:700;border-radius:999px;padding:12px 24px;text-decoration:none}
 .bd-strip{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin:12px 0 0;padding:13px 18px;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;background:var(--card);text-decoration:none;color:var(--navy-text)}
 .bd-strip:hover{border-color:var(--orange);border-left-color:var(--orange)}
@@ -170,6 +175,8 @@ body = f'''<span class="pill">給董事、獨立董事與高階主管</span>
 <li>費用與場次，來信談。</li>
 </ul>
 <div class="bd-cta"><a class="btn" href="{MAIL}">寫信談一場</a><a class="more" href="/how/">先看我們怎麼看問題 →</a></div>
+<p class="bd-mail">按鈕沒反應的話，直接寄到：<span class="row"><b id="bd-addr">george.chen@propelaigrowth.com</b><button type="button" class="bd-copy" data-copy="george.chen@propelaigrowth.com">複製信箱</button></span>主旨寫「大決定之前」就可以。</p>
+<script>(function(){{var b=document.querySelector('.bd-copy');if(!b)return;b.addEventListener('click',function(){{var t=b.getAttribute('data-copy');var ok=function(){{b.textContent='已複製';setTimeout(function(){{b.textContent='複製信箱'}},2000)}};var sel=function(){{var r=document.createRange();r.selectNodeContents(document.getElementById('bd-addr'));var s=window.getSelection();s.removeAllRanges();s.addRange(r);try{{document.execCommand('copy');ok()}}catch(e){{}}}};if(navigator.clipboard&&navigator.clipboard.writeText){{navigator.clipboard.writeText(t).then(ok,sel)}}else{{sel()}}}})}})();</script>
 </section>'''
 
 tpl = rd('about/index.html')
