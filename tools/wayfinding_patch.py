@@ -37,6 +37,7 @@ STEPS = [
         ('/half-day/', '半天課・全天課', '六題或十二題，每題練一個決定', '/half-day/prep/'),
         ('/workshop/', '全天工作坊', '帶自己的題目，PROPEL 六站走一遍', '/workshop/prep/'),
         ('/surf/', 'SURF™ 原廠班', 'MINDWORX 授權課程', '/surf/prep/'),
+        ('/big-decisions/', '大決定之前', '給董事、獨立董事與高階主管：大決定之前，該問的都問了嗎？'),
         ('/picker/', '選題器', '先挑你最想改的那個行為')]},
     {'name': '聊一聊', 'href': '/contact/', 'items': [
         ('/faq/', '常見問題', '費用、時間、怎麼上、適不適合'),
@@ -197,6 +198,8 @@ if m:
     body = ['<span class="pill">選一個開始</span>', '<h1>從你現在最想知道的那件事開始</h1>',
             '<p class="lead">四種開始的方式，各回答一個問題。還不確定的話，先看 59 分鐘試駕。</p>',
             m.group(1), m.group(2).replace('<a class="more" href="/downloads/">下載一頁介紹 →</a>', '<a class="more" href="/downloads/">下載一頁介紹 →</a><a class="more" href="/faq/">費用與常見問題 →</a>')]
+    bd = re.search(r'<!-- bd:home -->.*?<!-- /bd:home -->', home, re.S)   # 董事與高階主管場的入口條（big_decisions_page.py 放在首頁的同一條）
+    if bd: body.append(bd.group(0))
     wr('courses/index.html', shell('/courses/', 'pg-courses', '選一個開始', '59 分鐘試駕、半天課、全天工作坊、SURF™ 原廠班：從你現在最想知道的那件事開始。', '\n'.join(body)))
 
 # ---- /map/ 網站地圖：同一份 STEPS ----

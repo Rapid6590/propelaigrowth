@@ -13,3 +13,5 @@ Propel AI 啟進智能決策 官網。靜態站，GitHub Pages 代管（main 分
 - 主選單＝四步（v0.2，2026-11-18）：`tools/wayfinding_patch.py <根目錄>`——主選單就是 ① 找到卡住的事 ② 看懂為什麼 ③ 選一個開始 ④ 聊一聊（不再有另一條路徑條、也不再用名詞選單）；所在那步亮橘，下面一排列出這一步裡的頁面；第二層頁面（各題、課前說明、各篇文章）才放麵包屑；產生 `/courses/`（第三步入口，課程卡取自首頁）與 `/map/`（兩頁皆 noindex）。**主選單、展開列、/map/ 都從檔頭同一份 `STEPS` 產生——新增一頁只改那裡。** `/quiz/`、`/picker/` 是獨立工具頁，不放主選單；`/en/` 不動。一定最後跑（其他腳本借關於頁當外框，跑完要由它把選單狀態修正）。順序：pain_pages → nav_patch → articles → calc_page → wayfinding。`nav_patch.py` 的選單改寫已由本腳本取代，只剩首頁痛點卡與用語替換有作用。
 
 - 選題器題目順序（v0.1，2026-11-18）：`tools/picker_order_patch.py <根目錄>`——講義題號照模組路線圖的順序編，這支把 `/picker/` 裡四個模組（工具沒人照做、產品沒在用、價格、購物車／民眾）的題目排成同一個順序。只動順序，不動文字與網址；可重跑。選題器來源檔不在 repo，所以用補丁做；來源檔哪天改了順序，這支會自己變成不動。順序：… → calc_page → picker_order_patch → wayfinding。
+
+- 董事與高階主管場（v0.1，2026-11-18）：`tools/big_decisions_page.py <根目錄>`——產生 `/big-decisions/`「大決定之前，該問的都問了嗎？」（決策品質線；同一個網站底下的一頁），首頁課程段與 `/courses/` 底下各加一條入口，選單項目在 `wayfinding_patch.py` 的 `STEPS`。頁面上不放研究數字、不寫保證結果與免責。順序：… → calc_page → picker_order_patch → big_decisions_page → wayfinding。
