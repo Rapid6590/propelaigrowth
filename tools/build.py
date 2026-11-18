@@ -927,5 +927,7 @@ if not PREVIEW:
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'articles.py'), str(OUT)], check=True)
 # ---------- 算算看 /calc/（決策點的複利，三條示範鏈）：見 tools/calc_page.py ----------
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'calc_page.py'), str(OUT)], check=True)
+# ---------- 選題器四個模組的題目順序＝路的順序（跟講義題號一致）：見 tools/picker_order_patch.py ----------
+    subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'picker_order_patch.py'), str(OUT)], check=True)
 # ---------- 主選單四步、展開列、麵包屑、/courses/、/map/：見 tools/wayfinding_patch.py（一定最後跑）----------
     subprocess.run([sys.executable, str(pathlib.Path(__file__).parent/'wayfinding_patch.py'), str(OUT)], check=True)
