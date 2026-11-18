@@ -216,7 +216,7 @@ for i, st in enumerate(STEPS, 1):
 body.append('</div>')
 wr('map/index.html', shell('/map/', 'pg-map', '網站地圖', '整個網站只有四步：找到卡住的事、看懂為什麼、選一個開始、聊一聊。所有頁面都在這裡。', '\n'.join(body)))
 
-# ---- 首頁：「整個網站，只有四步」一段（大框裡只有標題；放在痛點卡後面、02 之前）。同一份 STEPS，SUB_HIDE 的頁這裡照列 ----
+# ---- 首頁：「整個網站，只有四步」一段（大框裡只有標題；放在首頁最下面、聯絡表單之後）。同一份 STEPS，SUB_HIDE 的頁這裡照列 ----
 def home_steps():
     cols = []
     for i, st in enumerate(STEPS, 1):
@@ -224,8 +224,8 @@ def home_steps():
         cols.append(f'<div><a class="h" href="{st["href"]}"><i>{i}</i>{esc(st["name"])}</a>{links}</div>')
     return ('<!-- wf:steps --><section class="sec" id="steps">\n      <p class="eyebrow">這個網站怎麼逛</p>\n      <h2>整個網站，只有四步</h2>\n'
             '      <div class="steps4">' + ''.join(cols) + '</div>\n'
-            '      <a class="more" href="/map/">每一頁在做什麼，看網站地圖 →</a>\n    </section>\n\n    <!-- /wf:steps -->')
-STEPS_RE = re.compile(r'<!-- wf:steps -->.*?<!-- /wf:steps -->', re.S)
+            '      <a class="more" href="/map/">每一頁在做什麼，看網站地圖 →</a>\n    </section><!-- /wf:steps -->')
+STEPS_RE = re.compile(r'\s*<!-- wf:steps -->.*?<!-- /wf:steps -->', re.S)
 
 # ---- 套到所有中文頁（含首頁與 404）----
 n = 0
@@ -239,7 +239,7 @@ for f in files:
     s = patch(s, url)
     if url == '/':
         s = STEPS_RE.sub('', s)
-        s = s.replace('<section class="sec" id="how">', home_steps() + '<section class="sec" id="how">', 1)
+        s = s.replace('\n</main>', '\n    ' + home_steps() + '\n</main>', 1)   # 放在首頁最下面（George 1118：不塞在 01 和 02 中間，會打斷順序）
     # 頁尾加「網站地圖」；sitemap.xml 不加（noindex）
     if '<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->' in s and '/map/">網站地圖' not in s:
         s = s.replace('<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->', '<a href="/contact/">聯絡</a>｜<a href="/map/">網站地圖</a></div><!-- /aeo:foot -->')

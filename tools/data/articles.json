@@ -86,7 +86,7 @@
       "proposal-no-reply"
     ],
     "quiz": true,
-    "draft": true,
+    "draft": false,
     "source": "Samuelson, W. & Zeckhauser, R. (1988). Status quo bias in decision making. Journal of Risk and Uncertainty, 1, 7–59.",
     "body": [
       "報價單送出去了。\n客戶回了四個字：我再想想。",
