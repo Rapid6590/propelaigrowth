@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""選題器：四個模組的題目順序改成「這條路」的順序（v0.1，2026-11-18）。
+"""選題器：四個模組的題目順序改成「這條路」的順序（v0.2，2026-11-18）。
 
 用法：python3 tools/picker_order_patch.py <根目錄>
 
 為什麼有這支：選題器的來源檔（picker_standalone.html）不在 repo，build.py 只是把它包進外框。
 講義題號 2026-11-18 起照模組路線圖的順序編；這支把 /picker/ 裡同樣那幾題排成同一個順序，
 官網跟講義才對得上。只動順序，題目文字、模組代碼、網址都不動。可重跑：已經排好就不動。
+
+注意：頁面裡的「推薦組合」（PLANS）和「單一主題推薦」（THEME_PLANS）是用「第幾題」指到題目的，
+所以題目換位置時，這兩處的編號要一起換，不然推薦會指到別題。v0.1 漏了這件事，v0.2 補上；
+同一個模組連續出現的幾題，換完之後照新題號由小到大排（＝路的順序）。
 """
 import json, pathlib, re, sys
 
@@ -21,12 +25,13 @@ ORDER = {
 def main(root):
     p = pathlib.Path(root) / 'picker' / 'index.html'
     s = p.read_text(encoding='utf-8')
+    m = re.search(r'const\s+D\s*=\s*', s)
+    if not m:
+        sys.exit('picker_order_patch: 找不到資料區 const D=')
+    D, end = json.JSONDecoder().raw_decode(s[m.end():])
     changed = []
     for key, order in ORDER.items():
-        m = re.search(r'("%s":\{"t":"[^"]+".*?"q":)(\[.*?\])' % key, s, re.S)
-        if not m:
-            sys.exit(f'picker_order_patch: 找不到模組 {key}')
-        qs = json.loads(m.group(2))
+        qs = D['TITLES'][key]['q']
         if len(qs) != len(order):
             sys.exit(f'picker_order_patch: {key} 題數 {len(qs)} 不等於 {len(order)}')
         def rank(q):
@@ -34,11 +39,27 @@ def main(root):
             if len(hits) != 1:
                 sys.exit(f'picker_order_patch: {key} 這一題對不到唯一位置：{q}')
             return hits[0]
-        new = sorted(qs, key=rank)
-        if new != qs:
-            s = s[:m.start(2)] + json.dumps(new, ensure_ascii=False, separators=(',', ':')) + s[m.end(2):]
-            changed.append(key)
-    p.write_text(s, encoding='utf-8')
+        perm = [rank(q) for q in qs]            # 舊位置 → 新位置
+        if perm == list(range(len(qs))):
+            continue
+        D['TITLES'][key]['q'] = [q for _, q in sorted(zip(perm, qs))]
+        for pl in D.get('PLANS', {}).values():
+            for o in pl['options']:
+                items = [[i, perm[q]] if i == key else [i, q] for i, q in o['items']]
+                out, run = [], []
+                for it in items + [[None, None]]:   # 同一模組連續的幾題，照新題號排
+                    if run and it[0] != run[0][0]:
+                        out += sorted(run, key=lambda x: x[1]) if run[0][0] == key else run
+                        run = []
+                    run.append(it)
+                o['items'] = out
+        tp = D.get('THEME_PLANS', {}).get(key)
+        if tp:
+            tp['items'] = sorted(perm[i] for i in tp['items'])
+        changed.append(key)
+    if changed:
+        s = s[:m.end()] + json.dumps(D, ensure_ascii=False, separators=(',', ':')) + s[m.end() + end:]
+        p.write_text(s, encoding='utf-8')
     print('picker_order_patch:', ('改了 ' + '、'.join(changed)) if changed else '已是路的順序，沒有變動')
 
 if __name__ == '__main__':
