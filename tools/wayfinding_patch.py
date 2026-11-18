@@ -107,6 +107,15 @@ CSS = '''
 .wf-step:nth-child(n+3){order:3}.wf-sub{justify-self:stretch;min-width:0;order:2}.wf-sub.t2{margin-left:0}.wf-sub.t3,.wf-sub.t4{order:4;justify-self:stretch;min-width:0}
 .wf-sub a{padding:5px 9px}
 }
+.steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 12px}
+.steps4>div{position:relative;border:1.5px solid var(--navy);border-radius:14px;background:var(--card);padding:12px 10px 10px;display:flex;flex-direction:column;gap:6px}
+.steps4>div:not(:last-child)::after{content:"▶";position:absolute;right:-10px;top:14px;font-size:10px;color:var(--orange);z-index:1}
+.steps4 .h{display:flex;gap:8px;align-items:center;font-weight:700;font-size:15px;color:var(--navy-text);text-decoration:none;margin:0 0 4px}
+.steps4 .h i{flex:0 0 22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-style:normal;font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
+.steps4 a.s{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--navy-text);text-decoration:none;font-size:13.5px;line-height:1.35}
+.steps4 a.s:hover,.steps4 .h:hover{border-color:var(--orange);color:var(--accent-ink)}
+.steps4 a:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (max-width:640px){.steps4{grid-template-columns:repeat(2,minmax(0,1fr))}.steps4>div::after{display:none}}
 .map-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 24px}
 .map-col{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .map-col h2{font-size:16px;margin:0 0 8px;display:flex;gap:8px;align-items:center}
@@ -207,6 +216,17 @@ for i, st in enumerate(STEPS, 1):
 body.append('</div>')
 wr('map/index.html', shell('/map/', 'pg-map', '網站地圖', '整個網站只有四步：找到卡住的事、看懂為什麼、選一個開始、聊一聊。所有頁面都在這裡。', '\n'.join(body)))
 
+# ---- 首頁：「整個網站，只有四步」一段（大框裡只有標題；放在痛點卡後面、02 之前）。同一份 STEPS，SUB_HIDE 的頁這裡照列 ----
+def home_steps():
+    cols = []
+    for i, st in enumerate(STEPS, 1):
+        links = ''.join(f'<a class="s" href="{it[0]}">{esc(it[1])}</a>' for it in st['items'])
+        cols.append(f'<div><a class="h" href="{st["href"]}"><i>{i}</i>{esc(st["name"])}</a>{links}</div>')
+    return ('<!-- wf:steps --><section class="sec" id="steps">\n      <p class="eyebrow">這個網站怎麼逛</p>\n      <h2>整個網站，只有四步</h2>\n'
+            '      <div class="steps4">' + ''.join(cols) + '</div>\n'
+            '      <a class="more" href="/map/">每一頁在做什麼，看網站地圖 →</a>\n    </section>\n\n    <!-- /wf:steps -->')
+STEPS_RE = re.compile(r'<!-- wf:steps -->.*?<!-- /wf:steps -->', re.S)
+
 # ---- 套到所有中文頁（含首頁與 404）----
 n = 0
 files = sorted(ROOT.glob('**/index.html')) + [ROOT / '404.html']
@@ -217,6 +237,9 @@ for f in files:
     url = '/' if rel == 'index.html' else ('/404' if rel == '404.html' else '/' + rel[:-len('index.html')])
     s = f.read_text(encoding='utf-8'); o = s
     s = patch(s, url)
+    if url == '/':
+        s = STEPS_RE.sub('', s)
+        s = s.replace('<section class="sec" id="how">', home_steps() + '<section class="sec" id="how">', 1)
     # 頁尾加「網站地圖」；sitemap.xml 不加（noindex）
     if '<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->' in s and '/map/">網站地圖' not in s:
         s = s.replace('<a href="/contact/">聯絡</a></div><!-- /aeo:foot -->', '<a href="/contact/">聯絡</a>｜<a href="/map/">網站地圖</a></div><!-- /aeo:foot -->')
