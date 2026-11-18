@@ -1,4 +1,4 @@
-# big_decisions_page.py v0.1 (2026-11-18) — /big-decisions/「大決定之前，該問的都問了嗎？」（決策品質線 DQ：給董事、獨立董事與高階主管）
+# big_decisions_page.py v0.2 (2026-11-18；v0.2 George 定「先一小時一題」，拿掉三小時) — /big-decisions/「大決定之前，該問的都問了嗎？」（決策品質線 DQ：給董事、獨立董事與高階主管）
 # 用法：python3 tools/big_decisions_page.py <站台根目錄>   可重跑。順序：… → calc_page → picker_order_patch → big_decisions_page → wayfinding。
 # 規矩（George 1114–1118）：
 #   - 名稱＝痛點句「大決定之前，該問的都問了嗎？」；副標「後照鏡照不到的地方，先回頭看一眼」（朋友的原話：怕不知道自己不知道什麼、後照鏡盲點）。
@@ -163,7 +163,8 @@ body = f'''<span class="pill">給董事、獨立董事與高階主管</span>
 <section class="sec">
 <h2>怎麼排</h2>
 <ul class="bd-facts">
-<li>一堂三小時，可依場合調整。</li>
+<li>先從一小時開始：一個盲點區，完整走一遍。</li>
+<li>三題完整版另談。</li>
 <li>可以排成董事進修的一堂、經營團隊年度會議前的一堂，或高階主管場。</li>
 <li>進修時數是否認列，以主辦機構審核為準。</li>
 <li>費用與場次，來信談。</li>
