@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Do the math: small gains at each step compound｜Propel AI</title>
+<meta name="description" content="To get anything done, people have to clear several steps in a row. Enter the pass rate for each step and see how small gains at every step compound. Three example chains. Nothing is collected.">
+<link rel="canonical" href="https://propelaigrowth.com/en/calc/">
+
+<meta property="og:type" content="website"><meta property="og:site_name" content="Propel AI">
+<meta property="og:title" content="Do the math: small gains at each step compound｜Propel AI"><meta property="og:description" content="To get anything done, people have to clear several steps in a row. Enter the pass rate for each step and see how small gains at every step compound. Three example chains. Nothing is collected.">
+<meta property="og:url" content="https://propelaigrowth.com/en/calc/"><meta property="og:image" content="https://propelaigrowth.com/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+
+
+<link rel="alternate" hreflang="zh-Hant" href="https://propelaigrowth.com/calc/"><link rel="alternate" hreflang="en" href="https://propelaigrowth.com/en/calc/"><link rel="alternate" hreflang="x-default" href="https://propelaigrowth.com/calc/">
+</head>
+<body class="pg-en-calc">
+<div class="wrap">
+  <header class="sitehead">
+    <a class="wordmark" href="/en/">PROPEL AI<small>Behavioral economics × behavior design × AI</small></a>
+    <a class="lang" href="/calc/" hreflang="zh-Hant" lang="zh-Hant">中文</a>
+    <nav class="wf-nav" aria-label="Main menu"><div class="wf-step nodrop"><a href="/en/#pain"><i>1</i>What&#x27;s stuck</a></div><div class="wf-step cur"><a href="/en/how/" aria-current="step"><i>2</i>See why</a></div><div class="wf-step nodrop"><a href="/en/#courses"><i>3</i>Where to start</a></div><div class="wf-step"><a href="/en/contact/"><i>4</i>Talk to us</a><div class="wf-drop" role="group" aria-label="Talk to us: pages in this step"><div><a href="/en/about/">About us</a><a href="/en/contact/">Contact</a></div></div></div><div class="wf-sub t2" role="group" aria-label="See why: pages in this step"><a href="/en/how/">How we think</a><a href="/en/ai/">Where AI fits</a><a href="/en/calc/" aria-current="page">Do the math</a></div></nav>
+  </header>
+<main>
+    <span class="pill">Do the math</span>
+    <h1>Small gains at each step. See how they compound.</h1>
+    <p class="lead">A customer, an employee or a resident may need to clear several steps in a row. Make each of ten steps 10% better and you get about 2.6×. Let each slip 10% and 0.35× is left. The three chains below are illustrations; change any number to your own.</p>
+    <div class="cc">
+      <div class="cc-tabs" role="tablist" aria-label="Choose an example chain"><button type="button" role="tab" aria-selected="true">Selling to consumers</button><button type="button" role="tab" aria-selected="false">Selling to companies</button><button type="button" role="tab" aria-selected="false">Public services</button></div>
+      <div class="cc-start"><label for="cc-start">Start with</label><input id="cc-start" type="number" inputmode="numeric" min="0" step="1" value="10000"><span id="cc-startlabel"></span></div>
+      <div class="cc-head" aria-hidden="true"><span>Step</span><span>Now</span><span>Lift</span><span>After</span><span>First</span><span></span></div>
+      <div id="cc-rows"></div>
+      <button class="cc-add" id="cc-add" type="button">+ Add a step</button>
+      <div class="cc-out" aria-live="polite">
+        <h2>How many make it through every step</h2>
+        <div class="cc-bar r0"><div class="t"><b>Now</b><small>nothing changed</small></div><div class="b"><i id="cc-b0"></i><span id="cc-v0"></span></div></div>
+        <div class="cc-bar r1"><div class="t"><b>This round</b><small id="cc-t1"></small></div><div class="b"><i id="cc-b1"></i><span id="cc-v1"></span></div></div>
+        <div class="cc-bar r2"><div class="t"><b>After several rounds</b><small id="cc-t2"></small></div><div class="b"><i id="cc-b2"></i><span id="cc-v2"></span></div></div>
+        <p class="cc-say" id="cc-say"></p>
+      </div>
+      <p class="disc">These numbers are illustrations, not promises. Actual gains must be measured in your own process. Everything on this page is calculated in your browser. Nothing is sent anywhere.</p>
+      <details><summary>Research behind the example changes</summary><p id="cc-src" style="margin:6px 0 0"></p></details>
+      <div class="cc-bridge">
+        <h2>“My process doesn’t have these steps.”</h2>
+        <p>Right. These are examples, not templates. At the second station of our full-day workshop, you map your own process in four to seven steps and circle the one or two that are most stuck.</p>
+        <p>Change only those one or two at a time, and watch one number for two weeks. Improving every step takes several rounds.</p>
+      </div>
+      <div class="cta-row" style="margin-top:18px">
+        <a class="btn primary" href="/en/contact/">Tell us one thing, and we’ll write back</a>
+        <a class="btn secondary" href="/en/how/">See how we look at a problem</a>
+      </div>
+      <p class="note">All programs are taught in Mandarin.</p>
+    </div>
+<script>
+(function(){
+  var CHAINS = [{"id":"b2c","tab":"Selling to consumers","start":10000,"unit":"people","startLabel":"people who see the ad","endLabel":"payment completed","gates":[["See the ad → click",3,20,"Change “Save 300 today” to “In two days, you’ll miss out on the 300 discount.”",true],["Land → view product page",60,15,"Use the same message as the ad on the landing page, with one clear next step",false],["Product page → add to cart",30,20,"Show a real purchase count, and pre-select the most popular option",false],["Cart → start checkout",40,20,"Show shipping up front; cut the form from ten fields to four",true],["Checkout → pay",85,5,"Add a one-line guarantee; if payment isn’t finished, send one reminder within the hour",false]],"src":"Kahneman & Tversky (1979); Iyengar & Lepper (2000); Chernev et al. (2015); Goldstein et al. (2008); Egebark & Ekström (2016); FCA Occasional Paper No. 2 (2013); Leventhal et al. (1965)"},{"id":"b2b","tab":"Selling to companies","start":100,"unit":"accounts","startLabel":"accounts on your target list","endLabel":"renewed","gates":[["Get a meeting with the decision maker",20,15,"Keep the ask small and specific, and add “No worries if now isn’t a good time.”",true],["Agree on a next step",50,20,"Before the meeting ends, record the next step, owner, and date",false],["Choose a plan after the quote",40,25,"Offer three plans, not eight, and mark the one most clients choose",true],["Get internal approval",60,15,"Write the one page they’ll show their boss, and open with the cost of doing nothing",false],["Renew the agreement",70,10,"Send a reminder 90 days before the agreement expires, with one page on what the year delivered",false]],"src":"Carpenter (2013); Milkman et al. (2011); Iyengar & Lepper (2000); Tversky & Kahneman (1974); Kahneman & Tversky (1979); Karlan et al. (2016)"},{"id":"gov","tab":"Public services","start":10000,"unit":"people","startLabel":"eligible residents","endLabel":"completed","gates":[["Receive the notice → decide to apply",40,15,"The first line says what to do and by which date; if it’s true, add “Most people have already applied.”",false],["Decide → find the form",50,20,"The link goes straight to the application form, not to the agency home page",true],["Find it → start the application",60,20,"With consent, pre-fill what the agency already has; 12 fields become 3",true],["Start → submit",70,10,"The last field on the form asks: “Which day do you plan to submit?”",false],["Submit → done (incl. follow-up documents)",80,10,"The follow-up notice says which document is missing, by which date, and where to send it",false]],"src":"Hallsworth et al. (2017); Behavioural Insights Team, EAST (2014); Bettinger et al. (2012); Milkman et al. (2011); Leventhal et al. (1965)"}];
+  var $ = function(id){ return document.getElementById(id); };
+  var state = null, MAXG = 7, MING = 2;
+  function clone(c){ return {id:c.id, start:c.start, unit:c.unit, startLabel:c.startLabel, endLabel:c.endLabel, src:c.src,
+    gates:c.gates.map(function(g){ return {name:g[0], base:g[1], lift:g[2], how:g[3], pick:g[4]}; })}; }
+  function num(v, lo, hi){ v = parseFloat(v); if (!isFinite(v)) v = 0; return Math.min(hi, Math.max(lo, v)); }
+  function fmt(x){
+    if (x >= 100) return Math.round(x).toLocaleString('en-US');
+    if (x >= 10) return (Math.round(x * 10) / 10).toFixed(1);
+    return (Math.round(x * 100) / 100).toFixed(x >= 1 ? 1 : 2);
+  }
+  function pct(x){ var r = Math.round(x * 10) / 10; return (r % 1 === 0 ? r.toFixed(0) : r.toFixed(1)) + '%'; }
+  function after(g){ return Math.min(100, g.base * (1 + g.lift / 100)); }
+
+  function load(i){
+    state = clone(CHAINS[i]);
+    var tabs = document.querySelectorAll('.cc-tabs button');
+    for (var k = 0; k < tabs.length; k++) tabs[k].setAttribute('aria-selected', k === i ? 'true' : 'false');
+    $('cc-start').value = state.start; $('cc-startlabel').textContent = state.startLabel;
+    $('cc-src').textContent = state.src;
+    rows(); calc();
+  }
+  function rows(){
+    var box = $('cc-rows'); box.innerHTML = '';
+    state.gates.forEach(function(g, i){
+      var d = document.createElement('div'); d.className = 'cc-row' + (g.pick ? ' on' : '');
+      d.innerHTML =
+        '<div class="cc-name"><i>' + (i + 1) + '</i><input type="text" aria-label="Name of step ' + (i + 1) + '" maxlength="40"></div>' +
+        '<div class="cc-f"><label>Now</label><input type="number" inputmode="decimal" min="0" max="100" step="1" aria-label="Step ' + (i + 1) + ': pass rate now, in %"><span class="u">%</span></div>' +
+        '<div class="cc-f"><label>Lift</label><span class="u">+</span><input type="number" inputmode="decimal" min="0" max="200" step="5" aria-label="Step ' + (i + 1) + ': lift, in %"><span class="u">%</span></div>' +
+        '<div class="cc-after"></div>' +
+        '<div class="cc-pick"><label><input type="checkbox" aria-label="Change step ' + (i + 1) + ' first this round"><span hidden>Change first</span></label></div>' +
+        '<button class="cc-del" type="button" aria-label="Remove step ' + (i + 1) + '" title="Remove this step">×</button>' +
+        (g.how ? '<div class="cc-how"><b>Example change</b>&nbsp; ' + g.how.replace(/</g, '&lt;') + '</div>' : '') +
+        '<div class="cc-cum"></div>';
+      var ins = d.querySelectorAll('input');
+      ins[0].value = g.name; ins[1].value = g.base; ins[2].value = g.lift; ins[3].checked = !!g.pick;
+      ins[0].addEventListener('input', function(){ g.name = this.value; if (g.how){ g.how = ''; var h = d.querySelector('.cc-how'); if (h) h.remove(); } });
+      ins[1].addEventListener('input', function(){ g.base = num(this.value, 0, 100); calc(); });
+      ins[2].addEventListener('input', function(){ g.lift = num(this.value, 0, 200); calc(); });
+      ins[3].addEventListener('change', function(){ g.pick = this.checked; d.classList.toggle('on', g.pick); calc(); });
+      d.querySelector('.cc-del').addEventListener('click', function(){ if (state.gates.length > MING){ state.gates.splice(i, 1); rows(); calc(); } });
+      box.appendChild(d);
+    });
+    $('cc-add').hidden = state.gates.length >= MAXG;
+    var dels = box.querySelectorAll('.cc-del');
+    for (var k = 0; k < dels.length; k++) dels[k].style.visibility = state.gates.length > MING ? 'visible' : 'hidden';
+  }
+  function calc(){
+    var s = num($('cc-start').value, 0, 1e9), a = s, b = s, c = s, picked = 0, maxLift = 0, capped = false;
+    var els = $('cc-rows').children;
+    state.gates.forEach(function(g, i){
+      var af = after(g);
+      if (g.base * (1 + g.lift / 100) > 100) capped = true;
+      a *= g.base / 100; c *= af / 100; b *= (g.pick ? af : g.base) / 100;
+      if (g.pick) picked++;
+      if (g.lift > maxLift) maxLift = g.lift;
+      els[i].querySelector('.cc-after').textContent = pct(af);
+      els[i].querySelector('.cc-cum').textContent = 'Left after this step: ' + fmt(a) + ' now, ' + fmt(c) + ' with every step improved';
+    });
+    var n = state.gates.length, top = Math.max(a, b, c, 1e-9);
+    function bar(id, v){ $(id).style.width = Math.max(1, v / top * 100) + '%'; }
+    bar('cc-b0', a); bar('cc-b1', b); bar('cc-b2', c);
+    $('cc-v0').textContent = fmt(a) + ' ' + state.unit;
+    $('cc-v1').innerHTML = fmt(b) + ' ' + state.unit + (a > 0 && picked ? '<em>' + (b / a).toFixed(1) + '×</em>' : '');
+    $('cc-v2').innerHTML = fmt(c) + ' ' + state.unit + (a > 0 ? '<em>' + (c / a).toFixed(1) + '×</em>' : '');
+    $('cc-t1').textContent = picked ? 'only the ' + picked + (picked > 1 ? ' ticked steps' : ' ticked step') : 'no step ticked yet';
+    $('cc-t2').textContent = 'all ' + n + ' steps improved';
+    var say = '';
+    if (a > 0 && maxLift > 0){
+      say = (maxLift <= 30 ? 'No step improved by more than <b>' : 'The biggest single step improved by <b>') + maxLift + '%</b>. Across ' + n + ' steps, the gains compound to <b>' + (c / a).toFixed(1) + '×</b> the starting result.';
+      if (picked && picked < n) say += ' Improving just ' + picked + (picked > 1 ? ' steps' : ' step') + ' this round gives <b>' + (b / a).toFixed(1) + '×</b> in this illustration.';
+    } else { say = 'Fill in a number for each step and the result appears below.'; }
+    if (capped) say += ' One step has reached 100%. A pass rate cannot go higher than everyone.';
+    $('cc-say').innerHTML = say;
+  }
+  var tabs = document.querySelectorAll('.cc-tabs button');
+  for (var k = 0; k < tabs.length; k++) (function(i){ tabs[i].addEventListener('click', function(){ load(i); }); })(k);
+  $('cc-start').addEventListener('input', calc);
+  $('cc-add').addEventListener('click', function(){ if (state.gates.length < MAXG){ state.gates.push({name:'One more step', base:50, lift:10, how:'', pick:false}); rows(); calc(); } });
+  load(0);
+})();
+</script>
+      <div class="nav"><a href="/en/how/" class="prev">← How we think</a><a href="/en/">Home</a></div>
+</main>
+  <footer class="sitefoot">
+    <div><b>Propel AI Co., Ltd.</b>｜Tax ID 61933866｜12F, No. 1-2, Sec. 5, Zhongxiao E. Rd., Taipei, Taiwan｜<a href="mailto:george.chen@propelaigrowth.com">george.chen@propelaigrowth.com</a></div>
+    <div>Licensed trainer and coach, MINDWORX SURF™ Method (Europe)｜We respect your decision; no follow-up marketing without your consent.</div>
+    <div class="disc">Program descriptions are pre-course information; actual arrangements follow the quotation and pre-course confirmation. Propel AI reserves the right to adjust program content and format.</div>
+  </footer>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('form.mform').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.reportValidity())return;
+      var d=new FormData(f);
+      var body='I want: '+d.get('who')+'\nat: '+d.get('when')+'\nto: '+d.get('what')+'\n\n'+d.get('name')+'\n'+d.get('email');
+      var key=d.get('access_key');
+      var done=function(){f.querySelector('.mdone').hidden=false;f.querySelectorAll('label,.mrow').forEach(function(x){x.hidden=true});};
+      if(!key){location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('Website (EN): one thing I want to make happen')+'&body='+encodeURIComponent(body);return;}
+      var btn=f.querySelector('button');btn.disabled=true;btn.textContent='Sending…';
+      d.append('message',body);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+        if(j.success){done();}else{throw 0;}
+      }).catch(function(){btn.disabled=false;btn.textContent='Send — we\'ll write back';location.href='mailto:george.chen@propelaigrowth.com?subject='+encodeURIComponent('Website (EN): one thing I want to make happen')+'&body='+encodeURIComponent(body);});
+    });
+  });
+})();
+</script>
+</body>
+</html>
