@@ -1,4 +1,5 @@
-# en_patch.py v0.1 (2026-11-19) — 英文站：主選單換成四步＋英文版「算算看」/en/calc/
+# en_patch.py v0.2 (2026-11-19) — 英文站：主選單換成四步＋英文版「算算看」/en/calc/＋英文版 AI 頁 /en/ai/
+#   v0.2：George 看過預覽——算算看表頭（Now／Lift）沒對到輸入格 → 英文表頭改成置中；加英文版 AI 頁（內容對照 ai_page.py v0.2）。
 # 用法：python3 tools/en_patch.py <站台根目錄>   可重跑（冪等）。只動 /en/ 底下的頁（外加中文 /calc/ 的語言切換與 hreflang）。
 # 順序：… → calc_page → … → wayfinding → en_patch（放最後；它拿 /en/about/ 當外框，也要讀 calc_page.py 的程式）。
 # 規矩（George 1118–1119）：
@@ -19,11 +20,11 @@ def esc(s): return html.escape(s, quote=True)
 # ---- 英文站唯一的一份選單：(名字, 入口, [(網址, 選單上的名字)]) ----
 STEPS = [
     ("What's stuck", '/en/#pain', []),
-    ('See why', '/en/how/', [('/en/how/', 'How we think'), ('/en/calc/', 'Do the math')]),
+    ('See why', '/en/how/', [('/en/how/', 'How we think'), ('/en/ai/', 'Where AI fits'), ('/en/calc/', 'Do the math')]),
     ('Pick a start', '/en/#courses', []),
     ('Talk to us', '/en/contact/', [('/en/about/', 'About us'), ('/en/contact/', 'Contact')]),
 ]
-ZH = {'/en/': '/', '/en/how/': '/how/', '/en/about/': '/about/', '/en/contact/': '/contact/', '/en/calc/': '/calc/'}
+ZH = {'/en/': '/', '/en/how/': '/how/', '/en/about/': '/about/', '/en/contact/': '/contact/', '/en/calc/': '/calc/', '/en/ai/': '/ai/'}
 
 def header(url):
     cur = next((i for i, (_, _, items) in enumerate(STEPS, 1) if any(u == url for u, _ in items)), None)
@@ -48,6 +49,10 @@ CSS = '''
 /* en:css */
 .wf-step.nodrop>a::after{content:none!important}
 @media (max-width:640px){.pg-en-calc .cc-after::before{content:"After"}}
+/* 英文表頭字短（Now、Lift），靠右會落在 % 上面；改成對著輸入格置中 */
+.pg-en-calc .cc-head span:nth-child(2),.pg-en-calc .cc-head span:nth-child(3){text-align:center;padding-right:15px}
+.pg-en-calc .cc-head span:nth-child(3){padding-left:16px}
+.pg-en-ai .ai-flow li{font-size:13.5px}
 /* /en:css */
 '''
 css = re.sub(r'\n/\* en:css \*/.*?/\* /en:css \*/\n', '', rd('assets/site.css'), flags=re.S)
@@ -174,6 +179,121 @@ h = re.sub(r'<body class="[^"]*">', '<body class="pg-en-calc">', h)
 h = h.replace('</head>', ALT + '\n</head>', 1)
 wr('en/calc/index.html', h + '\n    ' + calc_body + '\n' + REST)
 
+# ---------- 英文版 AI 頁（內容對照 ai_page.py；圖直接取那邊的 SVG，換掉圖上的中文字） ----------
+asrc = (HERE / 'ai_page.py').read_text(encoding='utf-8')
+ans = {'esc': esc}
+exec(asrc[asrc.index('# 主圖：'):asrc.index('def stat_block')], ans)
+SVG_TR = {
+    'HERO': [('左邊是導航螢幕，上面畫出一條路線；右邊是一隻腳踩在油門上。導航算得出路，車要動還是要有人踩油門。', 'Left: a navigation screen with a route. Right: a foot on the accelerator. Navigation works out the route; someone still has to press the pedal.'),
+             ('AI：把路算出來', 'AI works out the route'), ('文案、簡報、報表、程式碼', 'Copy, decks, reports, code'),
+             ('人：踩下油門', 'People press the pedal'), ('客戶點頭、同仁照做、民眾來辦', 'Customers reply. Teams follow through.')],
+    'ONE': [('左邊：六個人看同一則訊息。右邊：六個人各自收到不同的訊息。', 'Left: six people see the same message. Right: each of six people gets a different message.'),
+            ('以前：同一句話，同一個時間', 'Before: one message for all'), ('現在：各自的話，各自的那一秒', 'Now: one for each person')],
+    'BILL': [('示意圖：一張用電通知，下面多了三條橫條，比較你家、相似的家庭、省電的家庭。', 'Illustration: an energy report with three bars comparing your home, similar homes and efficient homes.'),
+             ('本月用電通知', 'Your energy report'), ('你家', 'You'), ('相似家庭', 'Similar'), ('省電家庭', 'Efficient')],
+    'CUP': [('示意圖：儀表板中間亮起一個咖啡杯圖示，旁邊寫著該休息了嗎。', 'Illustration: a coffee cup icon lights up on the dashboard, with the words Time for a rest?'),
+            ('font-size="10" font-weight="700" fill="#fff" text-anchor="middle">該休息了嗎？', 'font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">Time for a rest?')],
+    'EG_L': [('一份提案，用 AI 一個小時就寫好。', 'A proposal, written with AI in one hour.'), ('提案寫好了', 'Proposal written'), ('用 AI，一個小時', 'With AI, in one hour'), ('做出來：變快了', 'Making it: faster')],
+    'EG_R': [('客戶的訊息畫面：提案已讀，三天沒有回覆。', 'The customer’s message thread: proposal read, no reply for three days.'), ('提案在附件，請參考', 'Proposal attached'),
+             ('>已讀<', '>Read<'), ('三天了，沒有回覆', 'Three days. No reply.'), ('對方照著做：沒有變容易', 'Getting them to act: no easier')],
+}
+G = {}
+for k, pairs in SVG_TR.items():
+    v = ans[k]
+    for a_, b_ in pairs:
+        assert v.count(a_) == 1, ('ai_page.py 的圖改過了，英文對照要跟著改', k, a_)
+        v = v.replace(a_, b_)
+    assert not re.search(r'[一-鿿]', v), ('英文 AI 頁的圖還有中文字', k)
+    G[k] = v
+AI_STATS = [
+    ('You are not alone', 'Individuals got faster. Company numbers have not caught up.', [
+        (80, 'of respondents say AI has improved their own productivity', False),
+        (37, 'say AI has contributed to their company’s earnings', True)], '', False),
+    ('The reason', 'The difference is the workplace, not individual willingness', [
+        (67, 'Organizational factors: culture, manager support, talent practices', True),
+        (32, 'Individual mindset and behavior', False)], 'Relative importance for how much AI helps, as people report it', True),
+]
+def stat_block(tag, title, rows, cmp, key):
+    r = ''.join(f'<div class="ai-row{" o" if o else ""}"><b>{v:g}%</b><span>{esc(t)}</span><div class="ai-bar"><i style="width:{v:g}%"></i></div></div>' for v, t, o in rows)
+    c = f'<p class="cmp">{esc(cmp)}</p>' if cmp else ''
+    return f'<div class="ai-stat{" ai-key" if key else ""}"><h3><small>{esc(tag)}</small>{esc(title)}</h3>{c}{r}</div>'
+ai_stats = ''.join(stat_block(*x) for x in AI_STATS)
+AI_SRC = ('External surveys, not Propel AI client results. Sources: McKinsey, The state of AI in 2026 (1,719 respondents, 97 countries). '
+          'Microsoft, 2026 Work Trend Index (20,000 people who use AI at work, 10 markets; 67% and 32% are relative importance in a model, not causation).')
+ai_body = f'''<span class="pill">Where AI fits</span>
+    <h1><span class="nb">AI makes things.</span> <span class="nb">Things don’t become behavior</span> <span class="nb">on their own.</span></h1>
+    <p class="lead">Copy, slide decks, reports, code: AI can produce all of them, and the cost keeps falling. A customer saying yes, a team following the new process, a resident completing an application: none of these happens just because one more document exists.</p>
+    <figure class="ai-fig">{G["HERO"]}</figure>
+    <p class="ai-cap">AI is the navigation, not the accelerator.<small>It can work out the route. For the car to move, someone still has to press the pedal.</small></p>
+
+    <section class="sec">
+    <h2><span class="nb">Everyone is using AI.</span> <span class="nb">Why hasn’t the company felt it?</span></h2>
+    <div class="ai-eg">{G["EG_L"]}<i></i>{G["EG_R"]}</div>
+    <p class="ai-say"><span class="nb">AI has made “making it” faster.</span> <span class="nb">“Getting the other side to act” is no easier.</span><small>And revenue only moves when they act.</small></p>
+    <div class="ai-stats">{ai_stats}</div>
+    <div class="ai-so"><small>So</small><b>What we do is the step after AI has done its part: getting customers to reply, and getting teams to follow through.</b><span>We do it by changing what a person faces at the moment of decision: what they see, how many steps it takes, and when the reminder arrives.</span></div>
+    <p class="note">{esc(AI_SRC)}</p>
+    </section>
+
+    <section class="sec">
+    <h2><span class="nb">Before: one version for everyone.</span> <span class="nb">With AI: one for each person.</span></h2>
+    <p>The same sign, the same letter, the same default: that was most of what could be done before. Now data records what each person actually did, and AI helps decide what to say to them and when. “Change the environment, not the person” has not changed. What has changed is that the reminder can fit each person’s situation.</p>
+    <figure class="ai-fig">{G["ONE"]}</figure>
+    <h3 style="margin-top:18px">Two examples already in use</h3>
+    <div class="ai-ex">
+    <div><span class="tag2">Government</span>{G["BILL"]}<h3>Japan’s Ministry of the Environment: a home energy report that shows how similar homes compare</h3>
+    <p>Five electricity and gas utilities sent it to about 300,000 households over four years. Each household received a report written from its own usage. Energy use fell by about 2% on average.</p>
+    <p>The Ministry calls this direction BI-Tech: behavioral science combined with data and AI, so that each household gets its own version.</p>
+    <p class="src">Source: Ministry of the Environment, Japan, nudge program; Oracle Japan and Jyukankyo Research Institute (field trials, fiscal 2017–2020)</p></div>
+    <div><span class="tag2">Business</span>{G["CUP"]}<h3>Mercedes-Benz ATTENTION ASSIST: it learns how you drive, then suggests a rest</h3>
+    <p>In the first 20 minutes of a trip, the system records how you are driving, using 70 parameters. Later, when the steering shows the corrections typical of a tired driver, a coffee cup lights up on the dashboard and a tone sounds.</p>
+    <p>There is no “Do not drive tired” sign. It reminds that one driver, at that moment.</p>
+    <p class="src">Source: Mercedes-Benz press material (introduced in 2009)</p></div>
+    </div>
+    <p class="note">Both drawings are illustrations.</p>
+    </section>
+
+    <section class="sec">
+    <h2>Where AI sits in our programs</h2>
+    <p>The order is fixed:</p>
+    <ol class="ai-flow"><li><small>1</small>The team decides first</li><li class="on"><small>2</small>AI gives a second opinion</li><li><small>3</small>We work through it together</li><li><small>4</small>The team makes the call</li></ol>
+    <div class="ai-do">
+    <div><h3>Choosing</h3><p>AI helps the team pick which behavior to change first.</p></div>
+    <div><h3>Checking</h3><p>It compares your analysis with 67 common sticking points and 101 low-cost changes, to show what was missed.</p></div>
+    <div><h3>Taking it back</h3><p>One AI prompt per topic, printed in the handout, so you can run your own case again at work.</p></div>
+    </div>
+    <p>AI can write the sentence well. Which person, at which moment, and which part to change: that is your judgment, and it is what the program trains.</p>
+    </section>
+
+    <div class="ai-end"><b>Behavior is not decided by the person alone. Much of it is decided by the environment. And the environment is something you can arrange in advance.</b>
+    <ul><li>Do they want to?</li><li>Is it easy to do?</li><li>Is there a reminder at the moment it matters?</li></ul></div>
+
+    <div class="cta">
+    <a class="btn primary" href="/en/contact/">Tell us one thing, and we’ll write back</a>
+    <a class="btn secondary" href="/en/how/">See how we look at a problem</a>
+    </div>
+    <p><a class="more" href="/en/calc/">A little better at every step. Do the math →</a></p>
+    <p class="note">Programs are delivered in Mandarin.</p>
+      <div class="nav"><a href="/en/how/" class="prev">← How we think</a><a href="/en/">Home</a></div>'''
+ai_title = 'AI makes things. Things don’t become behavior on their own.'
+ai_desc = 'Where AI fits at Propel AI: AI is the navigation, not the accelerator. AI can produce the copy, the deck and the report; getting customers to reply and teams to follow through depends on what they face at the moment of decision.'
+AI_ALT = ('<link rel="alternate" hreflang="zh-Hant" href="{s}/ai/"><link rel="alternate" hreflang="en" href="{s}/en/ai/">'
+          '<link rel="alternate" hreflang="x-default" href="{s}/ai/">').format(s=SITE)
+h = HEAD
+h = re.sub(r'<title>.*?</title>', f'<title>{esc(ai_title)}｜Propel AI</title>', h)
+h = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m.group(1) + esc(ai_desc), h)
+h = re.sub(r'(<meta property="og:title" content=")[^"]*', lambda m: m.group(1) + esc(ai_title) + '｜Propel AI', h)
+h = re.sub(r'(<meta property="og:description" content=")[^"]*', lambda m: m.group(1) + esc(ai_desc), h)
+h = h.replace(f'{SITE}/en/about/', f'{SITE}/en/ai/')
+h = re.sub(r'<body class="[^"]*">', '<body class="pg-ai pg-en-ai">', h)
+h = h.replace('</head>', AI_ALT + '\n</head>', 1)
+wr('en/ai/index.html', h + '\n    ' + ai_body + '\n' + REST)
+# 中文 /ai/：語言切換指到英文 AI 頁，補 hreflang
+za = rd('ai/index.html')
+za = za.replace('<a class="lang" href="/en/" hreflang="en" lang="en">EN</a>', '<a class="lang" href="/en/ai/" hreflang="en" lang="en">EN</a>')
+if 'hreflang="en" href="' + SITE + '/en/ai/"' not in za: za = za.replace('</head>', AI_ALT + '\n</head>', 1)
+wr('ai/index.html', za)
+
 # ---------- 五個英文頁的頁首換成四步 ----------
 n = 0
 for url in ZH:
@@ -187,7 +307,7 @@ for url in ZH:
 home = re.sub(r'<!-- encalc:home -->.*?<!-- /encalc:home -->', '', rd('en/index.html'), flags=re.S)
 m = re.search(r'<a class="more" href="/en/how/">Three examples from research[^<]*</a>', home)
 if m:
-    home = home[:m.end()] + '<!-- encalc:home --><br><a class="more" href="/en/calc/">A little better at every step. Do the math →</a><!-- /encalc:home -->' + home[m.end():]
+    home = home[:m.end()] + '<!-- encalc:home --><br><a class="more" href="/en/calc/">A little better at every step. Do the math →</a><br><a class="more" href="/en/ai/">Our name has AI in it. What does that mean? →</a><!-- /encalc:home -->' + home[m.end():]
     wr('en/index.html', home)
 
 # 中文 /calc/：語言切換指到英文算算看，補 hreflang
@@ -196,5 +316,7 @@ zc = zc.replace('<a class="lang" href="/en/" hreflang="en" lang="en">EN</a>', '<
 if 'hreflang="en" href="' + SITE + '/en/calc/"' not in zc: zc = zc.replace('</head>', ALT + '\n</head>', 1)
 wr('calc/index.html', zc)
 sm = rd('sitemap.xml')
-if f'{SITE}/en/calc/' not in sm: wr('sitemap.xml', sm.replace('</urlset>', f'  <url><loc>{SITE}/en/calc/</loc></url>\n</urlset>'))
-print(f'en_patch: 英文站 {n} 頁頁首換成四步；/en/calc/ 已產生；中文 /calc/ 的 EN 指到英文算算看')
+for u in ('/en/calc/', '/en/ai/'):
+    if f'{SITE}{u}' not in sm: sm = sm.replace('</urlset>', f'  <url><loc>{SITE}{u}</loc></url>\n</urlset>')
+wr('sitemap.xml', sm)
+print(f'en_patch: 英文站 {n} 頁頁首換成四步；/en/calc/、/en/ai/ 已產生；中文 /calc/ 與 /ai/ 的 EN 指到對應英文頁')

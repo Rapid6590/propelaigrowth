@@ -18,4 +18,4 @@ Propel AI 啟進智能決策 官網。靜態站，GitHub Pages 代管（main 分
 
 - AI 頁（v0.1，2026-11-19）：`tools/ai_page.py <根目錄>`——產生 `/ai/`「AI 做得出東西；東西不會自己變成行為」（我們跟 AI 的關係；第二步「看懂為什麼」底下，選單上叫「AI 時代」），首頁第 02 段加一個入口，選單項目在 `wayfinding_patch.py` 的 `STEPS`。頁上的數字都對過原始報告；措辭規矩寫在檔頭（不寫導入失敗率、67% 對 32% 是相對重要性不是因果、AIF 兩個數字的分母是受訪企業）。順序：… → big_decisions_page → ai_page → wayfinding。
 
-- 英文站（v0.1，2026-11-19）：`tools/en_patch.py <根目錄>`——英文五頁的主選單換成四步（① What's stuck ② See why ③ Pick a start ④ Talk to us；第 1、3 步連到英文首頁的段落，不展開），產生英文版算算看 `/en/calc/`（算式直接取自 `calc_page.py` 的 JS，介面字串逐句對照；示範數字跟中文版逐關核對，不一致會停下來），英文首頁第 02 段加入口，中文 `/calc/` 的 EN 指到英文算算看。選單在檔頭 `STEPS`，英文免責句在 `DISCLAIMER_EN`。**順序放最後**：… → wayfinding → en_patch。
+- 英文站（v0.1，2026-11-19）：`tools/en_patch.py <根目錄>`——英文五頁的主選單換成四步（① What's stuck ② See why ③ Pick a start ④ Talk to us；第 1、3 步連到英文首頁的段落，不展開），產生英文版算算看 `/en/calc/`（算式直接取自 `calc_page.py` 的 JS，介面字串逐句對照；示範數字跟中文版逐關核對，不一致會停下來），英文首頁第 02 段加入口，中文 `/calc/` 的 EN 指到英文算算看。選單在檔頭 `STEPS`，英文免責句在 `DISCLAIMER_EN`。**順序放最後**：… → wayfinding → en_patch。 v0.2（同日）：加英文版 AI 頁 `/en/ai/`（選單第二步「Where AI fits」；圖直接取 `ai_page.py` 的 SVG、換掉圖上的中文字，中文版的圖改了英文對照會停下來）；英文算算看的表頭改成對著輸入格置中。

@@ -689,4 +689,8 @@ div.tile.hot:hover{border-color:#F3B48A}
 /* en:css */
 .wf-step.nodrop>a::after{content:none!important}
 @media (max-width:640px){.pg-en-calc .cc-after::before{content:"After"}}
+/* 英文表頭字短（Now、Lift），靠右會落在 % 上面；改成對著輸入格置中 */
+.pg-en-calc .cc-head span:nth-child(2),.pg-en-calc .cc-head span:nth-child(3){text-align:center;padding-right:15px}
+.pg-en-calc .cc-head span:nth-child(3){padding-left:16px}
+.pg-en-ai .ai-flow li{font-size:13.5px}
 /* /en:css */
