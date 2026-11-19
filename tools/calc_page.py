@@ -1,4 +1,4 @@
-# calc_page.py v0.2 (2026-11-18；v0.2 修表頭與欄位沒對齊：欄寬改用 px) — /calc/「算算看：每一關多一點，最後差多少？」（決策點的複利，三條示範鏈）
+# calc_page.py（1119 15:24 George：官網是開放給不特定人，示範改法只標研究主題，不列作者年份；完整出處列在公司簡介與課堂講義，不寫來信索取） v0.2 (2026-11-18；v0.2 修表頭與欄位沒對齊：欄寬改用 px) — /calc/「算算看：每一關多一點，最後差多少？」（決策點的複利，三條示範鏈）
 # 用法：python3 tools/calc_page.py <站台根目錄>   可重跑。順序：… → articles → calc_page → wayfinding。
 # 規矩（George 1117–1118）：
 #   - 五關都在同一次交易／同一件申辦裡；回購、下次再來是下一條鏈，另算。
@@ -24,7 +24,7 @@ CHAINS = [
         ('商品頁 → 加入購物車', 30, 20, '放真實的購買數字，主推規格先選好', False),
         ('購物車 → 開始結帳', 40, 20, '運費在第一頁就講，欄位從十個減到四個', True),
         ('結帳 → 付款完成', 85, 5, '加一行保證，沒付完的一小時內提醒一次', False)],
-     'src': 'Kahneman & Tversky (1979)；Iyengar & Lepper (2000)；Chernev et al. (2015)；Goldstein et al. (2008)；Egebark & Ekström (2016)；FCA Occasional Paper No. 2 (2013)；Leventhal et al. (1965)'},
+     'src': '損失框架、選項數、描述性規範與預設、摩擦與揭露時點、提醒時點。完整出處列在公司簡介與課堂講義。'},
     {'id': 'b2b', 'tab': '賣給企業客戶', 'start': 100, 'unit': '家', 'startLabel': '名單上的客戶', 'endLabel': '續約',
      'gates': [
         ('約到做決定的人', 20, 15, '請求小而具體，加一句「不方便也沒關係」', True),
@@ -32,7 +32,7 @@ CHAINS = [
         ('報價後選定方案', 40, 25, '方案給三個不給八個，標出多數客戶選的那個', True),
         ('內部簽核通過', 60, 15, '替他準備給老闆的一頁，第一行寫不做的代價', False),
         ('到期續約', 70, 10, '到期前 90 天提醒，附一頁這一年的成果', False)],
-     'src': 'Carpenter (2013)；Milkman et al. (2011)；Iyengar & Lepper (2000)；Tversky & Kahneman (1974)；Kahneman & Tversky (1979)；Karlan et al. (2016)'},
+     'src': '小而具體的請求、執行意圖、選項數與錨定、損失框架、預設與提醒時點。完整出處列在公司簡介與課堂講義。'},
     {'id': 'gov', 'tab': '讓民眾辦得成', 'start': 10000, 'unit': '位', 'startLabel': '符合資格的民眾', 'endLabel': '辦成',
      'gates': [
         ('收到通知 → 決定要辦', 40, 15, '通知第一行寫要做什麼、哪一天前；屬實的話，加一句「多數人已經辦了」', False),
@@ -40,7 +40,7 @@ CHAINS = [
         ('找到入口 → 開始填', 60, 20, '機關查得到的資料，經同意後先帶入；12 欄減到 3 欄', True),
         ('開始填 → 送出', 70, 10, '表單最後留一格：「你打算哪一天送件？」', False),
         ('送出 → 辦成（含補件）', 80, 10, '補件通知寫明缺哪一件、哪一天前、從哪裡補', False)],
-     'src': 'Hallsworth et al. (2017)；Behavioural Insights Team《EAST》(2014)；Bettinger et al. (2012)；Milkman et al. (2011)；Leventhal et al. (1965)'},
+     'src': '通知信措辭與社會規範、少一步、預先帶入資料、寫下哪一天、具體指示。完整出處列在公司簡介與課堂講義。'},
 ]
 
 CSS = '''
@@ -209,7 +209,7 @@ body = f'''<span class="pill">算算看</span>
         <p class="cc-say" id="cc-say"></p>
       </div>
       <p class="disc">{esc(DISCLAIMER)}這一頁的數字只在你的瀏覽器裡算，不會送出。</p>
-      <details><summary>示範改法參考了哪些研究</summary><p id="cc-src" style="margin:6px 0 0"></p></details>
+      <details><summary>示範改法背後的研究主題</summary><p id="cc-src" style="margin:6px 0 0"></p></details>
       <div class="cc-bridge">
         <h2>「我的流程不是這幾關」</h2>
         <p>對，上面是示範，不是範本。全天工作坊的第二站，就是把你自己那件事拆成四到七步，圈出最卡的一兩步。</p>

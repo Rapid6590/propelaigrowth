@@ -72,7 +72,7 @@ CHAINS_EN = [
         ('Product page → add to cart', 30, 20, 'Show a real purchase count, and pre-select the most popular option', False),
         ('Cart → start checkout', 40, 20, 'Show shipping up front; cut the form from ten fields to four', True),
         ('Checkout → pay', 85, 5, 'Add a one-line guarantee; if payment isn’t finished, send one reminder within the hour', False)],
-     'src': 'Kahneman & Tversky (1979); Iyengar & Lepper (2000); Chernev et al. (2015); Goldstein et al. (2008); Egebark & Ekström (2016); FCA Occasional Paper No. 2 (2013); Leventhal et al. (1965)'},
+     'src': 'Loss framing, number of options, descriptive norms and defaults, friction and timing of disclosure, timing of reminders. Full references are listed in our company profile and course materials.'},
     {'id': 'b2b', 'tab': 'Selling to companies', 'start': 100, 'unit': 'accounts', 'startLabel': 'accounts on your target list', 'endLabel': 'renewed',
      'gates': [
         ('Get a meeting with the decision maker', 20, 15, 'Keep the ask small and specific, and add “No worries if now isn’t a good time.”', True),
@@ -80,7 +80,7 @@ CHAINS_EN = [
         ('Choose a plan after the quote', 40, 25, 'Offer three plans, not eight, and mark the one most clients choose', True),
         ('Get internal approval', 60, 15, 'Write the one page they’ll show their boss, and open with the cost of doing nothing', False),
         ('Renew the agreement', 70, 10, 'Send a reminder 90 days before the agreement expires, with one page on what the year delivered', False)],
-     'src': 'Carpenter (2013); Milkman et al. (2011); Iyengar & Lepper (2000); Tversky & Kahneman (1974); Kahneman & Tversky (1979); Karlan et al. (2016)'},
+     'src': 'Small, specific requests; implementation intentions; number of options and anchoring; loss framing; defaults and timing of reminders. Full references are listed in our company profile and course materials.'},
     {'id': 'gov', 'tab': 'Public services', 'start': 10000, 'unit': 'people', 'startLabel': 'eligible residents', 'endLabel': 'completed',
      'gates': [
         ('Receive the notice → decide to apply', 40, 15, 'The first line says what to do and by which date; if it’s true, add “Most people have already applied.”', False),
@@ -88,7 +88,7 @@ CHAINS_EN = [
         ('Find it → start the application', 60, 20, 'With consent, pre-fill what the agency already has; 12 fields become 3', True),
         ('Start → submit', 70, 10, 'The last field on the form asks: “Which day do you plan to submit?”', False),
         ('Submit → done (incl. follow-up documents)', 80, 10, 'The follow-up notice says which document is missing, by which date, and where to send it', False)],
-     'src': 'Hallsworth et al. (2017); Behavioural Insights Team, EAST (2014); Bettinger et al. (2012); Milkman et al. (2011); Leventhal et al. (1965)'},
+     'src': 'Wording of notices and social norms, one step fewer, pre-filled data, writing down a date, specific instructions. Full references are listed in our company profile and course materials.'},
 ]
 # 跟中文版逐關核對數字（中文改了而英文沒跟上時，這裡會停下來）
 ns = {}
@@ -149,7 +149,7 @@ calc_body = f'''<span class="pill">Do the math</span>
         <p class="cc-say" id="cc-say"></p>
       </div>
       <p class="disc">{esc(DISCLAIMER_EN)} Everything on this page is calculated in your browser. Nothing is sent anywhere.</p>
-      <details><summary>Research behind the example changes</summary><p id="cc-src" style="margin:6px 0 0"></p></details>
+      <details><summary>The research themes behind the example changes</summary><p id="cc-src" style="margin:6px 0 0"></p></details>
       <div class="cc-bridge">
         <h2>“My process doesn’t have these steps.”</h2>
         <p>Right. These are examples, not templates. At the second station of our full-day workshop, you map your own process in four to seven steps and circle the one or two that are most stuck.</p>
