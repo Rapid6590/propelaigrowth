@@ -431,6 +431,10 @@ div.tile.hot:hover{border-color:#F3B48A}
 .cc-head .cc-hf{display:flex;align-items:center;gap:3px}
 .cc-hf b{flex:1;min-width:0;text-align:center;font-weight:400;white-space:nowrap}
 .cc-hf i{visibility:hidden;font-style:normal;font-size:14px;letter-spacing:0;line-height:1}
+/* 「之後」：下面的數字靠右、寬度不一，表頭對著兩位數（00%）那一塊置中，不貼在最右邊 */
+.cc-head .cc-ha{display:grid;justify-content:end}.cc-ha>*{grid-area:1/1}
+.cc-ha b{text-align:center;font-weight:400;white-space:nowrap}
+.cc-ha i{visibility:hidden;height:0;overflow:hidden;font-style:normal;font-size:16px;font-weight:700;letter-spacing:0;font-variant-numeric:tabular-nums}
 .cc-row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px}
 .cc-row.on{border-color:var(--orange)}
 .cc-name{display:flex;gap:8px;align-items:center;min-width:0}
