@@ -1,4 +1,5 @@
 # calc_page.py（1119 15:24 George：官網是開放給不特定人，示範改法只標研究主題，不列作者年份；完整出處列在公司簡介與課堂講義，不寫來信索取） v0.2 (2026-11-18；v0.2 修表頭與欄位沒對齊：欄寬改用 px) — /calc/「算算看：每一關多一點，最後差多少？」（決策點的複利，三條示範鏈）
+# v0.3 (2026-11-24)：表頭「原本通過」「多幾 %」兩格改成跟下面那一列同樣的排法（.cc-hf），字正對輸入格；之前靠右會偏到 % 上面（George 1124 22:45）。
 # 用法：python3 tools/calc_page.py <站台根目錄>   可重跑。順序：… → articles → calc_page → wayfinding。
 # 規矩（George 1117–1118）：
 #   - 五關都在同一次交易／同一件申辦裡；回購、下次再來是下一條鏈，另算。
@@ -55,7 +56,11 @@ CSS = '''
 .cc-start input[type=number]{width:7.5em}
 .cc-head,.cc-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 104px 70px 44px 26px;gap:8px;align-items:center}
 .cc-head{font-size:12px;color:var(--mute);letter-spacing:.04em;padding:0 13px 6px}
-.cc-head span:nth-child(n+2){text-align:right}.cc-head span:nth-child(5){text-align:center}
+.cc-head>span:nth-child(n+2){text-align:right}.cc-head>span:nth-child(5){text-align:center}
+/* 表頭這兩格照下面那一列的排法做（看不見的 +、% 佔同樣的位置），字就會正對著輸入格，換字型、換語言都不會跑掉 */
+.cc-head .cc-hf{display:flex;align-items:center;gap:3px}
+.cc-hf b{flex:1;min-width:0;text-align:center;font-weight:400;white-space:nowrap}
+.cc-hf i{visibility:hidden;font-style:normal;font-size:14px;letter-spacing:0;line-height:1}
 .cc-row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px}
 .cc-row.on{border-color:var(--orange)}
 .cc-name{display:flex;gap:8px;align-items:center;min-width:0}
@@ -198,7 +203,7 @@ body = f'''<span class="pill">算算看</span>
     <div class="cc">
       <div class="cc-tabs" role="tablist" aria-label="選一條示範流程">{tabs}</div>
       <div class="cc-start"><label for="cc-start">從</label><input id="cc-start" type="number" inputmode="numeric" min="0" step="1" value="10000"><span id="cc-startlabel"></span><span class="note">開始</span></div>
-      <div class="cc-head" aria-hidden="true"><span>每一關</span><span>原本通過</span><span>多幾 %</span><span>之後</span><span>先動</span><span></span></div>
+      <div class="cc-head" aria-hidden="true"><span>每一關</span><span class="cc-hf"><b>原本通過</b><i>%</i></span><span class="cc-hf"><i>+</i><b>多幾 %</b><i>%</i></span><span>之後</span><span>先動</span><span></span></div>
       <div id="cc-rows"></div>
       <button class="cc-add" id="cc-add" type="button">＋ 再加一關</button>
       <div class="cc-out" aria-live="polite">

@@ -1,6 +1,7 @@
 # en_patch.py v0.3 (2026-11-19) — 英文站：主選單換成四步＋英文版「算算看」/en/calc/＋英文版 AI 頁 /en/ai/
 #   v0.3：英文文案照「英文網站中英對照表」v0.2 校訂＋George 1119 裁示改（統一用詞：action you want to see easier to take／topic／we review it together／GPS, gas pedal／All programs are taught in Mandarin／compound）。
 #   v0.2：George 看過預覽——算算看表頭（Now／Lift）沒對到輸入格 → 英文表頭改成置中；加英文版 AI 頁（內容對照 ai_page.py v0.2）。
+# v0.4 (2026-11-24)：英文算算看表頭改用跟中文同一套 .cc-hf 排法，拿掉原本用 padding 湊的那兩條。
 # 用法：python3 tools/en_patch.py <站台根目錄>   可重跑（冪等）。只動 /en/ 底下的頁（外加中文 /calc/ 的語言切換與 hreflang）。
 # 順序：… → calc_page → … → wayfinding → en_patch（放最後；它拿 /en/about/ 當外框，也要讀 calc_page.py 的程式）。
 # 規矩（George 1118–1119）：
@@ -50,9 +51,6 @@ CSS = '''
 /* en:css */
 .wf-step.nodrop>a::after{content:none!important}
 @media (max-width:640px){.pg-en-calc .cc-after::before{content:"After"}}
-/* 英文表頭字短（Now、Lift），靠右會落在 % 上面；改成對著輸入格置中 */
-.pg-en-calc .cc-head span:nth-child(2),.pg-en-calc .cc-head span:nth-child(3){text-align:center;padding-right:15px}
-.pg-en-calc .cc-head span:nth-child(3){padding-left:16px}
 .pg-en-ai .ai-flow li{font-size:13.5px}
 /* 英文選單：四格等高（量過 1100／375 寬，Find what's stuck 與 Choose where to start 都會折行，所以用短字） */
 [lang=en] .wf-step>a{height:100%;box-sizing:border-box}
@@ -138,7 +136,7 @@ calc_body = f'''<span class="pill">Do the math</span>
     <div class="cc">
       <div class="cc-tabs" role="tablist" aria-label="Choose an example chain">{tabs}</div>
       <div class="cc-start"><label for="cc-start">Start with</label><input id="cc-start" type="number" inputmode="numeric" min="0" step="1" value="10000"><span id="cc-startlabel"></span></div>
-      <div class="cc-head" aria-hidden="true"><span>Step</span><span>Now</span><span>Lift</span><span>After</span><span>First</span><span></span></div>
+      <div class="cc-head" aria-hidden="true"><span>Step</span><span class="cc-hf"><b>Now</b><i>%</i></span><span class="cc-hf"><i>+</i><b>Lift</b><i>%</i></span><span>After</span><span>First</span><span></span></div>
       <div id="cc-rows"></div>
       <button class="cc-add" id="cc-add" type="button">+ Add a step</button>
       <div class="cc-out" aria-live="polite">
