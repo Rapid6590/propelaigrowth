@@ -99,5 +99,50 @@
       "你上一次收到「我再想想」，後來做了什麼？"
     ],
     "linkedin": "https://www.linkedin.com/feed/update/urn:li:activity:7528729425245454336/"
+  },
+  {
+    "slug": "how-many-options-on-a-quote",
+    "no": 4,
+    "date": "2026-11-20",
+    "title": "報價單上，該放幾個方案？",
+    "deck": "報價做得越完整，客戶反而越難決定。二十多年前，一個果醬試吃攤早就演過這一幕。",
+    "images": [
+      [
+        "/assets/articles/04a.jpg",
+        "果醬試吃攤的實驗：一次擺 24 種，一次擺 6 種"
+      ],
+      [
+        "/assets/articles/04b.jpg",
+        "長條圖：擺 24 種，路過的人六成停下來、停下來的人 3% 買；擺 6 種，四成停下來、停下來的人 30% 買"
+      ],
+      [
+        "/assets/articles/04c.jpg",
+        "後來的研究整理出四個條件：方案之間難比較、決定本身難、客戶說不清要什麼、要當場決定"
+      ],
+      [
+        "/assets/articles/04d.jpg",
+        "三格：想不想、順不順手、有沒有提醒；八個方案卡在順不順手那一格"
+      ]
+    ],
+    "image_after": [
+      2,
+      4,
+      5
+    ],
+    "related_q": [
+      "proposal-no-reply"
+    ],
+    "quiz": true,
+    "draft": false,
+    "source": "Iyengar, S. S. & Lepper, M. R. (2000). When choice is demotivating: Can one desire too much of a good thing? Journal of Personality and Social Psychology, 79(6)；Scheibehenne, B., Greifeneder, R. & Todd, P. M. (2010). Can there ever be too many options? A meta-analytic review of choice overload. Journal of Consumer Research, 37(3)；Chernev, A., Böckenholt, U. & Goodman, J. (2015). Choice overload: A conceptual review and meta-analysis. Journal of Consumer Psychology, 25(2).",
+    "body": [
+      "報價做得越完整，客戶反而越難決定。",
+      "二十多年前，加州一家超市的果醬試吃攤，早就演過這一幕。\n擺 24 種，路過的人六成停下來；停下來的人裡，3% 買。\n擺 6 種，四成停下來；停下來的人裡，30% 買。\n算回全部路過的人，是 1.7% 對 12%——還是差七倍。\n（Iyengar & Lepper, 2000, Journal of Personality and Social Psychology, 79(6)）",
+      "報價單上常有同一件事。\n三個方案長成八個，每一個都有道理。\n客戶看完，說：我再想想。",
+      "後來的研究說，選項多不一定壞；但方案之間差不多、客戶自己也說不清要什麼、又要當場做決定的時候，多一個選項就多一道門檻。報價單，幾乎每一條都中。",
+      "他想不想？來要報價的，多半想。\n做起來順不順手？八個方案，要比八次。\n該做的那一秒，有沒有提醒？",
+      "你上一份報價單，有幾個方案？"
+    ],
+    "linkedin": "https://www.linkedin.com/feed/update/urn:li:activity:7529438431106453504/"
   }
 ]
