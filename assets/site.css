@@ -20,7 +20,6 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-
 .back{color:var(--mute);text-decoration:none;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
 .back:focus,.btn:focus,.choice:focus{outline:3px solid var(--orange);outline-offset:2px}
 h1{font-size:clamp(26px,6vw,34px);line-height:1.25;margin:0 0 10px;text-wrap:balance;color:var(--navy);font-weight:900}
-:root:not([data-theme="light"]) h1{color:var(--fg)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) h1{color:var(--fg)} }
 :root[data-theme="dark"] h1{color:var(--fg)}
 .lead{color:var(--mute);margin:0 0 26px;font-size:16px}
