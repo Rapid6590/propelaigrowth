@@ -201,9 +201,9 @@ JS = r'''
 '''
 
 tabs = ''.join(f'<button type="button" role="tab" aria-selected="{"true" if i == 0 else "false"}">{esc(c["tab"])}</button>' for i, c in enumerate(CHAINS))
-body = f'''<span class="pill">算算看</span>
+body = f'''<span class="pill">行為複利｜算算看</span>
     <h1>每一關多一點，最後差多少？</h1>
-    <p class="lead">一件事要成，客人、員工或民眾得連過好幾關。十關各多 10%，乘起來是 2.6 倍；各少 10%，只剩 0.35。下面三條是示範，數字都可以改成你自己的。</p>
+    <p class="lead">一件事要成，客人、員工或民眾得連過好幾關。十關各多 10%，乘起來是 2.6 倍；各少 10%，只剩 0.35——這就是行為複利。下面三條是示範，數字都可以改成你自己的。</p>
     <div class="cc">
       <div class="cc-tabs" role="tablist" aria-label="選一條示範流程">{tabs}</div>
       <div class="cc-start"><label for="cc-start">從</label><input id="cc-start" type="number" inputmode="numeric" min="0" step="1" value="10000"><span id="cc-startlabel"></span><span class="note">開始</span></div>
@@ -236,8 +236,8 @@ tpl = re.sub(r'<!-- aeo:ld -->.*?<!-- /aeo:ld -->\n?', '', tpl, flags=re.S)
 tpl = re.sub(r'<!-- wf:top -->.*?<!-- /wf:top -->\n?', '', tpl, flags=re.S)
 tpl = re.sub(r'<link rel="alternate" hreflang="[^"]*" href="[^"]*">', '', tpl)
 HEAD, REST = tpl[:tpl.index('<main>') + 6], tpl[tpl.index('</main>'):]
-title = '算算看：每一關多一點，最後差多少？'
-desc = '一件事要成，得連過好幾關。把每一關的通過率填進去，看每關多一點，乘起來差多少。三條示範：賣給消費者、賣給企業客戶、讓民眾辦得成。不用留資料。'
+title = '行為複利算算看：每一關多一點，最後差多少？'
+desc = '行為複利：一件事要成，得連過好幾關。把每一關的通過率填進去，看每關多一點，乘起來差多少。三條示範：賣給消費者、賣給企業客戶、讓民眾辦得成。不用留資料。'
 h = HEAD
 h = re.sub(r'<title>.*?</title>', f'<title>{esc(title)}｜Propel AI 啟進智能決策</title>', h)
 h = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m.group(1) + esc(desc), h)
@@ -250,7 +250,7 @@ wr('calc/index.html', h + '\n    ' + body + '\n' + REST)
 home = rd('index.html')
 HOOK = '<a class="more" href="/how/">四個例子：換預設、給選項、先開口、跟進信 →</a>'
 if HOOK in home and 'calc:home' not in home:
-    wr('index.html', home.replace(HOOK, '<div class="links">' + HOOK + '<!-- calc:home --><a class="more" href="/calc/">每一關多一點，最後差多少？算算看 →</a><!-- /calc:home --></div>', 1))
+    wr('index.html', home.replace(HOOK, '<div class="links">' + HOOK + '<!-- calc:home --><a class="more" href="/calc/">行為複利：每一關多一點，最後差多少？算算看 →</a><!-- /calc:home --></div>', 1))
 sm = rd('sitemap.xml')
 if f'{SITE}/calc/' not in sm:
     wr('sitemap.xml', sm.replace('</urlset>', f'  <url><loc>{SITE}/calc/</loc></url>\n</urlset>'))

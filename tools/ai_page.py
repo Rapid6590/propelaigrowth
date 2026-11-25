@@ -261,7 +261,7 @@ body = f'''<span class="pill">我們跟 AI 的關係</span>
 <a class="btn primary" href="/quiz/">還不確定？先做兩分鐘小測驗</a>
 <a class="btn secondary" href="/trial/">想先試一次：59 分鐘試駕</a>
 </div>
-<p><a class="more" href="/how/">看三個改環境的例子 →</a>　<a class="more" href="/calc/">每一關多一點，最後差多少？算算看 →</a></p>
+<p><a class="more" href="/how/">看三個改環境的例子 →</a>　<a class="more" href="/calc/">行為複利：每一關多一點，最後差多少？算算看 →</a></p>
 <div class="nav"><a href="/how/" class="prev">← 怎麼看問題</a><a href="/">回首頁 ⌂</a></div>'''
 
 tpl = rd('about/index.html')
