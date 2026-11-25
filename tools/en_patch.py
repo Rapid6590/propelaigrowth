@@ -130,9 +130,9 @@ for a, b in TR:
 assert not re.search(r'[一-鿿]', JS), '英文算算看的 JS 還有中文字'
 
 tabs = ''.join(f'<button type="button" role="tab" aria-selected="{"true" if i == 0 else "false"}">{esc(c["tab"])}</button>' for i, c in enumerate(CHAINS_EN))
-calc_body = f'''<span class="pill">Do the math</span>
+calc_body = f'''<span class="pill">Behavioral compounding | Do the math</span>
     <h1>Small gains at each step. See how they compound.</h1>
-    <p class="lead">A customer, an employee or a resident may need to clear several steps in a row. Make each of ten steps 10% better and you get about 2.6×. Let each slip 10% and 0.35× is left. The three chains below are illustrations; change any number to your own.</p>
+    <p class="lead">A customer, an employee or a resident may need to clear several steps in a row. Make each of ten steps 10% better and you get about 2.6×. Let each slip 10% and 0.35× is left. That is behavioral compounding. The three chains below are illustrations; change any number to your own.</p>
     <div class="cc">
       <div class="cc-tabs" role="tablist" aria-label="Choose an example chain">{tabs}</div>
       <div class="cc-start"><label for="cc-start">Start with</label><input id="cc-start" type="number" inputmode="numeric" min="0" step="1" value="10000"><span id="cc-startlabel"></span></div>
@@ -166,8 +166,8 @@ tpl = rd('en/about/index.html')
 tpl = re.sub(r'<script type="application/ld\+json">.*?</script>\n?', '', tpl, flags=re.S)
 tpl = re.sub(r'<link rel="alternate" hreflang="[^"]*" href="[^"]*">', '', tpl)
 HEAD, REST = tpl[:tpl.index('<main>') + 6], tpl[tpl.index('</main>'):]
-title = 'Do the math: small gains at each step compound'
-desc = 'To get anything done, people have to clear several steps in a row. Enter the pass rate for each step and see how small gains at every step compound. Three example chains. Nothing is collected.'
+title = 'Behavioral compounding: small gains at each step add up. Do the math'
+desc = 'Behavioral compounding: to get anything done, people have to clear several steps in a row. Enter the pass rate for each step and see how small gains at every step compound. Three example chains. Nothing is collected.'
 ALT = ('<link rel="alternate" hreflang="zh-Hant" href="{s}/calc/"><link rel="alternate" hreflang="en" href="{s}/en/calc/">'
        '<link rel="alternate" hreflang="x-default" href="{s}/calc/">').format(s=SITE)
 h = HEAD
@@ -273,7 +273,7 @@ ai_body = f'''<span class="pill">Where AI fits</span>
     <a class="btn primary" href="/en/contact/">Tell us one thing, and we’ll write back</a>
     <a class="btn secondary" href="/en/how/">See how we look at a problem</a>
     </div>
-    <p><a class="more" href="/en/calc/">Small gains at every step can compound. Do the math →</a></p>
+    <p><a class="more" href="/en/calc/">Behavioral compounding: small gains at every step add up. Do the math →</a></p>
     <p class="note">All programs are taught in Mandarin.</p>
       <div class="nav"><a href="/en/how/" class="prev">← How we think</a><a href="/en/">Home</a></div>'''
 ai_title = 'AI can produce the work. People still have to act on it.'
@@ -308,7 +308,7 @@ for url in ZH:
 home = re.sub(r'<!-- encalc:home -->.*?<!-- /encalc:home -->', '', rd('en/index.html'), flags=re.S)
 m = re.search(r'<a class="more" href="/en/how/">Three examples from research[^<]*</a>', home)
 if m:
-    home = home[:m.end()] + '<!-- encalc:home --><br><a class="more" href="/en/calc/">Small gains at every step can compound. Do the math →</a><br><a class="more" href="/en/ai/">Why “AI” is in our name →</a><!-- /encalc:home -->' + home[m.end():]
+    home = home[:m.end()] + '<!-- encalc:home --><br><a class="more" href="/en/calc/">Behavioral compounding: small gains at every step add up. Do the math →</a><br><a class="more" href="/en/ai/">Why “AI” is in our name →</a><!-- /encalc:home -->' + home[m.end():]
     wr('en/index.html', home)
 
 # 中文 /calc/：語言切換指到英文算算看，補 hreflang
